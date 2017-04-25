@@ -29,6 +29,9 @@ public class ShakeMapIndexerModule extends DefaultIndexerModule {
 	public static final String OVERLAY_WIDTH_PROPERTY = "overlayWidth";
 	public static final String OVERLAY_HEIGHT_PROPERTY = "overlayHeight";
 
+	public static final String ATLAS_CONTRIBUTOR = "atlas";
+	public static final int ATLAS_CONTRIBUTOR_WEIGHT = 200;
+
 	public static final int CONTAINS_EPICENTER_WEIGHT = 50;
 	public static final int CENTERED_ON_EPICENTER_WEIGHT = 25;
 	// Number of degrees at which no additional weight will be
@@ -112,8 +115,14 @@ public class ShakeMapIndexerModule extends DefaultIndexerModule {
 		if (eventLat.longValue() < maxLat.longValue()
 				&& eventLat.longValue() > minLat.longValue()
 				&& eventLon.longValue() < maxLon.longValue()
-				&& eventLon.longValue() > minLon.longValue())
+				&& eventLon.longValue() > minLon.longValue()) {
 			weight += CONTAINS_EPICENTER_WEIGHT;
+		}
+
+		// ShakeMap Atlas is always preferred.
+		if (ATLAS_CONTRIBUTOR.equals(summary.getSource())) {
+			weight += ATLAS_CONTRIBUTOR_WEIGHT;
+		}
 
 		return weight;
 	}
