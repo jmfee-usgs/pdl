@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gov.usgs.earthquake.indexer.DefaultAssociatorTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2018-08-22T23:04:36" hostname="igskcicgltgm091.local" time="0.052">
+  <properties/>
+  <testcase name="testAssociationOrder" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.014"/>
+  <testcase name="testChooseMostSimilar" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.003"/>
+  <testcase name="testDifferentEventCodesFromSameSource" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.0"/>
+  <testcase name="testNearEquator" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.024"/>
+  <testcase name="testAlertMultipleAssociations" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.003"/>
+  <testcase name="testSameEventCodeFromSameSource" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.001"/>
+  <testcase name="testAtSouthPole" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.0"/>
+  <testcase name="testChooseEventWithoutSummarySourceCode" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.0"/>
+  <testcase name="testNorthernLatitude" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.001"/>
+  <testcase name="testDateTimeLine" classname="gov.usgs.earthquake.indexer.DefaultAssociatorTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Wed Aug 22 17:04:36 MDT 2018
+WARNING	thread=13	Potential merge, product id=urn:usgs-product:us:origin:c0001234:1534979076186, nearby events: [nc11112222, ciaaaa2222, uw00005555]
+]]></system-err>
+</testsuite>

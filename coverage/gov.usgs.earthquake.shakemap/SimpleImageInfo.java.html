@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimpleImageInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pdl</a> &gt; <a href="index.source.html" class="el_package">gov.usgs.earthquake.shakemap</a> &gt; <span class="el_source">SimpleImageInfo.java</span></div><h1>SimpleImageInfo.java</h1><pre class="source lang-java linenums">/*
+ *	SimpleImageInfo.java
+ *
+ *	@version 0.1
+ *	@author  Jaimon Mathew &lt;http://www.jaimon.co.uk&gt;
+ *
+ *	A Java class to determine image width, height and MIME types for a number of image file formats without loading the whole image data.
+ *
+ *	Revision history
+ *	0.1 - 29/Jan/2011 - Initial version created
+ *
+ *  -------------------------------------------------------------------------------
+ 
+ 	This code is licensed under the Apache License, Version 2.0 (the &quot;License&quot;); 
+ 	You may not use this file except in compliance with the License. 
+
+ 	You may obtain a copy of the License at 
+
+ 	http://www.apache.org/licenses/LICENSE-2.0 
+
+	Unless required by applicable law or agreed to in writing, software 
+	distributed under the License is distributed on an &quot;AS IS&quot; BASIS, 
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+	See the License for the specific language governing permissions and 
+	limitations under the License.
+	
+ *  -------------------------------------------------------------------------------
+ */
+package gov.usgs.earthquake.shakemap;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+public class SimpleImageInfo {
+	private int height;
+	private int width;
+	private String mimeType;
+
+	public SimpleImageInfo(final File file) throws IOException {
+<span class="nc" id="L43">		this(new FileInputStream(file));</span>
+<span class="nc" id="L44">	}</span>
+
+<span class="fc" id="L46">	public SimpleImageInfo(final InputStream is) throws IOException {</span>
+		try {
+<span class="fc" id="L48">			processStream(is);</span>
+		} finally {
+<span class="fc" id="L50">			is.close();</span>
+		}
+<span class="fc" id="L52">	}</span>
+
+	public SimpleImageInfo(final byte[] bytes) throws IOException {
+<span class="nc" id="L55">		this(new ByteArrayInputStream(bytes));</span>
+<span class="nc" id="L56">	}</span>
+
+	private void processStream(final InputStream is) throws IOException {
+<span class="fc" id="L59">		int c1 = is.read();</span>
+<span class="fc" id="L60">		int c2 = is.read();</span>
+<span class="fc" id="L61">		int c3 = is.read();</span>
+
+<span class="fc" id="L63">		mimeType = null;</span>
+<span class="fc" id="L64">		width = height = -1;</span>
+
+<span class="pc bpc" id="L66" title="5 of 6 branches missed.">		if (c1 == 'G' &amp;&amp; c2 == 'I' &amp;&amp; c3 == 'F') { // GIF</span>
+<span class="nc" id="L67">			is.skip(3);</span>
+<span class="nc" id="L68">			width = readInt(is, 2, false);</span>
+<span class="nc" id="L69">			height = readInt(is, 2, false);</span>
+<span class="nc" id="L70">			mimeType = &quot;image/gif&quot;;</span>
+<span class="pc bpc" id="L71" title="3 of 4 branches missed.">		} else if (c1 == 0xFF &amp;&amp; c2 == 0xD8) { // JPG</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">			while (c3 == 255) {</span>
+<span class="nc" id="L73">				int marker = is.read();</span>
+<span class="nc" id="L74">				int len = readInt(is, 2, true);</span>
+<span class="nc bnc" id="L75" title="All 6 branches missed.">				if (marker == 192 || marker == 193 || marker == 194) {</span>
+<span class="nc" id="L76">					is.skip(1);</span>
+<span class="nc" id="L77">					height = readInt(is, 2, true);</span>
+<span class="nc" id="L78">					width = readInt(is, 2, true);</span>
+<span class="nc" id="L79">					mimeType = &quot;image/jpeg&quot;;</span>
+<span class="nc" id="L80">					break;</span>
+				}
+<span class="nc" id="L82">				is.skip(len - 2);</span>
+<span class="nc" id="L83">				c3 = is.read();</span>
+<span class="nc" id="L84">			}</span>
+<span class="pc bpc" id="L85" title="3 of 6 branches missed.">		} else if (c1 == 137 &amp;&amp; c2 == 80 &amp;&amp; c3 == 78) { // PNG</span>
+<span class="fc" id="L86">			is.skip(15);</span>
+<span class="fc" id="L87">			width = readInt(is, 2, true);</span>
+<span class="fc" id="L88">			is.skip(2);</span>
+<span class="fc" id="L89">			height = readInt(is, 2, true);</span>
+<span class="fc" id="L90">			mimeType = &quot;image/png&quot;;</span>
+<span class="nc bnc" id="L91" title="All 4 branches missed.">		} else if (c1 == 66 &amp;&amp; c2 == 77) { // BMP</span>
+<span class="nc" id="L92">			is.skip(15);</span>
+<span class="nc" id="L93">			width = readInt(is, 2, false);</span>
+<span class="nc" id="L94">			is.skip(2);</span>
+<span class="nc" id="L95">			height = readInt(is, 2, false);</span>
+<span class="nc" id="L96">			mimeType = &quot;image/bmp&quot;;</span>
+		} else {
+<span class="nc" id="L98">			int c4 = is.read();</span>
+<span class="nc bnc" id="L99" title="All 16 branches missed.">			if ((c1 == 'M' &amp;&amp; c2 == 'M' &amp;&amp; c3 == 0 &amp;&amp; c4 == 42)</span>
+					|| (c1 == 'I' &amp;&amp; c2 == 'I' &amp;&amp; c3 == 42 &amp;&amp; c4 == 0)) { // TIFF
+<span class="nc bnc" id="L101" title="All 2 branches missed.">				boolean bigEndian = c1 == 'M';</span>
+<span class="nc" id="L102">				int ifd = 0;</span>
+				int entries;
+<span class="nc" id="L104">				ifd = readInt(is, 4, bigEndian);</span>
+<span class="nc" id="L105">				is.skip(ifd - 8);</span>
+<span class="nc" id="L106">				entries = readInt(is, 2, bigEndian);</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">				for (int i = 1; i &lt;= entries; i++) {</span>
+<span class="nc" id="L108">					int tag = readInt(is, 2, bigEndian);</span>
+<span class="nc" id="L109">					int fieldType = readInt(is, 2, bigEndian);</span>
+<span class="nc" id="L110">					readInt(is, 4, bigEndian); //long count</span>
+
+					int valOffset;
+<span class="nc bnc" id="L113" title="All 4 branches missed.">					if ((fieldType == 3 || fieldType == 8)) {</span>
+<span class="nc" id="L114">						valOffset = readInt(is, 2, bigEndian);</span>
+<span class="nc" id="L115">						is.skip(2);</span>
+					} else {
+<span class="nc" id="L117">						valOffset = readInt(is, 4, bigEndian);</span>
+					}
+<span class="nc bnc" id="L119" title="All 2 branches missed.">					if (tag == 256) {</span>
+<span class="nc" id="L120">						width = valOffset;</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">					} else if (tag == 257) {</span>
+<span class="nc" id="L122">						height = valOffset;</span>
+					}
+<span class="nc bnc" id="L124" title="All 4 branches missed.">					if (width != -1 &amp;&amp; height != -1) {</span>
+<span class="nc" id="L125">						mimeType = &quot;image/tiff&quot;;</span>
+<span class="nc" id="L126">						break;</span>
+					}
+				}
+			}
+		}
+<span class="pc bpc" id="L131" title="1 of 2 branches missed.">		if (mimeType == null) {</span>
+<span class="nc" id="L132">			throw new IOException(&quot;Unsupported image type&quot;);</span>
+		}
+<span class="fc" id="L134">	}</span>
+
+	private int readInt(InputStream is, int noOfBytes, boolean bigEndian)
+			throws IOException {
+<span class="fc" id="L138">		int ret = 0;</span>
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">		int sv = bigEndian ? ((noOfBytes - 1) * 8) : 0;</span>
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">		int cnt = bigEndian ? -8 : 8;</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">		for (int i = 0; i &lt; noOfBytes; i++) {</span>
+<span class="fc" id="L142">			ret |= is.read() &lt;&lt; sv;</span>
+<span class="fc" id="L143">			sv += cnt;</span>
+		}
+<span class="fc" id="L145">		return ret;</span>
+	}
+
+	public int getHeight() {
+<span class="fc" id="L149">		return height;</span>
+	}
+
+	public void setHeight(int height) {
+<span class="nc" id="L153">		this.height = height;</span>
+<span class="nc" id="L154">	}</span>
+
+	public int getWidth() {
+<span class="fc" id="L157">		return width;</span>
+	}
+
+	public void setWidth(int width) {
+<span class="nc" id="L161">		this.width = width;</span>
+<span class="nc" id="L162">	}</span>
+
+	public String getMimeType() {
+<span class="nc" id="L165">		return mimeType;</span>
+	}
+
+	public void setMimeType(String mimeType) {
+<span class="nc" id="L169">		this.mimeType = mimeType;</span>
+<span class="nc" id="L170">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L174">		return &quot;MIME Type : &quot; + mimeType + &quot;\t Width : &quot; + width</span>
+				+ &quot;\t Height : &quot; + height;
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

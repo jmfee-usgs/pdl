@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gov.usgs.earthquake.indexer.SearchXMLTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2018-08-22T23:04:45" hostname="igskcicgltgm091.local" time="0.06">
+  <properties/>
+  <testcase name="testEventDetailSearchResponse" classname="gov.usgs.earthquake.indexer.SearchXMLTest" time="0.011"/>
+  <testcase name="testProductSummarySearchResponse" classname="gov.usgs.earthquake.indexer.SearchXMLTest" time="0.003"/>
+  <testcase name="testSearchRequest" classname="gov.usgs.earthquake.indexer.SearchXMLTest" time="0.006"/>
+  <testcase name="testSearchSocket" classname="gov.usgs.earthquake.indexer.SearchXMLTest" time="0.016"/>
+  <testcase name="testEventSummarySearchResponse" classname="gov.usgs.earthquake.indexer.SearchXMLTest" time="0.001"/>
+  <testcase name="testProductDetailSearchResponse" classname="gov.usgs.earthquake.indexer.SearchXMLTest" time="0.022"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[FINE	thread=13	Digest='3M7M0nQuPil7TPnstwfsKodLzq8=' , 2ms
+FINE	thread=13	Digest='+R2vnkH51wXnnDskbLQhXCJcMDc=' , 4ms
+FINE	thread=13	Digest='Bn/P8KzavMnPCtt7LmZ6jrxpAis=' , 2ms
+FINE	thread=13	Digest='AfKkIg2BlYW6+DFRTTFC4TkqlhU=' , 2ms
+FINE	thread=13	Digest='ErGAs7nyE8X0mm5C4iPVJgKPwjA=' , 2ms
+FINE	thread=13	Digest='Bp792Jq/n/rkChExCdhFFf2yF5Q=' , 1ms
+FINE	thread=13	Digest='amPYWyaKopYIPpR0ObeLkN4a2Mw=' , 3ms
+FINE	thread=13	Digest='GVeOjpV0d4dOCof3ER4KSX2fodo=' , 1ms
+There are 1 active/queued socket connections
+INFO	thread=1119	[null] accepted search connection Socket[addr=/192.168.0.33,port=59640,localport=12345]
+INFO	thread=1119	[null] closed search connection Socket[addr=/192.168.0.33,port=59640,localport=12345]
+FINEST	thread=1120	[null] acquiring write lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] acquired write lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] acquiring read lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] acquired read lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] releasing read lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] released read lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINER	thread=1120	[null] product stored id=urn:usgs-product:us:shakemap:abcd1234:1534979085877, status=UPDATE
+FINEST	thread=1120	[null] releasing write lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] released write lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] acquiring read lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] acquired read lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] releasing read lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+FINEST	thread=1120	[null] released read lock for product id=urn:usgs-product:us:shakemap:abcd1234:1534979085877
+]]></system-err>
+</testsuite>

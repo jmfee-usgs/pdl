@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gov.usgs.earthquake.eidsutil.EIDSClientTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-08-22T23:04:29" hostname="igskcicgltgm091.local" time="6.83">
+  <properties/>
+  <testcase name="testConnection" classname="gov.usgs.earthquake.eidsutil.EIDSClientTest" time="6.83"/>
+  <system-out><![CDATA[[Info] Connecting to server at 'prod01-pdl01.cr.usgs.gov:39977'
+[Info] Connection verified to server:  "prod01-pdl01.cr.usgs.gov" (prod01-pdl01.cr.usgs.gov:39977)
+]]></system-out>
+  <system-err><![CDATA[Received message prod01-pdl01.cr.usgs.gov:5461847: <?xml version="1.0" encoding="UTF-8"?>
+<notification xmlns="http://earthquake.usgs.gov/distribution/product" id="urn:usgs-product:nc:helicorder:nca-daily-2018081900:1534715488082" updated="2018-08-19T21:51:28.082Z" trackerURL="https://prod01-pdl01.cr.usgs.gov/tracker/" expires="2018-08-19T22:51:30.004Z" url="https://prod01-pdl01.cr.usgs.gov/products/nc_helicorder_nca-daily-2018081900_1534715488082.bin" />
+
+]]></system-err>
+</testsuite>

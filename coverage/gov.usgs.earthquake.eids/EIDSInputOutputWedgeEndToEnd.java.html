@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EIDSInputOutputWedgeEndToEnd.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pdl</a> &gt; <a href="index.source.html" class="el_package">gov.usgs.earthquake.eids</a> &gt; <span class="el_source">EIDSInputOutputWedgeEndToEnd.java</span></div><h1>EIDSInputOutputWedgeEndToEnd.java</h1><pre class="source lang-java linenums">package gov.usgs.earthquake.eids;
+
+import java.io.File;
+
+import gov.usgs.earthquake.distribution.Factory;
+import gov.usgs.earthquake.distribution.SocketProductReceiver;
+import gov.usgs.util.FileUtils;
+
+<span class="nc" id="L9">public class EIDSInputOutputWedgeEndToEnd {</span>
+
+<span class="nc" id="L11">	public static final File TEST_DIRECTORY = new File(&quot;testdir&quot;);</span>
+
+	// currently this test just blocks so it can be tested interactively.
+	// @Test
+	public static void main(final String[] args) throws Exception {
+<span class="nc" id="L16">		Runtime.getRuntime().addShutdownHook(new Thread() {</span>
+			public void run() {
+				// clean up the created files/directories
+<span class="nc" id="L19">				FileUtils.deleteTree(TEST_DIRECTORY);</span>
+<span class="nc" id="L20">			}</span>
+		});
+
+<span class="nc" id="L23">		System.err</span>
+<span class="nc" id="L24">				.println(&quot;This starts up an end to end instance of the &quot;</span>
+						+ &quot;EIDSInputWedge and EIDSOutputWedge.  Place message into 'polldir'&quot;
+						+ &quot; and they should appear in 'outputdir'.  &quot;
+						+ &quot;This runs for 1000 seconds, which should be sufficient for most tests.&quot;);
+		// receiver
+<span class="nc" id="L29">		EIDSOutputWedge output = new EIDSOutputWedge();</span>
+<span class="nc" id="L30">		output.setDirectory(new File(TEST_DIRECTORY, &quot;outputdir&quot;));</span>
+<span class="nc" id="L31">		output.setOutputFormat(EIDSOutputWedge.OUTPUT_TYPE_EQXML);</span>
+<span class="nc" id="L32">		Factory factory = new Factory();</span>
+<span class="nc" id="L33">		SocketProductReceiver receiver = factory.createSocketProductReceiver(</span>
+				11235, 1, new File(TEST_DIRECTORY, &quot;receiverStorage&quot;),
+				new File(TEST_DIRECTORY, &quot;receiverIndexFile&quot;));
+<span class="nc" id="L36">		receiver.addNotificationListener(output);</span>
+<span class="nc" id="L37">		receiver.startup();</span>
+
+		// sender
+<span class="nc" id="L40">		new EIDSInputWedge()</span>
+<span class="nc" id="L41">				.run(new String[] {</span>
+						// poll
+						EIDSInputWedge.POLL_ARGUMENT,
+						// polldir
+						EIDSInputWedge.POLLDIR_ARGUMENT
+								+ new File(TEST_DIRECTORY, &quot;polldir&quot;)
+<span class="nc" id="L47">										.getCanonicalPath(),</span>
+						// servers
+						EIDSInputWedge.SERVERS_ARGUMENT + &quot;localhost:11235&quot;,
+						// oldinput
+						EIDSInputWedge.STORAGEDIR_ARGUMENT
+								+ new File(TEST_DIRECTORY, &quot;oldinput&quot;)
+<span class="nc" id="L53">										.getCanonicalPath() });</span>
+
+<span class="nc" id="L55">		Thread.sleep(1000000);</span>
+<span class="nc" id="L56">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

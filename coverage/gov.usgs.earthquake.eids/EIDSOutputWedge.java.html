@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EIDSOutputWedge.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pdl</a> &gt; <a href="index.source.html" class="el_package">gov.usgs.earthquake.eids</a> &gt; <span class="el_source">EIDSOutputWedge.java</span></div><h1>EIDSOutputWedge.java</h1><pre class="source lang-java linenums">package gov.usgs.earthquake.eids;
+
+import java.io.File;
+import java.util.logging.Logger;
+import gov.usgs.earthquake.distribution.DefaultNotificationListener;
+import gov.usgs.earthquake.product.Product;
+import gov.usgs.earthquake.shakemap.ShakeMapIndexerWedge;
+import gov.usgs.util.Config;
+import gov.usgs.util.FileUtils;
+
+public class EIDSOutputWedge extends DefaultNotificationListener {
+
+	/** Logging object. */
+<span class="fc" id="L14">	private static final Logger LOGGER = Logger</span>
+<span class="fc" id="L15">			.getLogger(ShakeMapIndexerWedge.class.getName());</span>
+
+	public static final String OUTPUT_TYPE_EQXML = &quot;eqxml.xml&quot;;
+	public static final String OUTPUT_TYPE_QUAKEML = &quot;quakeml.xml&quot;;
+	public static final String OUTPUT_TYPE_CUBE = &quot;cube.txt&quot;;
+
+	// Config keys
+	public static final String OUTPUT_DIRECTORY_PROPERTY = &quot;directory&quot;;
+	public static final String TEMP_DIRECTORY_PROPERTY = &quot;tempDirectory&quot;;
+	public static final String FILE_NAME_PROPERTY = &quot;contentFile&quot;;
+	public static final String OUTPUT_FORMAT_PROPERTY = &quot;outputFormat&quot;;
+
+	// Defaults
+<span class="fc" id="L28">	public static final File DEFAULT_DIRECTORY = new File(&quot;outputdir&quot;);</span>
+<span class="fc" id="L29">	public static final File DEFAULT_TEMP_DIRECTORY = new File(</span>
+<span class="fc" id="L30">			System.getProperty(&quot;java.io.tmpdir&quot;));</span>
+	public static final String DEFAULT_OUTPUT_FORMAT = OUTPUT_TYPE_CUBE;
+
+	// Local Variables
+<span class="fc" id="L34">	private File directory = DEFAULT_DIRECTORY;</span>
+<span class="fc" id="L35">	private File tempDirectory = DEFAULT_TEMP_DIRECTORY;</span>
+<span class="fc" id="L36">	private String outputFormat = DEFAULT_OUTPUT_FORMAT;</span>
+	// converter object
+	private LegacyConverter converter;
+
+	/**
+	 * Create a new EIDSOutputWedge.
+	 * 
+	 * Sets up the includeTypes list to contain &quot;origin&quot;. Override this if you
+	 * want the behavior to extend past origin products.
+	 */
+<span class="fc" id="L46">	public EIDSOutputWedge() {</span>
+<span class="fc" id="L47">		this.getIncludeTypes().add(&quot;origin&quot;);</span>
+<span class="fc" id="L48">		converter = LegacyConverter.cubeConverter();</span>
+<span class="fc" id="L49">	}</span>
+
+	/**
+	 * Receive a product from Product Distribution.
+	 * 
+	 * @param product
+	 */
+	@Override
+	public void onProduct(final Product product) throws Exception {
+<span class="fc" id="L58">		byte[] data = converter.convert(product);</span>
+
+<span class="fc bfc" id="L60" title="All 2 branches covered.">		if (data != null) {</span>
+<span class="fc" id="L61">			write(data);</span>
+		}
+<span class="fc" id="L63">	}</span>
+
+	/**
+	 * Configuration
+	 */
+	@Override
+	public void configure(final Config config) throws Exception {
+<span class="fc" id="L70">		super.configure(config);</span>
+
+<span class="fc" id="L72">		setDirectory(new File(config.getProperty(OUTPUT_DIRECTORY_PROPERTY,</span>
+<span class="fc" id="L73">				DEFAULT_DIRECTORY.getName())));</span>
+
+<span class="fc" id="L75">		setTempDirectory(new File(config.getProperty(TEMP_DIRECTORY_PROPERTY,</span>
+<span class="fc" id="L76">				DEFAULT_TEMP_DIRECTORY.getName())));</span>
+
+<span class="fc" id="L78">		setOutputFormat(config.getProperty(OUTPUT_FORMAT_PROPERTY,</span>
+				DEFAULT_OUTPUT_FORMAT));
+
+<span class="fc" id="L81">	}</span>
+
+	/**
+	 * Writes the content of the file you wish to extract to disk with a unique
+	 * name and at the directory specified in configuration
+	 * 
+	 * @param data
+	 * @throws Exception
+	 */
+	private void write(byte[] data) throws Exception {
+<span class="fc" id="L91">		String uniqueFileName = System.currentTimeMillis() + &quot;_&quot; + outputFormat;</span>
+<span class="fc" id="L92">		File destFile = new File(directory, uniqueFileName);</span>
+
+		// Handles case where filename is already in use
+		// In practice this shouldn't trigger
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">		while (destFile.exists()) {</span>
+<span class="nc" id="L97">			uniqueFileName = System.currentTimeMillis() + &quot;_&quot;</span>
+<span class="nc" id="L98">					+ (int) (Math.random() * 10000) + &quot;_&quot; + outputFormat;</span>
+<span class="nc" id="L99">			destFile = new File(directory, uniqueFileName);</span>
+
+<span class="nc" id="L101">			LOGGER.info(&quot;Eqxml name not unique. Attempting to resolve as &quot;</span>
+					+ uniqueFileName);
+		}
+
+<span class="fc" id="L105">		File srcFile = new File(tempDirectory, uniqueFileName);</span>
+<span class="fc" id="L106">		FileUtils.writeFileThenMove(srcFile, destFile, data);</span>
+<span class="fc" id="L107">	}</span>
+
+	// Getters
+	public File getDirectory() {
+<span class="fc" id="L111">		return directory;</span>
+	}
+
+	public File getTempDirectory() {
+<span class="nc" id="L115">		return tempDirectory;</span>
+	}
+
+	public String getOutputFormat() {
+<span class="nc" id="L119">		return outputFormat;</span>
+	}
+
+	public LegacyConverter getConverter() {
+<span class="nc" id="L123">		return converter;</span>
+	}
+
+	// Setters
+	public void setDirectory(File directory) {
+<span class="fc" id="L128">		this.directory = directory;</span>
+<span class="fc" id="L129">	}</span>
+
+	public void setTempDirectory(File tempDirectory) {
+<span class="fc" id="L132">		this.tempDirectory = tempDirectory;</span>
+<span class="fc" id="L133">	}</span>
+
+	public void setOutputFormat(String outputFormat) {
+<span class="fc bfc" id="L136" title="All 2 branches covered.">		if (outputFormat.equals(OUTPUT_TYPE_EQXML)) {</span>
+<span class="fc" id="L137">			converter = LegacyConverter.eqxmlConverter();</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">		} else if (outputFormat.equals(OUTPUT_TYPE_QUAKEML)) {</span>
+<span class="fc" id="L139">			converter = LegacyConverter.quakemlConverter();</span>
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">		} else if (outputFormat.equals(OUTPUT_TYPE_CUBE)) {</span>
+<span class="fc" id="L141">			converter = LegacyConverter.cubeConverter();</span>
+		} else {
+<span class="nc" id="L143">			throw new IllegalArgumentException(&quot;Unknown outputFormat '&quot;</span>
+					+ outputFormat + &quot;'&quot;);
+		}
+<span class="fc" id="L146">		this.outputFormat = outputFormat;</span>
+<span class="fc" id="L147">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

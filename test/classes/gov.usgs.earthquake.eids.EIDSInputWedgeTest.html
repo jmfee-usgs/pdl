@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class gov.usgs.earthquake.eids.EIDSInputWedgeTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class gov.usgs.earthquake.eids.EIDSInputWedgeTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/gov.usgs.earthquake.eids.html">gov.usgs.earthquake.eids</a> &gt; EIDSInputWedgeTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">3</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.165s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+<li>
+<a href="#tab2">Standard error</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">sendInternalProduct</td>
+<td class="success">0.043s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sendOneProduct</td>
+<td class="success">0.047s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">sendScenarioProduct</td>
+<td class="success">0.075s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>urn:usgs-product:ci:origin-scenario:ci09082344:1534979067430
+urn:usgs-product:ci:internal-origin:ci09082344:1534979067477
+urn:usgs-product:ci:origin:ci09082344:1534979067521
+</pre>
+</span>
+</div>
+<div id="tab2" class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre>[Fatal Error] :1:1: Content is not allowed in prolog.
+
+###
+Wed Aug 22 17:04:27 MDT 2018
+FINE	thread=13	Digest='Uj6DpedeK5OrXPA+R3rHAwYTues=' , 1ms
+FINE	thread=13	Product Created source=ci, type=origin-scenario, code=ci09082344, updateTime=Wed Aug 22 17:04:27 MDT 2018
+INFO	thread=13	[null] sending product to Socket[addr=localhost/127.0.0.1,port=11235,localport=59631]
+FINE	thread=13	[null] using protocol version v0.1
+There are 1 active/queued socket connections
+INFO	thread=529	[test_receiver] accepted connection Socket[addr=/127.0.0.1,port=59631,localport=11235]
+FINE	thread=529	[test_receiver] protocol version 'v0.1' Socket[addr=/127.0.0.1,port=59631,localport=11235]
+FINE	thread=529	Product Received source=ci, type=origin-scenario, code=ci09082344, updateTime=Wed Aug 22 17:04:27 MDT 2018
+FINE	thread=529	[test_receiver] listener (test_listener) has 0 queued notifications
+INFO	thread=529	[test_receiver] received product 'urn:usgs-product:ci:origin-scenario:ci09082344:1534979067430'
+ from Socket[addr=/127.0.0.1,port=59631,localport=11235]
+INFO	thread=529	[test_receiver] closed connection Socket[addr=/127.0.0.1,port=59631,localport=11235]
+listener received urn:usgs-product:ci:origin-scenario:ci09082344:1534979067430
+INFO	thread=13	[null] send complete Socket[addr=localhost/127.0.0.1,port=11235,localport=59631] response=&quot;[test_receiver] received product 'urn:usgs-product:ci:origin-scenario:ci09082344:1534979067430'
+&quot;
+INFO	thread=13	Generated 1 products: 1 sent, 0 partially sent, 0 failed to send
+FINE	thread=13	Digest='Uj6DpedeK5OrXPA+R3rHAwYTues=' , 1ms
+[Fatal Error] :1:1: Content is not allowed in prolog.
+
+###
+Wed Aug 22 17:04:27 MDT 2018
+FINE	thread=13	Digest='5BmayK0MJNJs6xNIO4NN7BHE4pU=' , 1ms
+FINE	thread=13	Product Created source=ci, type=internal-origin, code=ci09082344, updateTime=Wed Aug 22 17:04:27 MDT 2018
+INFO	thread=13	[null] sending product to Socket[addr=localhost/127.0.0.1,port=11235,localport=59632]
+There are 1 active/queued socket connections
+INFO	thread=537	[test_receiver] accepted connection Socket[addr=/127.0.0.1,port=59632,localport=11235]
+FINE	thread=13	[null] using protocol version v0.1
+FINE	thread=537	[test_receiver] protocol version 'v0.1' Socket[addr=/127.0.0.1,port=59632,localport=11235]
+FINE	thread=537	Product Received source=ci, type=internal-origin, code=ci09082344, updateTime=Wed Aug 22 17:04:27 MDT 2018
+FINE	thread=537	[test_receiver] listener (test_listener) has 0 queued notifications
+INFO	thread=537	[test_receiver] received product 'urn:usgs-product:ci:internal-origin:ci09082344:1534979067477'
+ from Socket[addr=/127.0.0.1,port=59632,localport=11235]
+INFO	thread=537	[test_receiver] closed connection Socket[addr=/127.0.0.1,port=59632,localport=11235]
+INFO	thread=13	[null] send complete Socket[addr=localhost/127.0.0.1,port=11235,localport=59632] response=&quot;[test_receiver] received product 'urn:usgs-product:ci:internal-origin:ci09082344:1534979067477'
+&quot;
+INFO	thread=13	Generated 1 products: 1 sent, 0 partially sent, 0 failed to send
+listener received urn:usgs-product:ci:internal-origin:ci09082344:1534979067477
+FINE	thread=13	Digest='5BmayK0MJNJs6xNIO4NN7BHE4pU=' , 0ms
+[Fatal Error] :1:1: Content is not allowed in prolog.
+
+###
+Wed Aug 22 17:04:27 MDT 2018
+FINE	thread=13	Digest='89yfWasDyW8N6lhQzAd1GQiDx/o=' , 1ms
+FINE	thread=13	Product Created source=ci, type=origin, code=ci09082344, updateTime=Wed Aug 22 17:04:27 MDT 2018
+INFO	thread=13	[null] sending product to Socket[addr=localhost/127.0.0.1,port=11235,localport=59633]
+FINE	thread=13	[null] using protocol version v0.1
+There are 1 active/queued socket connections
+INFO	thread=545	[test_receiver] accepted connection Socket[addr=/127.0.0.1,port=59633,localport=11235]
+FINE	thread=545	[test_receiver] protocol version 'v0.1' Socket[addr=/127.0.0.1,port=59633,localport=11235]
+FINE	thread=545	Product Received source=ci, type=origin, code=ci09082344, updateTime=Wed Aug 22 17:04:27 MDT 2018
+FINE	thread=545	[test_receiver] listener (test_listener) has 0 queued notifications
+INFO	thread=545	[test_receiver] received product 'urn:usgs-product:ci:origin:ci09082344:1534979067521'
+ from Socket[addr=/127.0.0.1,port=59633,localport=11235]
+INFO	thread=545	[test_receiver] closed connection Socket[addr=/127.0.0.1,port=59633,localport=11235]
+INFO	thread=13	[null] send complete Socket[addr=localhost/127.0.0.1,port=11235,localport=59633] response=&quot;[test_receiver] received product 'urn:usgs-product:ci:origin:ci09082344:1534979067521'
+&quot;
+INFO	thread=13	Generated 1 products: 1 sent, 0 partially sent, 0 failed to send
+listener received urn:usgs-product:ci:origin:ci09082344:1534979067521
+FINE	thread=13	Digest='89yfWasDyW8N6lhQzAd1GQiDx/o=' , 1ms
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 4.9</a> at Aug 22, 2018, 5:04:57 PM</p>
+</div>
+</div>
+</body>
+</html>

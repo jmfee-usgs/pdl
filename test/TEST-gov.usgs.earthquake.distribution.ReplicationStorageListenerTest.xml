@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gov.usgs.earthquake.distribution.ReplicationStorageListenerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-08-22T23:04:15" hostname="igskcicgltgm091.local" time="5.057">
+  <properties/>
+  <testcase name="testReplicationAddRemove" classname="gov.usgs.earthquake.distribution.ReplicationStorageListenerTest" time="5.057"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[Adding first product to local storage.
+Adding second product to local storage.
+Wed Aug 22 17:04:15 MDT 2018
+INFO	thread=456	[replicator] product stored. Replicating. (urn:usgs-product:us:dyfi:usc0001xgp:1299843514931)
+INFO	thread=456	[replicator] product replicated to remote. (urn:usgs-product:us:dyfi:usc0001xgp:1299843514931)
+INFO	thread=456	[replicator] product stored. Replicating. (urn:usgs-product:us:shakemap:abcd1234:1534979055288)
+INFO	thread=456	[replicator] product replicated to remote. (urn:usgs-product:us:shakemap:abcd1234:1534979055288)
+INFO	thread=458	[Thread-430] command "rsync -a -vz --relative -e ssh -o ConnectTimeout=5 ./dyfi/usc0001xgp/us/1299843514931 127.0.0.1:/Users/jmfee/Documents/git/pdl/storage_test/remoteStorage" exited with status [0]
+INFO	thread=458	[Thread-431] command "rsync -a -vz --relative -e ssh -o ConnectTimeout=5 ./shakemap/abcd1234/us/1534979055288 127.0.0.1:/Users/jmfee/Documents/git/pdl/storage_test/remoteStorage" exited with status [0]
+Checking if remote storage has first product.
+Checking if remote storage has second product.
+Removing first product from local storage.
+Wed Aug 22 17:04:17 MDT 2018
+INFO	thread=456	[replicator] product removed. Replicating. (urn:usgs-product:us:dyfi:usc0001xgp:1299843514931)
+INFO	thread=456	[replicator] product removal replicated. (urn:usgs-product:us:dyfi:usc0001xgp:1299843514931)
+INFO	thread=458	[Thread-432] command "rsync -a -vz --relative -e ssh -o ConnectTimeout=5 --delete --include='dyfi**' --exclude='*' . 127.0.0.1:/Users/jmfee/Documents/git/pdl/storage_test/remoteStorage" exited with status [0]
+Checking if first product was removed from remote storage.
+]]></system-err>
+</testsuite>

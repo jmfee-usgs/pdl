@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gov.usgs.earthquake.distribution.HeartbeatListenerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2018-08-22T23:03:53" hostname="igskcicgltgm091.local" time="6.013">
+  <properties/>
+  <testcase name="testAutoClearHeartbeat" classname="gov.usgs.earthquake.distribution.HeartbeatListenerTest" time="5.003"/>
+  <testcase name="testJSONHeartbeatListener" classname="gov.usgs.earthquake.distribution.HeartbeatListenerTest" time="0.001"/>
+  <testcase name="testManualClearHeartbeat" classname="gov.usgs.earthquake.distribution.HeartbeatListenerTest" time="1.001"/>
+  <testcase name="testWriteHeartbeat" classname="gov.usgs.earthquake.distribution.HeartbeatListenerTest" time="0.007"/>
+  <system-out><![CDATA[Test scheduled heartbeat data clearing, JSON={}
+Test sendHeartbeatMessage and JSON={"TestComponent1":{"key13":{"date":"1534979038702","message":"value13"},"key12":{"date":"1534979038702","message":"value12"},"key11":{"date":"1534979038702","message":"value11"}},"TestComponent2":{"key23":{"date":"1534979038702","message":"value23"},"key22":{"date":"1534979038702","message":"value22"},"key21":{"date":"1534979038702","message":"value21"}}}
+Manual test heartbeat data cleared, JSON={}
+]]></system-out>
+  <system-err><![CDATA[CONFIG	thread=13	[null] maxTries = 1
+CONFIG	thread=13	[null] maxTries = 1
+CONFIG	thread=13	[null] timeout = 0ms
+CONFIG	thread=13	[null] retry delay = 300000ms
+CONFIG	thread=13	[null] process duplicates = false
+CONFIG	thread=13	[null] include paths = []
+CONFIG	thread=13	[null] exclude paths = []
+CONFIG	thread=13	[null] heartbeat file = /Users/jmfee/Documents/git/pdl/heartbeat.dat
+CONFIG	thread=13	[null] heartbeat timeout = 100ms
+FINER	thread=287	[null] running listener cleanup
+Wed Aug 22 17:03:54 MDT 2018
+FINER	thread=287	[null] running listener cleanup
+Wed Aug 22 17:03:55 MDT 2018
+FINER	thread=287	[null] running listener cleanup
+Wed Aug 22 17:03:56 MDT 2018
+FINER	thread=287	[null] running listener cleanup
+Wed Aug 22 17:03:57 MDT 2018
+FINER	thread=287	[null] running listener cleanup
+Wed Aug 22 17:03:58 MDT 2018
+FINER	thread=287	[null] running listener cleanup
+CONFIG	thread=13	[null] maxTries = 1
+CONFIG	thread=13	[null] maxTries = 1
+CONFIG	thread=13	[null] timeout = 0ms
+CONFIG	thread=13	[null] retry delay = 300000ms
+CONFIG	thread=13	[null] process duplicates = false
+CONFIG	thread=13	[null] include paths = []
+CONFIG	thread=13	[null] exclude paths = []
+CONFIG	thread=13	[null] heartbeat file = /Users/jmfee/Documents/git/pdl/heartbeat.dat
+CONFIG	thread=13	[null] heartbeat timeout = 1800000ms
+CONFIG	thread=13	[null] maxTries = 1
+CONFIG	thread=13	[null] maxTries = 1
+CONFIG	thread=13	[null] timeout = 0ms
+CONFIG	thread=13	[null] retry delay = 300000ms
+CONFIG	thread=13	[null] process duplicates = false
+CONFIG	thread=13	[null] include paths = []
+CONFIG	thread=13	[null] exclude paths = []
+CONFIG	thread=13	[null] heartbeat file = /Users/jmfee/Documents/git/pdl/heartbeat.dat
+CONFIG	thread=13	[null] heartbeat timeout = 100ms
+Wed Aug 22 17:03:59 MDT 2018
+FINER	thread=287	[null] running listener cleanup
+FINER	thread=13	[null] running listener cleanup
+CONFIG	thread=13	[null] maxTries = 1
+CONFIG	thread=13	[null] maxTries = 1
+CONFIG	thread=13	[null] timeout = 0ms
+CONFIG	thread=13	[null] retry delay = 300000ms
+CONFIG	thread=13	[null] process duplicates = false
+CONFIG	thread=13	[null] include paths = []
+CONFIG	thread=13	[null] exclude paths = []
+CONFIG	thread=13	[null] heartbeat file = /Users/jmfee/Documents/git/pdl/heartbeat.dat
+CONFIG	thread=13	[null] heartbeat timeout = 1800000ms
+]]></system-err>
+</testsuite>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gov.usgs.earthquake.product.io.IOTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2018-08-22T23:04:45" hostname="igskcicgltgm091.local" time="0.144">
+  <properties/>
+  <testcase name="directoryWriteThenRead" classname="gov.usgs.earthquake.product.io.IOTest" time="0.023"/>
+  <testcase name="zipWriteThenRead" classname="gov.usgs.earthquake.product.io.IOTest" time="0.064"/>
+  <testcase name="binaryWriteThenRead" classname="gov.usgs.earthquake.product.io.IOTest" time="0.022"/>
+  <testcase name="xmlWriteThenRead" classname="gov.usgs.earthquake.product.io.IOTest" time="0.028"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[FINE	thread=13	Digest='hG3A3r5fIBd0b2x/ymAKY0q639w=' , 2ms
+Wed Aug 22 17:04:46 MDT 2018
+FINE	thread=13	Digest='nUG4Zx6bkHRcUIfFuYD71wwp1jY=' , 1ms
+FINE	thread=13	Digest='rfWiCJt1Rat28f0MPo46aL3cU24=' , 2ms
+FINE	thread=13	Digest='qk6qH997frp0NScekY2cnqN/TTA=' , 1ms
+]]></system-err>
+</testsuite>

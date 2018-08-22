@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MTIndexerModule.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pdl</a> &gt; <a href="index.source.html" class="el_package">gov.usgs.earthquake.momenttensor</a> &gt; <span class="el_source">MTIndexerModule.java</span></div><h1>MTIndexerModule.java</h1><pre class="source lang-java linenums">/**
+ * MTIndexerModule
+ */
+
+package gov.usgs.earthquake.momenttensor;
+
+import java.math.BigDecimal;
+
+import gov.usgs.earthquake.indexer.DefaultIndexerModule;
+import gov.usgs.earthquake.indexer.IndexerModule;
+import gov.usgs.earthquake.indexer.ProductSummary;
+import gov.usgs.earthquake.product.Product;
+
+<span class="fc" id="L14">public class MTIndexerModule extends DefaultIndexerModule {</span>
+
+	private static final String TYPE_MWW = &quot;Mww&quot;;
+	private static final long TYPE_MWW_BONUS = 60L;
+	private static final String TYPE_MWC = &quot;Mwc&quot;;
+	private static final long TYPE_MWC_BONUS = 2L;
+	private static final String TYPE_MWB = &quot;Mwb&quot;;
+	private static final long TYPE_MWB_BONUS = 1L;
+	private static final long TYPE_OTHER_BONUS = 0L;
+	private static final String EVENT_SOURCE_GCMT = &quot;gcmt&quot;;
+	private static final long EVENT_SOURCE_GCMT_BONUS = 56L;
+	private static final long MAG_OUTSIDE_RANGE_PENALTY = -100L;
+<span class="fc" id="L26">	private static final BigDecimal MAG_RANGE_MIN = new BigDecimal(5.5);</span>
+<span class="fc" id="L27">	private static final BigDecimal MAG_RANGE_MAX = new BigDecimal(7.0);</span>
+
+	@Override
+	public int getSupportLevel(Product product) {
+<span class="nc" id="L31">		int supportLevel = IndexerModule.LEVEL_UNSUPPORTED;</span>
+<span class="nc" id="L32">		String type = getBaseProductType(product.getId().getType());</span>
+		// Support only moment tensor products
+<span class="nc bnc" id="L34" title="All 2 branches missed.">		if (type.equals(&quot;moment-tensor&quot;)) {</span>
+<span class="nc" id="L35">			supportLevel = IndexerModule.LEVEL_SUPPORTED;</span>
+		}
+
+<span class="nc" id="L38">		return supportLevel;</span>
+	}
+
+	@Override
+	protected long getPreferredWeight(ProductSummary summary) {
+		// Get the default preferred weight value from the parent class
+<span class="fc" id="L44">		long weight = super.getPreferredWeight(summary);</span>
+
+		// points by type
+<span class="fc" id="L47">		String tensorType = summary.getProperties().get(&quot;derived-magnitude-type&quot;);</span>
+<span class="fc" id="L48">		String eventSource = summary.getEventSource();</span>
+<span class="fc" id="L49">		String derivedMagnitude = summary.getProperties().get(&quot;derived-magnitude&quot;);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">		BigDecimal magRange = derivedMagnitude == null ? null : new BigDecimal(derivedMagnitude);</span>
+
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">		if (tensorType == null) {</span>
+<span class="fc" id="L53">			tensorType = summary.getProperties().get(&quot;beachball-type&quot;);</span>
+		}
+
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">		if (tensorType != null) {</span>
+			// Add bonus
+<span class="fc bfc" id="L58" title="All 2 branches covered.">			if (tensorType.equalsIgnoreCase(TYPE_MWW)) {</span>
+<span class="fc" id="L59">				weight += TYPE_MWW_BONUS;</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">			} else if (tensorType.equalsIgnoreCase(TYPE_MWC)) {</span>
+<span class="fc" id="L61">				weight += TYPE_MWC_BONUS;</span>
+<span class="pc bpc" id="L62" title="1 of 2 branches missed.">			} else if (tensorType.equalsIgnoreCase(TYPE_MWB)) {</span>
+<span class="fc" id="L63">				weight += TYPE_MWB_BONUS;</span>
+			} else {
+<span class="nc" id="L65">				weight += TYPE_OTHER_BONUS;</span>
+			}
+
+			// Subtract penalty
+<span class="fc bfc" id="L69" title="All 2 branches covered.">			if (magRange != null) {</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">				if (tensorType.equalsIgnoreCase(TYPE_MWB)</span>
+<span class="pc bpc" id="L71" title="1 of 4 branches missed.">						&amp;&amp; (magRange.compareTo(MAG_RANGE_MIN) == -1 || magRange.compareTo(MAG_RANGE_MAX) == 1)) {</span>
+<span class="fc" id="L72">					weight += MAG_OUTSIDE_RANGE_PENALTY;</span>
+				}
+			}
+		}
+
+		// Add gcmt bonus if required
+<span class="fc bfc" id="L78" title="All 2 branches covered.">		if (eventSource.equalsIgnoreCase(EVENT_SOURCE_GCMT)) {</span>
+<span class="fc" id="L79">			weight += EVENT_SOURCE_GCMT_BONUS;</span>
+		}
+
+<span class="fc" id="L82">		return weight;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

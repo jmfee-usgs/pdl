@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gov.usgs.earthquake.distribution.URLNotificationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-08-22T23:04:27" hostname="igskcicgltgm091.local" time="0.004">
+  <properties/>
+  <testcase name="testXMLFormat" classname="gov.usgs.earthquake.distribution.URLNotificationTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[<?xml version="1.0"?>
+<notification xmlns="http://earthquake.usgs.gov/distribution/product" id="urn:usgs-product:testsource:testtype:testcode:1534979067182" updated="2018-08-22T23:04:27.182Z" trackerURL="http://earthquake.usgs.gov/tracker" expires="2018-08-22T23:14:31.982Z" url="http://earthquake.usgs.gov/someProduct.xml"/>
+]]></system-err>
+</testsuite>

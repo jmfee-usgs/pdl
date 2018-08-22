@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IndexerChange.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pdl</a> &gt; <a href="index.source.html" class="el_package">gov.usgs.earthquake.indexer</a> &gt; <span class="el_source">IndexerChange.java</span></div><h1>IndexerChange.java</h1><pre class="source lang-java linenums">package gov.usgs.earthquake.indexer;
+
+public class IndexerChange {
+
+	/** Enumeration of indexer event types. */
+<span class="fc" id="L6">	public static enum IndexerChangeType {</span>
+<span class="fc" id="L7">		EVENT_ADDED, EVENT_UPDATED, EVENT_DELETED, EVENT_ARCHIVED, EVENT_MERGED, EVENT_SPLIT,</span>
+
+<span class="fc" id="L9">		PRODUCT_ADDED, PRODUCT_UPDATED, PRODUCT_DELETED, PRODUCT_ARCHIVED</span>
+	};
+
+<span class="fc" id="L12">	public static final IndexerChangeType EVENT_ADDED = IndexerChangeType.EVENT_ADDED;</span>
+<span class="fc" id="L13">	public static final IndexerChangeType EVENT_UPDATED = IndexerChangeType.EVENT_UPDATED;</span>
+<span class="fc" id="L14">	public static final IndexerChangeType EVENT_DELETED = IndexerChangeType.EVENT_DELETED;</span>
+<span class="fc" id="L15">	public static final IndexerChangeType EVENT_ARCHIVED = IndexerChangeType.EVENT_ARCHIVED;</span>
+<span class="fc" id="L16">	public static final IndexerChangeType EVENT_MERGED = IndexerChangeType.EVENT_MERGED;</span>
+<span class="fc" id="L17">	public static final IndexerChangeType EVENT_SPLIT = IndexerChangeType.EVENT_SPLIT;</span>
+
+<span class="fc" id="L19">	public static final IndexerChangeType PRODUCT_ADDED = IndexerChangeType.PRODUCT_ADDED;</span>
+<span class="fc" id="L20">	public static final IndexerChangeType PRODUCT_UPDATED = IndexerChangeType.PRODUCT_UPDATED;</span>
+<span class="fc" id="L21">	public static final IndexerChangeType PRODUCT_DELETED = IndexerChangeType.PRODUCT_DELETED;</span>
+<span class="fc" id="L22">	public static final IndexerChangeType PRODUCT_ARCHIVED = IndexerChangeType.PRODUCT_ARCHIVED;</span>
+
+	/** Indicates the type of change that is occurring */
+	private IndexerChangeType type;
+	/** The event as it was before the change occurred. */
+	private Event originalEvent;
+	/** The event as it is after the change occurred. */
+	private Event newEvent;
+
+	/**
+	 * Constructor to quickly create a new &lt;code&gt;IndexerChange&lt;/code&gt; object to
+	 * be added to the list of changes in a given &lt;code&gt;IndexerEvent&lt;/code&gt;.
+	 * Note the &lt;code&gt;oldEvent&lt;/code&gt; and &lt;code&gt;newEvent&lt;/code&gt; will have
+	 * particular meanings depending on the given &lt;code&gt;type&lt;/code&gt; of change
+	 * that occurred.
+	 * 
+	 * @param type
+	 *            The type of change that occurred.
+	 * @param originalEvent
+	 *            The event as it was before the change occurred.
+	 * @param newEvent
+	 *            The event as it is after the change occurred.
+	 * @see IndexerEvent
+	 */
+	public IndexerChange(IndexerChangeType type, Event originalEvent,
+<span class="fc" id="L47">			Event newEvent) {</span>
+<span class="fc" id="L48">		this.type = type;</span>
+<span class="fc" id="L49">		this.originalEvent = originalEvent;</span>
+<span class="fc" id="L50">		this.newEvent = newEvent;</span>
+<span class="fc" id="L51">	}</span>
+
+	public IndexerChangeType getType() {
+<span class="fc" id="L54">		return this.type;</span>
+	}
+
+	public Event getOriginalEvent() {
+<span class="fc" id="L58">		return this.originalEvent;</span>
+	}
+
+	public Event getNewEvent() {
+<span class="fc" id="L62">		return this.newEvent;</span>
+	}
+
+	@Override
+	public String toString() {
+<span class="fc" id="L67">		StringBuffer b = new StringBuffer();</span>
+<span class="fc" id="L68">		b.append(getType().toString() + &quot; :: &quot;);</span>
+
+<span class="fc bfc" id="L70" title="All 2 branches covered.">		if (getOriginalEvent() != null) {</span>
+<span class="fc" id="L71">			b.append(getOriginalEvent().getEventId() + &quot; --&gt; &quot;);</span>
+		} else {
+<span class="fc" id="L73">			b.append(&quot;null --&gt; &quot;);</span>
+		}
+
+<span class="fc bfc" id="L76" title="All 2 branches covered.">		if (getNewEvent() != null) {</span>
+<span class="fc" id="L77">			b.append(getNewEvent().getEventId());</span>
+		} else {
+<span class="fc" id="L79">			b.append(&quot;null&quot;);</span>
+		}
+
+<span class="fc" id="L82">		return b.toString();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

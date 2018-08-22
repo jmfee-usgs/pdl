@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gov.usgs.earthquake.product.ProductTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-08-22T23:04:46" hostname="igskcicgltgm091.local" time="0.033">
+  <properties/>
+  <testcase name="testCopyConstructor" classname="gov.usgs.earthquake.product.ProductTest" time="0.019"/>
+  <testcase name="testSignature" classname="gov.usgs.earthquake.product.ProductTest" time="0.014"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[FINE	thread=13	Digest='B0R5Suv4/4G/XEq9DqMJX14pYTY=' , 3ms
+FINE	thread=13	Digest='2OWiwmZstR5S57PAR0ThpYNaMKs=' , 2ms
+FINE	thread=13	Digest='2OWiwmZstR5S57PAR0ThpYNaMKs=' , 1ms
+FINE	thread=13	Digest='2OWiwmZstR5S57PAR0ThpYNaMKs=' , 1ms
+FINE	thread=13	Digest='2OWiwmZstR5S57PAR0ThpYNaMKs=' , 1ms
+FINE	thread=13	Digest='BSl51NVENBNHVpLU8FKgb/1YEqM=' , 3ms
+]]></system-err>
+</testsuite>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="gov.usgs.earthquake.distribution.HeartbeatInfoTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2018-08-22T23:03:53" hostname="igskcicgltgm091.local" time="0.005">
+  <properties/>
+  <testcase name="testHeartbeatInfoNotExpired" classname="gov.usgs.earthquake.distribution.HeartbeatInfoTest" time="0.005"/>
+  <testcase name="testHeartbeatInfoExpired" classname="gov.usgs.earthquake.distribution.HeartbeatInfoTest" time="0.0"/>
+  <system-out><![CDATA[Test successful: HeartbeatInfo NOT expired
+Test successful: HeartbeatInfo expired
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

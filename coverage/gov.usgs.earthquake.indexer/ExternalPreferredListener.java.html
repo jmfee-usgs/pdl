@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExternalPreferredListener.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">pdl</a> &gt; <a href="index.source.html" class="el_package">gov.usgs.earthquake.indexer</a> &gt; <span class="el_source">ExternalPreferredListener.java</span></div><h1>ExternalPreferredListener.java</h1><pre class="source lang-java linenums">package gov.usgs.earthquake.indexer;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import gov.usgs.earthquake.product.Product;
+
+/**
+ * Notify external processes when preferred product change within events.
+ * 
+ * @author jmfee
+ *
+ */
+<span class="nc" id="L14">public class ExternalPreferredListener extends ExternalIndexerListener {</span>
+
+	public static final String PREFERRED_ACTION_ARGUMENT = &quot;--preferred-action=&quot;;
+
+<span class="nc" id="L18">	public static enum PreferredAction {</span>
+<span class="nc" id="L19">		PREFERRED_ADDED,</span>
+<span class="nc" id="L20">		PREFERRED_CHANGED,</span>
+<span class="nc" id="L21">		PREFERRED_REMOVED</span>
+	};
+
+	/**
+	 * Skip parent class processing, except autoArchiving.
+	 */
+	@Override
+	public boolean accept(final IndexerEvent event) {
+<span class="nc" id="L29">		return false;</span>
+	}
+
+	/**
+	 * Handle indexer events.
+	 */
+	@Override
+	public void onIndexerEvent(final IndexerEvent event) throws Exception {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">		for (IndexerChange change : event.getIndexerChanges()) {</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">			if (!accept(event, change)) {</span>
+				// ignoreArchive, processOnlyWhenEventChanged checks
+<span class="nc" id="L40">				continue;</span>
+			}
+
+<span class="nc" id="L43">			Map&lt;ProductSummary, PreferredAction&gt; changes = getIndexerChangePreferredActions(change);</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">			for (ProductSummary changedProduct : changes.keySet()) {</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">				if (!accept(changedProduct.getId())) {</span>
+<span class="nc" id="L46">					continue;</span>
+				}
+
+<span class="nc" id="L49">				Event changedEvent = change.getNewEvent();</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">				if (changedEvent == null) {</span>
+					// event archived...
+<span class="nc" id="L52">					changedEvent = change.getOriginalEvent();</span>
+				}
+
+<span class="nc" id="L55">				String command = getProductSummaryCommand(changedEvent, changedProduct);</span>
+
+				// indexer action
+<span class="nc" id="L58">				command = command + &quot; &quot; +</span>
+						ExternalIndexerListener.EVENT_ACTION_ARGUMENT +
+<span class="nc" id="L60">						change.getType().toString();</span>
+
+				// preferred product action
+<span class="nc" id="L63">				command = command + &quot; &quot; +</span>
+						PREFERRED_ACTION_ARGUMENT +
+<span class="nc" id="L65">						changes.get(changedProduct).toString();</span>
+
+				// pass product content as input to command
+<span class="nc" id="L68">				Product product = null;</span>
+				try {
+					// this product is not necessarily the product that triggered the change.
+<span class="nc" id="L71">					product = storeProduct(event.getIndexer().getProductStorage().getProduct(changedProduct.getId()));</span>
+<span class="nc" id="L72">				} catch (Exception e) {</span>
+					// ignore, just leave null
+<span class="nc" id="L74">				}</span>
+
+<span class="nc" id="L76">				runProductCommand(command, product);</span>
+<span class="nc" id="L77">			}</span>
+<span class="nc" id="L78">		}</span>
+
+<span class="nc" id="L80">		super.onIndexerEvent(event);</span>
+<span class="nc" id="L81">	}</span>
+
+	/**
+	 * Compare preferred products before/after IndexerChange was applied.
+	 * 
+	 * @param change indexer change to evaluate.
+	 * @return map of preferred products that were changed.
+	 */
+	public static Map&lt;ProductSummary, PreferredAction&gt; getIndexerChangePreferredActions(final IndexerChange change) {
+<span class="nc" id="L90">		Map&lt;ProductSummary, PreferredAction&gt; changes = new HashMap&lt;ProductSummary, PreferredAction&gt;();</span>
+
+		// only event types
+<span class="nc" id="L93">		IndexerChange.IndexerChangeType changeType = change.getType();</span>
+<span class="nc bnc" id="L94" title="All 10 branches missed.">		if (changeType != IndexerChange.EVENT_ADDED &amp;&amp;</span>
+				changeType != IndexerChange.EVENT_DELETED &amp;&amp;
+				changeType != IndexerChange.EVENT_MERGED &amp;&amp;
+				changeType != IndexerChange.EVENT_SPLIT &amp;&amp;
+				changeType != IndexerChange.EVENT_UPDATED) {
+<span class="nc" id="L99">			return changes;</span>
+		}
+		
+<span class="nc" id="L102">		Map&lt;String, ProductSummary&gt; newProducts = getPreferredProducts(change.getNewEvent());</span>
+<span class="nc" id="L103">		Map&lt;String, ProductSummary&gt; originalProducts = getPreferredProducts(change.getOriginalEvent());</span>
+
+		// check all currently preferred products
+<span class="nc bnc" id="L106" title="All 2 branches missed.">		for (String type : newProducts.keySet()) {</span>
+<span class="nc" id="L107">			ProductSummary newProduct = newProducts.get(type);</span>
+<span class="nc" id="L108">			ProductSummary originalProduct = originalProducts.get(type);</span>
+			
+<span class="nc bnc" id="L110" title="All 2 branches missed.">			if (originalProduct == null) {</span>
+				// no product of this type previously existed
+<span class="nc" id="L112">				changes.put(newProduct,</span>
+						PreferredAction.PREFERRED_ADDED);
+<span class="nc bnc" id="L114" title="All 2 branches missed.">			} else if (!newProduct.getId().equals(originalProduct.getId())) {</span>
+				// different from previous preferred product of same type
+<span class="nc" id="L116">				changes.put(newProduct,</span>
+						PreferredAction.PREFERRED_CHANGED);
+			}
+<span class="nc" id="L119">		}</span>
+		
+<span class="nc bnc" id="L121" title="All 2 branches missed.">		for (String type : originalProducts.keySet()) {</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">			if (newProducts.get(type) == null) {</span>
+				// no product of this type exists anymore
+<span class="nc" id="L124">				changes.put(originalProducts.get(type),</span>
+						PreferredAction.PREFERRED_REMOVED);
+			}
+<span class="nc" id="L127">		}</span>
+		
+<span class="nc" id="L129">		return changes;</span>
+	}
+
+	/**
+	 * Get a map of preferred products from an event.
+	 *
+	 * @param event the event.
+	 * @return preferred products, or empty hashmap if event is null.
+	 */
+	public static Map&lt;String, ProductSummary&gt; getPreferredProducts(final Event event) {
+<span class="nc bnc" id="L139" title="All 2 branches missed.">		if (event == null) {</span>
+<span class="nc" id="L140">			return new HashMap&lt;String, ProductSummary&gt;();</span>
+		}
+<span class="nc" id="L142">		return event.getPreferredProducts();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
