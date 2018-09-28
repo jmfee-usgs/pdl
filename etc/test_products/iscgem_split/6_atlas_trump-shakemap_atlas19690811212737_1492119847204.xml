@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<product xmlns="http://earthquake.usgs.gov/distribution/product" id="urn:usgs-product:atlas:trump-shakemap:atlas19690811212737:1492119847204" updateTime="2017-04-13T21:44:07.204Z" status="UPDATE" trackerURL="http://ehppdl1.cr.usgs.gov/tracker/">
+	<property name="eventsource" value="atlas"/>
+	<property name="eventsourcecode" value="19690811212737"/>
+	<property name="trump-code" value="atlas19690811212737"/>
+	<property name="trump-source" value="atlas"/>
+	<signature>S4sxjtDbHaoW6lpg9Fs+tbGr7yjMVgPmd7lRwGd5l5o1D5FjGMOj9iwDMmWazbf/bPcPe9/udA+6MKoK83vb8WcR0ibp/B6WUReTKHZ7SEgaeOCFqNDWTU2JLSjS0Pi4gL04iNPV9MrPI04HSSj1xXSrsMXtCAetvPF972yyTZMjMRkqt0R9tjx3TN9ru/+rDEo1ejKdbEc6auCf+8w8aVhrsLygyqQTu4vrn7YZCbEjaZ+Ig4DMiZitOj9HLEkEe/KE05KWq4mhJgE0p4Kv1jyqZ6Xsm0pEMR0c+WVtryrLsU/dTbPi6Duakd2pzRNG7Uv9wRpbYmMxoQd74qerHA==</signature>
+</product>

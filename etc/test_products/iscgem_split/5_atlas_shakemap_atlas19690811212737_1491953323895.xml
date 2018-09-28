@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<product xmlns="http://earthquake.usgs.gov/distribution/product" id="urn:usgs-product:atlas:shakemap:atlas19690811212737:1491953323895" updateTime="2017-04-11T23:28:43.895Z" status="DELETE" trackerURL="http://ehppdl1.cr.usgs.gov/tracker/">
+	<property name="message" value="removed and replaced for catalog consistency"/>
+	<signature>MCwCFBDVqwPugS3XxMdyCa13g7YBLwDYAhRL82YTSTGPmDwlaHgTH9rhuG994w==</signature>
+</product>

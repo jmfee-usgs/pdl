@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<product xmlns="http://earthquake.usgs.gov/distribution/product" id="urn:usgs-product:us:touch:iscgem805430:1536773688128" updateTime="2018-09-12T17:34:48.128Z" status="UPDATE" trackerURL="http://ehppdl1.cr.usgs.gov/tracker/">
+	<property name="eventsource" value="iscgem"/>
+	<property name="eventsourcecode" value="805430"/>
+	<property name="pdl-client-version" value="Version 1.14.1 2018-04-26"/>
+	<signature>MC0CFDKKG2OP9PA2qx769SAs/YnGTL4qAhUAmpep3RKymP7U6IqaOu9DBC5aevk=</signature>
+</product>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<product xmlns="http://earthquake.usgs.gov/distribution/product" id="urn:usgs-product:us:origin:iscgemsup805431:1536770083065" updateTime="2018-09-12T16:34:43.065Z" status="DELETE" trackerURL="http://ehppdl1.cr.usgs.gov/tracker/">
+	<property name="eventsource" value="iscgemsup"/>
+	<property name="eventsourcecode" value="805431"/>
+	<property name="pdl-client-version" value="Version 1.10.1 2016-04-07"/>
+	<property name="senderemail" value=""/>
+	<signature>RV2anAtJ9jdgLXJQxO02f/lRGK8dQkUA4DhxyHyFpHzsX+Ygoyn5Pn5vlqfz5HzgmA0QU244gU94m7NDtvhhR1sExWKSPlg6v32/ASqXmptIVGutFx4ocW1gQ+BpnS7eXiOjLJUeH437IpGQL67SSfcrQKaW2E9bJxGd4fgXUae48BlyMlMKrK9seUsNeXFSJZQGgu0uq0ce3FUW18gGq8aC0DJ6fgJYDfIpR6ubxBAYfckRpfA9HVG/2g5LvrVD0GPmwj5vM1aMyNCD511Jlko9DUKiRbxa0hEjr9OzKdGqlqXWk3zbE3X5TVn2Fq15GK5gCA3pI0zuS5/XUNl+qPkUGIf2DpSXEU3nEWcx321YrMmwNOYAYd189GFHhxxLSQESStA92tFQDtxkIPrvTr6MNH1qZn7KaYH+C9MZ204Rx0GP/Izmkdrroj+/LdZYCN7SHyKOYqTduLS4lr8HXronxbnKL1kySjmWVe4OzHReT225W5Noz+jSFB+AnWLzOkF4CgoM/SZm6iHoi8F1fPZdCzrYw7HhT9IYqrJvYsS+4UVq1sKhJ/0p0+HsKldUtp+9GrWUnGfn5OkUr7lcor6LGk9u/oeQnFaLCxzCK5jwzKOxjMiu3qfnXucRaGQzL8CYgLRF1vAra1DUl1yqLfhyVJ7RpMAyIJqawKiaeSQ=</signature>
+</product>

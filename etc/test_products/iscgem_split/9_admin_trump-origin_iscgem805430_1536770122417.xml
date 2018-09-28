@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<product xmlns="http://earthquake.usgs.gov/distribution/product" id="urn:usgs-product:admin:trump-origin:iscgem805430:1536770122417" updateTime="2018-09-12T16:35:22.417Z" status="UPDATE" trackerURL="http://ehppdl1.cr.usgs.gov/tracker/">
+	<property name="eventsource" value="iscgem"/>
+	<property name="eventsourcecode" value="805430"/>
+	<property name="pdl-client-version" value="Version 1.10.1 2016-04-07"/>
+	<property name="senderemail" value=""/>
+	<property name="trump-code" value="iscgem805430"/>
+	<property name="trump-source" value="us"/>
+	<signature>OHKCI3SzLJn8dpLN6AOE9ulR0rSCqHGCzE3POg3W41snN7isBjO3ixQPD0sszVqg/8yjgduxVYucTo2iC1ablzSeZjvbXzPCV0JVlZ+nKU8ZzZzclqOA6tp2HoBZQtBVPaVlm/Y0ZgkpI+FiTfqY1upzaMQ/mK30XNcR83NdDM4SxMtiovaXYlZNiHy6A8VKKWYFgb3lAyv0CdfNuioeNbnc21vSfUIQxUXI9+tKkw1UrVGOj8P3fKz4tu7GqdzqWhsbnAxnn468gsRJylkSTtvYMCBVqklhlolS0UXPwf+0WM3pXxW6O2ZeKP+FMHsBw40A2Kyu8n2n3ZAjD2oyL4Rzt3gbqQFqHMwP76Y6rOMpFuwgC8WgJsZ6Itw2dC5SxEM9CF5IH3nQJZGdCMUWDracx4lFi0L5xgTNMGMHDJP7KShlUt0sFmq/evLZt9yZnF5vVw6F8g/dRsyGlrkh8h/dtV00qhLQH8GmvHFeR/ye/gNozDQIRk+BoLFLnH1+YFGRQoudQ8GxmpX6uzM8bQEcTY+kUxp1n/XHjIiQTky19It56GT/daKx5ExIW062VvKw+zWLXxEffafIuh0g18oudqAhMJodTmEV8I4DyoTHnGMyp85d5ajW43XE1YZDMmypOo0eUXYoG3RxpCP/PFrgRbvvgY/zJVpRlUUKTZc=</signature>
+</product>

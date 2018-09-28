@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<product xmlns="http://earthquake.usgs.gov/distribution/product" id="urn:usgs-product:us:origin:iscgem805430:1423777364185" updateTime="2015-02-12T21:42:44.185Z" status="UPDATE" trackerURL="http://ehppdl1.cr.usgs.gov/tracker/">
+	<property name="depth" value="30.0"/>
+	<property name="evaluation-status" value="preliminary"/>
+	<property name="event-type" value="earthquake"/>
+	<property name="eventParametersPublicID" value="quakeml:us.anss.org/eventParameters/805430"/>
+	<property name="eventsource" value="iscgem"/>
+	<property name="eventsourcecode" value="805430"/>
+	<property name="eventtime" value="1969-08-11T21:27:35.000Z"/>
+	<property name="latitude" value="43.4240"/>
+	<property name="longitude" value="147.8590"/>
+	<property name="magnitude" value="8.2"/>
+	<property name="magnitude-source" value="iscgem"/>
+	<property name="magnitude-type" value="mw"/>
+	<property name="origin-source" value="iscgem"/>
+	<property name="quakeml-publicid" value="quakeml:atlas.anss.org/event/iscgem805430"/>
+	<property name="review-status" value="automatic"/>
+		<signature>MC4CFQCYqJUB8pakh1Y3SgEObgsRm4D7oQIVAIw+h4oiwWnb7cPNjmUG7xbB5kD2</signature>
+</product>

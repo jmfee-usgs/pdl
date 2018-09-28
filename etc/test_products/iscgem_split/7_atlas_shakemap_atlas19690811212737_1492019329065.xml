@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<product xmlns="http://earthquake.usgs.gov/distribution/product" id="urn:usgs-product:atlas:shakemap:atlas19690811212737:1492019329065" updateTime="2017-04-12T17:48:49.065Z" status="UPDATE" trackerURL="http://ehppdl1.cr.usgs.gov/tracker/">
+	<property name="eventsource" value="atlas"/>
+	<property name="eventsourcecode" value="19690811212737"/>
+	<property name="eventtime" value="1969-08-11T21:27:37.000Z"/>
+	<property name="latitude" value="43.4770"/>
+	<property name="longitude" value="147.8150"/>
+	<property name="maxmmi" value="8.2"/>
+	<property name="reviewstatus" value="automatic"/>
+		<signature>MCwCFHnFp5iWH3HPaJqFxF8lYLo/4Pr1AhRMBdxJQI6z1r2eDPbuDMJiEvPTYw==</signature>
+</product>
