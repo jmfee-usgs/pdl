@@ -59,11 +59,11 @@ import java.util.logging.Logger;
  * &lt;dt&gt;maxTries&lt;/dt&gt;
  * &lt;dd&gt;(Optional, Default 1) Number of times to attempt delivery of each
  * notification, if the listener throws a ContinuableListenerException during
- * onNotification(). A value &lt;= 1 means do not re-attempt.&lt;/dd&gt;
+ * onNotification(). A value &amp;lt;= 1 means do not re-attempt.&lt;/dd&gt;
  *
  * &lt;dt&gt;timeout&lt;/dt&gt;
  * &lt;dd&gt;(Optional, Default 0) Number of milliseconds before thread running
- * onNotification() is interrupted. A value &lt;= 0 means never interrupt.&lt;/dd&gt;
+ * onNotification() is interrupted. A value &amp;lt;= 0 means never interrupt.&lt;/dd&gt;
  *
  * &lt;dt&gt;retryDelay&lt;/dt&gt;
  * &lt;dd&gt;(Optional, Default 0) Number of milliseconds to wait before re-attempting
@@ -426,7 +426,7 @@ import java.util.logging.Logger;
 	 * Number of tries to deliver notification, when an Exception is thrown
 	 * during onNotification().
 	 *
-	 * @return the attemptCount. A value &lt; 1 means never try to deliver.
+	 * @return the attemptCount. A value &amp;lt; 1 means never try to deliver.
 	 */
 	public int getMaxTries() {
 <span class="fc" id="L432">		return maxTries;</span>
@@ -436,7 +436,7 @@ import java.util.logging.Logger;
 	 * Set the maxTries.
 	 *
 	 * @param maxTries
-	 *            the maxTries. A value &lt; 1 means never try to deliver.
+	 *            the maxTries. A value &amp;lt; 1 means never try to deliver.
 	 */
 	public void setMaxTries(final int maxTries) {
 <span class="fc" id="L442">		this.maxTries = maxTries;</span>
@@ -446,7 +446,7 @@ import java.util.logging.Logger;
 	 * Number of milliseconds onNotification is allowed to run before being
 	 * interrupted.
 	 *
-	 * @return the timeout in milliseconds. A value &lt;= 0 means never timeout.
+	 * @return the timeout in milliseconds. A value &amp;lt;= 0 means never timeout.
 	 */
 	public long getTimeout() {
 <span class="fc" id="L452">		return timeout;</span>
@@ -456,7 +456,7 @@ import java.util.logging.Logger;
 	 * Set the timeout.
 	 *
 	 * @param timeout
-	 *            the timeout in milliseconds. A value &lt;= 0 means never timeout.
+	 *            the timeout in milliseconds. A value &amp;lt;= 0 means never timeout.
 	 */
 	public void setTimeout(final long timeout) {
 <span class="nc" id="L462">		this.timeout = timeout;</span>
@@ -547,4 +547,4 @@ import java.util.logging.Logger;
 <span class="fc" id="L547">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

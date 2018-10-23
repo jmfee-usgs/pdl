@@ -81,49 +81,48 @@ public class ProductKey extends DefaultConfigurable {
 	 * @return true if this key might verify the signature for given product.
 	 */
 	public boolean isForProduct(final ProductId id) {
-<span class="pc bpc" id="L84" title="1 of 4 branches missed.">		if (sources.size() == 0 || sources.contains(id.getSource())) {</span>
-<span class="pc bpc" id="L85" title="1 of 4 branches missed.">			if (types.size() == 0 || types.contains(id.getType())) {</span>
-<span class="fc" id="L86">				return true;</span>
-			}
+<span class="pc bpc" id="L84" title="1 of 4 branches missed.">		if ((sources.size() == 0 || sources.contains(id.getSource()))</span>
+<span class="pc bpc" id="L85" title="1 of 4 branches missed.">				&amp;&amp; (types.size() == 0 || types.contains(id.getType()))) {</span>
+<span class="fc" id="L86">			return true;</span>
 		}
-<span class="nc" id="L89">		return false;</span>
+<span class="nc" id="L88">		return false;</span>
 	}
 
 	public void configure(final Config config) throws Exception {
-<span class="fc" id="L93">		String key = config.getProperty(KEY_PROPERTY_NAME);</span>
-<span class="pc bpc" id="L94" title="1 of 2 branches missed.">		if (key == null) {</span>
-<span class="nc" id="L95">			throw new ConfigurationException(</span>
+<span class="fc" id="L92">		String key = config.getProperty(KEY_PROPERTY_NAME);</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">		if (key == null) {</span>
+<span class="nc" id="L94">			throw new ConfigurationException(</span>
 					&quot;'key' is a required configuration property&quot;);
 		}
-<span class="fc" id="L98">		LOGGER.config(&quot;key is '&quot; + key + &quot;'&quot;);</span>
-<span class="fc" id="L99">		setKey(CryptoUtils.readOpenSSHPublicKey(key.getBytes()));</span>
+<span class="fc" id="L97">		LOGGER.config(&quot;key is '&quot; + key + &quot;'&quot;);</span>
+<span class="fc" id="L98">		setKey(CryptoUtils.readOpenSSHPublicKey(key.getBytes()));</span>
 
-<span class="fc" id="L101">		String sources = config.getProperty(SOURCES_PROPERTY_NAME);</span>
-<span class="pc bpc" id="L102" title="1 of 2 branches missed.">		if (sources != null) {</span>
-<span class="nc" id="L103">			LOGGER.config(&quot;key sources '&quot; + sources + &quot;'&quot;);</span>
-<span class="nc" id="L104">			getSources().addAll(StringUtils.split(sources, &quot;,&quot;));</span>
+<span class="fc" id="L100">		String sources = config.getProperty(SOURCES_PROPERTY_NAME);</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">		if (sources != null) {</span>
+<span class="nc" id="L102">			LOGGER.config(&quot;key sources '&quot; + sources + &quot;'&quot;);</span>
+<span class="nc" id="L103">			getSources().addAll(StringUtils.split(sources, &quot;,&quot;));</span>
 		}
 
-<span class="fc" id="L107">		String types = config.getProperty(TYPES_PROPERTY_NAME);</span>
-<span class="pc bpc" id="L108" title="1 of 2 branches missed.">		if (types != null) {</span>
-<span class="nc" id="L109">			LOGGER.config(&quot;key types '&quot; + types + &quot;'&quot;);</span>
-<span class="nc" id="L110">			getTypes().addAll(StringUtils.split(types, &quot;,&quot;));</span>
+<span class="fc" id="L106">		String types = config.getProperty(TYPES_PROPERTY_NAME);</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">		if (types != null) {</span>
+<span class="nc" id="L108">			LOGGER.config(&quot;key types '&quot; + types + &quot;'&quot;);</span>
+<span class="nc" id="L109">			getTypes().addAll(StringUtils.split(types, &quot;,&quot;));</span>
 		}
-<span class="fc" id="L112">	}</span>
+<span class="fc" id="L111">	}</span>
 
 	public void shutdown() throws Exception {
 		// Nothing to do
-<span class="nc" id="L116">	}</span>
+<span class="nc" id="L115">	}</span>
 
 	public void startup() throws Exception {
 		// Nothing to do
-<span class="nc" id="L120">	}</span>
+<span class="nc" id="L119">	}</span>
 
 	/**
 	 * @return the key
 	 */
 	public PublicKey getKey() {
-<span class="fc" id="L126">		return key;</span>
+<span class="fc" id="L125">		return key;</span>
 	}
 
 	/**
@@ -131,22 +130,22 @@ public class ProductKey extends DefaultConfigurable {
 	 *            the key to set
 	 */
 	public void setKey(PublicKey key) {
-<span class="fc" id="L134">		this.key = key;</span>
-<span class="fc" id="L135">	}</span>
+<span class="fc" id="L133">		this.key = key;</span>
+<span class="fc" id="L134">	}</span>
 
 	/**
 	 * @return the sources
 	 */
 	public List&lt;String&gt; getSources() {
-<span class="fc" id="L141">		return sources;</span>
+<span class="fc" id="L140">		return sources;</span>
 	}
 
 	/**
 	 * @return the types
 	 */
 	public List&lt;String&gt; getTypes() {
-<span class="fc" id="L148">		return types;</span>
+<span class="fc" id="L147">		return types;</span>
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

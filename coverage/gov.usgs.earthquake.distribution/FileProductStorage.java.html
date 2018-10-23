@@ -170,7 +170,7 @@ public class FileProductStorage extends DefaultConfigurable implements
 <span class="fc" id="L170">	}</span>
 
 	/**
-	 * This is chosen because 16^3 = 4096 &lt; 32000, which is the ext3
+	 * This is chosen because 16^3 = 4096 &amp;lt; 32000, which is the ext3
 	 * subdirectory limit.
 	 */
 	public static final int DIRECTORY_NAME_LENGTH = 3;
@@ -877,7 +877,7 @@ public class FileProductStorage extends DefaultConfigurable implements
 <span class="fc" id="L877">		Iterator&lt;StorageListener&gt; listenerIter = listeners.keySet().iterator();</span>
 <span class="fc bfc" id="L878" title="All 2 branches covered.">		while (listenerIter.hasNext()) {</span>
 <span class="fc" id="L879">			removeStorageListener(listenerIter.next());</span>
-			// TODO :: Maybe we should call &quot;listener.shutdown()&quot; here as well?
+			// Maybe we should call &quot;listener.shutdown()&quot; here as well?
 		}
 
 		// shutdown any legacy storages
@@ -978,4 +978,4 @@ public class FileProductStorage extends DefaultConfigurable implements
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

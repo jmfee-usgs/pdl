@@ -18,12 +18,11 @@ import java.util.logging.Logger;
  * is not active.
  * 
  * @author jmfee
- * 
  */
 public abstract class JDBCConnection extends DefaultConfigurable {
 
-<span class="fc" id="L25">	private static final Logger LOGGER = Logger.getLogger(JDBCConnection.class</span>
-<span class="fc" id="L26">			.getName());</span>
+<span class="fc" id="L24">	private static final Logger LOGGER = Logger.getLogger(JDBCConnection.class</span>
+<span class="fc" id="L25">			.getName());</span>
 
 	/** Connection object. */
 	private Connection connection;
@@ -31,9 +30,9 @@ public abstract class JDBCConnection extends DefaultConfigurable {
 	/**
 	 * Create a new JDBCConnection object.
 	 */
-<span class="fc" id="L34">	public JDBCConnection() {</span>
-<span class="fc" id="L35">		this.connection = null;</span>
-<span class="fc" id="L36">	}</span>
+<span class="fc" id="L33">	public JDBCConnection() {</span>
+<span class="fc" id="L34">		this.connection = null;</span>
+<span class="fc" id="L35">	}</span>
 
 	/**
 	 * Connect to the database.
@@ -53,8 +52,8 @@ public abstract class JDBCConnection extends DefaultConfigurable {
 	 */
 	@Override
 	public void startup() throws Exception {
-<span class="fc" id="L56">		this.connection = connect();</span>
-<span class="fc" id="L57">	}</span>
+<span class="fc" id="L55">		this.connection = connect();</span>
+<span class="fc" id="L56">	}</span>
 
 	/**
 	 * Shutdown the database connection.
@@ -66,19 +65,19 @@ public abstract class JDBCConnection extends DefaultConfigurable {
 	@Override
 	public void shutdown() throws Exception {
 		try {
-<span class="fc" id="L69">			connection.close();</span>
-<span class="fc" id="L70">		} catch (Exception e) {</span>
+<span class="fc" id="L68">			connection.close();</span>
+<span class="fc" id="L69">		} catch (Exception e) {</span>
 			// ignore
 		} finally {
-<span class="fc" id="L73">			connection = null;</span>
+<span class="fc" id="L72">			connection = null;</span>
 		}
-<span class="fc" id="L75">	}</span>
+<span class="fc" id="L74">	}</span>
 
 	/**
 	 * @return current connection object, or null if not connected.
 	 */
 	public Connection getConnection() {
-<span class="fc" id="L81">		return this.connection;</span>
+<span class="fc" id="L80">		return this.connection;</span>
 	}
 
 	/**
@@ -95,57 +94,57 @@ public abstract class JDBCConnection extends DefaultConfigurable {
 	public synchronized Connection verifyConnection() throws Exception {
 		try {
 			// usually throws an exception when connection is closed
-<span class="pc bpc" id="L98" title="1 of 2 branches missed.">			if (connection.isClosed()) {</span>
-<span class="nc" id="L99">				shutdown();</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">			if (connection.isClosed()) {</span>
+<span class="nc" id="L98">				shutdown();</span>
 			}
-<span class="nc" id="L101">		} catch (Exception e) {</span>
-<span class="nc" id="L102">			shutdown();</span>
-<span class="fc" id="L103">		}</span>
+<span class="fc" id="L100">		} catch (Exception e) {</span>
+<span class="fc" id="L101">			shutdown();</span>
+<span class="fc" id="L102">		}</span>
 
-<span class="pc bpc" id="L105" title="1 of 2 branches missed.">		if (connection == null) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">		if (connection == null) {</span>
 			// connection is null after shutdown()
-<span class="nc" id="L107">			startup();</span>
+<span class="fc" id="L106">			startup();</span>
 		}
 
 		// isClosed() doesn't check if we can still communicate with the server.
 		// current mysql driver doesn't implement isValid(), so check manually.
-<span class="fc" id="L112">		String query_text = &quot;SELECT 1&quot;;</span>
+<span class="fc" id="L111">		String query_text = &quot;SELECT 1&quot;;</span>
 
 		try {
-<span class="fc" id="L115">			Statement statement = null;</span>
-<span class="fc" id="L116">			ResultSet results = null;</span>
+<span class="fc" id="L114">			Statement statement = null;</span>
+<span class="fc" id="L115">			ResultSet results = null;</span>
 			try {
-<span class="fc" id="L118">				statement = connection.createStatement();</span>
-<span class="fc" id="L119">				results = statement.executeQuery(query_text);</span>
-<span class="fc bfc" id="L120" title="All 2 branches covered.">				while (results.next()) {</span>
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">					if (results.getInt(1) != 1) {</span>
-<span class="nc" id="L122">						throw new Exception(&quot;[&quot; + getName()</span>
+<span class="fc" id="L117">				statement = connection.createStatement();</span>
+<span class="fc" id="L118">				results = statement.executeQuery(query_text);</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">				while (results.next()) {</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">					if (results.getInt(1) != 1) {</span>
+<span class="nc" id="L121">						throw new Exception(&quot;[&quot; + getName()</span>
 								+ &quot;] Problem checking database connection&quot;);
 					}
 				}
 			} finally {
 				// close result and statement no matter what
 				try {
-<span class="fc" id="L129">					results.close();</span>
-<span class="nc" id="L130">				} catch (Exception e2) {</span>
+<span class="fc" id="L128">					results.close();</span>
+<span class="nc" id="L129">				} catch (Exception e2) {</span>
 					// ignore
-<span class="fc" id="L132">				}</span>
+<span class="fc" id="L131">				}</span>
 				try {
-<span class="fc" id="L134">					statement.close();</span>
-<span class="nc" id="L135">				} catch (Exception e2) {</span>
+<span class="fc" id="L133">					statement.close();</span>
+<span class="nc" id="L134">				} catch (Exception e2) {</span>
 					// ignore
-<span class="fc" id="L137">				}</span>
+<span class="fc" id="L136">				}</span>
 			}
-<span class="nc" id="L139">		} catch (Exception e) {</span>
+<span class="nc" id="L138">		} catch (Exception e) {</span>
 			// The connection was dead, so lets try to restart it
-<span class="nc" id="L141">			LOGGER.log(Level.FINE, &quot;[&quot; + getName()</span>
+<span class="nc" id="L140">			LOGGER.log(Level.FINE, &quot;[&quot; + getName()</span>
 					+ &quot;] Restarting database connection&quot;);
-<span class="nc" id="L143">			shutdown();</span>
-<span class="nc" id="L144">			startup();</span>
-<span class="fc" id="L145">		}</span>
+<span class="nc" id="L142">			shutdown();</span>
+<span class="nc" id="L143">			startup();</span>
+<span class="fc" id="L144">		}</span>
 
-<span class="fc" id="L147">		return this.connection;</span>
+<span class="fc" id="L146">		return this.connection;</span>
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

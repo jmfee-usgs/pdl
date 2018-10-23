@@ -189,7 +189,7 @@ import java.util.logging.Logger;
 <span class="nc" id="L189">				outFile = new File(serverPolldir, filename + &quot;.xml&quot;);</span>
 			}
 
-			// TODO: is this atomic enough?
+			// is this atomic enough?, write then move may be better
 <span class="fc" id="L193">			FileUtils.writeFile(outFile, message.getBytes());</span>
 <span class="fc" id="L194">			LOGGER.log(Level.INFO, &quot;[&quot; + getName()</span>
 <span class="fc" id="L195">					+ &quot;] sent notification to EIDS via &quot; + outFile.getPath());</span>
@@ -325,4 +325,4 @@ import java.util.logging.Logger;
 <span class="fc" id="L325">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

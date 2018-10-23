@@ -5,48 +5,52 @@ import gov.usgs.earthquake.product.ProductId;
 
 import java.io.File;
 
-<span class="fc" id="L8">public class DYFILegacyStorage extends FileProductStorage {</span>
+/**
+ * Storage class used by DYFIIndexerWedge.
+ */
+@Deprecated
+<span class="fc" id="L12">public class DYFILegacyStorage extends FileProductStorage {</span>
 
 	@Override
 	public String getProductPath(ProductId id) {
-<span class="fc" id="L12">		StringBuffer path = new StringBuffer();</span>
-<span class="fc" id="L13">		String fs = System.getProperty(&quot;file.separator&quot;);</span>
+<span class="fc" id="L16">		StringBuffer path = new StringBuffer();</span>
+<span class="fc" id="L17">		String fs = System.getProperty(&quot;file.separator&quot;);</span>
 
-<span class="fc" id="L15">		path.append(id.getCode().substring(0, 2)).append(fs); // Legacy network</span>
-<span class="fc" id="L16">		path.append(id.getCode().substring(2)).append(fs);    // Legacy code</span>
-<span class="fc" id="L17">		path.append(id.getSource());</span>
+<span class="fc" id="L19">		path.append(id.getCode().substring(0, 2)).append(fs); // Legacy network</span>
+<span class="fc" id="L20">		path.append(id.getCode().substring(2)).append(fs);    // Legacy code</span>
+<span class="fc" id="L21">		path.append(id.getSource());</span>
 		
-<span class="fc" id="L19">		return path.toString();</span>
+<span class="fc" id="L23">		return path.toString();</span>
 	}
 	
 	@Override
 	public boolean hasProduct(ProductId id) throws Exception {
 		
-<span class="fc" id="L25">		File productDir = new File(getBaseDirectory(), getProductPath(id));</span>
-<span class="fc" id="L26">		boolean hasProduct = false;</span>
+<span class="fc" id="L29">		File productDir = new File(getBaseDirectory(), getProductPath(id));</span>
+<span class="fc" id="L30">		boolean hasProduct = false;</span>
 		
-<span class="fc bfc" id="L28" title="All 2 branches covered.">		if (productDir.exists()) {</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">		if (productDir.exists()) {</span>
 		
 			// Legacy storage only keeps most recent product. So can't just check
 			// for directory existence since this may be from an earlier version.
 			// Check version to make sure incoming product is newer than current.
-<span class="fc" id="L33">			ProductId storedProduct = getProduct(id).getId();</span>
+<span class="fc" id="L37">			ProductId storedProduct = getProduct(id).getId();</span>
 			
-<span class="fc" id="L35">			int status = id.compareTo(storedProduct);</span>
+<span class="fc" id="L39">			int status = id.compareTo(storedProduct);</span>
 			
-<span class="fc bfc" id="L37" title="All 2 branches covered.">			if (status == 0) {</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">			if (status == 0) {</span>
 				// Equal product id we already have product
-<span class="fc" id="L39">				hasProduct = true;</span>
-<span class="pc bpc" id="L40" title="1 of 2 branches missed.">			} else if (status &gt; 0) {</span>
+<span class="fc" id="L43">				hasProduct = true;</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">			} else if (status &gt; 0) {</span>
 				// This product is newer than stored product. We don't have this yet
-<span class="fc" id="L42">				hasProduct = false;</span>
-<span class="nc bnc" id="L43" title="All 2 branches missed.">			} else if (status &lt; 0) {</span>
+<span class="fc" id="L46">				hasProduct = false;</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">			} else if (status &lt; 0) {</span>
 				// This product is older than stored product. Skip it.
-<span class="nc" id="L45">				hasProduct = true;</span>
+<span class="nc" id="L49">				hasProduct = true;</span>
 			}
 		}
 		
-<span class="fc" id="L49">		return hasProduct;</span>
+<span class="fc" id="L53">		return hasProduct;</span>
 	}
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

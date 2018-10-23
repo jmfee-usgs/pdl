@@ -12,7 +12,7 @@ import gov.usgs.earthquake.product.io.ObjectProductSource;
 import gov.usgs.util.Config;
 
 /**
- * Wrapper around EIDSProductBuilder so it acts as a Receiver.
+ * Wrap EIDSProductBuilder in NotificationReceiver interface.
  */
 public class EIDSProductReceiver extends EIDSNotificationReceiver {
 
@@ -52,17 +52,14 @@ public class EIDSProductReceiver extends EIDSNotificationReceiver {
 
 			@Override
 			public String getName() {
-				// TODO Auto-generated method stub
-<span class="nc" id="L56">				return null;</span>
+<span class="nc" id="L55">				return null;</span>
 			}
 
 			@Override
 			public void setName(String arg0) {
-				// TODO Auto-generated method stub
-				
-<span class="nc" id="L63">			}</span>
+<span class="nc" id="L60">			}</span>
 		});
-<span class="nc" id="L65">	}</span>
+<span class="nc" id="L62">	}</span>
 
 	/**
 	 * Receive messages from the EIDSNotificationReceiver EIDS Client.s
@@ -72,15 +69,15 @@ public class EIDSProductReceiver extends EIDSNotificationReceiver {
 	 */
 	public void onEIDSMessage(EIDSMessageEvent event) {
 		// forward eids messages to builder
-<span class="nc" id="L75">		builder.onEIDSMessage(event);</span>
-<span class="nc" id="L76">	}</span>
+<span class="nc" id="L72">		builder.onEIDSMessage(event);</span>
+<span class="nc" id="L73">	}</span>
 
 	@Override
 	public void configure(final Config config) throws Exception {
-<span class="nc" id="L80">		super.configure(config);</span>
+<span class="nc" id="L77">		super.configure(config);</span>
 
 		// load builder configuration properties too
-<span class="nc" id="L83">		builder.configure(config);</span>
-<span class="nc" id="L84">	}</span>
+<span class="nc" id="L80">		builder.configure(config);</span>
+<span class="nc" id="L81">	}</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

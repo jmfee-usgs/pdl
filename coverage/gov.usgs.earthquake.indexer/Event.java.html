@@ -196,7 +196,7 @@ public class Event implements Comparable&lt;Event&gt; {
 <span class="nc" id="L196">			list.remove(summary);</span>
 <span class="nc bnc" id="L197" title="All 2 branches missed.">			if (list.size() == 0) {</span>
 				// if the list is now empty, remove the list
-<span class="nc" id="L199">				products.remove(list);</span>
+<span class="nc" id="L199">				products.remove(type);</span>
 			}
 		}
 <span class="nc" id="L202">		eventSummary = null;</span>
@@ -367,7 +367,7 @@ public class Event implements Comparable&lt;Event&gt; {
 <span class="fc" id="L367">			String source = subEvent.getSource();</span>
 <span class="fc" id="L368">			String sourceCode = subEvent.getSourceCode();</span>
 <span class="fc" id="L369">			List&lt;String&gt; sourceEventCodes = allEventCodes.get(source);</span>
-<span class="fc bfc" id="L370" title="All 2 branches covered.">			if (sourceEventCodes == null) {</span>
+<span class="pc bpc" id="L370" title="1 of 2 branches missed.">			if (sourceEventCodes == null) {</span>
 				// create list for source
 <span class="fc" id="L372">				sourceEventCodes = new ArrayList&lt;String&gt;();</span>
 <span class="fc" id="L373">				allEventCodes.put(source, sourceEventCodes);</span>
@@ -828,15 +828,14 @@ public class Event implements Comparable&lt;Event&gt; {
 <span class="fc" id="L828">			summary.setMagnitude(magnitudeProduct.getEventMagnitude());</span>
 		}
 
-		// TODO: add other event summary properties
 		// we may be able to avoid implementing this here, since the mapping
 		// interface will be driven by the PHP product index.
-<span class="fc" id="L834">		summary.getEventCodes().putAll(this.getEventCodes());</span>
+<span class="fc" id="L833">		summary.getEventCodes().putAll(this.getEventCodes());</span>
 
 		// cache summary
-<span class="fc" id="L837">		eventSummary = summary;</span>
+<span class="fc" id="L836">		eventSummary = summary;</span>
 
-<span class="fc" id="L839">		return summary;</span>
+<span class="fc" id="L838">		return summary;</span>
 	}
 
 	/**
@@ -844,24 +843,24 @@ public class Event implements Comparable&lt;Event&gt; {
 	 * preferred weight and update time.
 	 * 
 	 */
-<span class="fc" id="L847">	static class MostPreferredFirstComparator implements</span>
+<span class="fc" id="L846">	static class MostPreferredFirstComparator implements</span>
 			Comparator&lt;ProductSummary&gt; {
 
 		@Override
 		public int compare(ProductSummary p1, ProductSummary p2) {
-<span class="fc bfc" id="L852" title="All 2 branches covered.">			if (p1.getPreferredWeight() &gt; p2.getPreferredWeight()) {</span>
-<span class="fc" id="L853">				return -1;</span>
-<span class="fc bfc" id="L854" title="All 2 branches covered.">			} else if (p1.getPreferredWeight() &lt; p2.getPreferredWeight()) {</span>
-<span class="fc" id="L855">				return 1;</span>
+<span class="fc bfc" id="L851" title="All 2 branches covered.">			if (p1.getPreferredWeight() &gt; p2.getPreferredWeight()) {</span>
+<span class="fc" id="L852">				return -1;</span>
+<span class="fc bfc" id="L853" title="All 2 branches covered.">			} else if (p1.getPreferredWeight() &lt; p2.getPreferredWeight()) {</span>
+<span class="fc" id="L854">				return 1;</span>
 			} else {
-<span class="fc" id="L857">				Date p1Update = p1.getUpdateTime();</span>
-<span class="fc" id="L858">				Date p2Update = p2.getUpdateTime();</span>
-<span class="fc bfc" id="L859" title="All 2 branches covered.">				if (p1Update.after(p2Update)) {</span>
-<span class="fc" id="L860">					return -1;</span>
-<span class="fc bfc" id="L861" title="All 2 branches covered.">				} else if (p2Update.after(p1Update)) {</span>
-<span class="fc" id="L862">					return 1;</span>
+<span class="fc" id="L856">				Date p1Update = p1.getUpdateTime();</span>
+<span class="fc" id="L857">				Date p2Update = p2.getUpdateTime();</span>
+<span class="fc bfc" id="L858" title="All 2 branches covered.">				if (p1Update.after(p2Update)) {</span>
+<span class="fc" id="L859">					return -1;</span>
+<span class="fc bfc" id="L860" title="All 2 branches covered.">				} else if (p2Update.after(p1Update)) {</span>
+<span class="fc" id="L861">					return 1;</span>
 				} else {
-<span class="fc" id="L864">					return 0;</span>
+<span class="fc" id="L863">					return 0;</span>
 				}
 			}
 		}
@@ -871,23 +870,23 @@ public class Event implements Comparable&lt;Event&gt; {
 	public int compareTo(Event that) {
 		int r;
 
-<span class="fc" id="L874">		List&lt;ProductSummary&gt; thisProducts = this.getProductList();</span>
-<span class="fc" id="L875">		List&lt;ProductSummary&gt; thatProducts = that.getProductList();</span>
-<span class="pc bpc" id="L876" title="1 of 2 branches missed.">		if ((r = (thatProducts.size() - thisProducts.size())) != 0) {</span>
-<span class="nc" id="L877">			return r;</span>
+<span class="fc" id="L873">		List&lt;ProductSummary&gt; thisProducts = this.getProductList();</span>
+<span class="fc" id="L874">		List&lt;ProductSummary&gt; thatProducts = that.getProductList();</span>
+<span class="pc bpc" id="L875" title="1 of 2 branches missed.">		if ((r = (thatProducts.size() - thisProducts.size())) != 0) {</span>
+<span class="nc" id="L876">			return r;</span>
 		}
 
-<span class="fc" id="L880">		Iterator&lt;ProductSummary&gt; thisIter = thisProducts.iterator();</span>
-<span class="fc" id="L881">		Iterator&lt;ProductSummary&gt; thatIter = thatProducts.iterator();</span>
-<span class="pc bpc" id="L882" title="1 of 4 branches missed.">		while (thisIter.hasNext() &amp;&amp; thatIter.hasNext()) {</span>
+<span class="fc" id="L879">		Iterator&lt;ProductSummary&gt; thisIter = thisProducts.iterator();</span>
+<span class="fc" id="L880">		Iterator&lt;ProductSummary&gt; thatIter = thatProducts.iterator();</span>
+<span class="pc bpc" id="L881" title="1 of 4 branches missed.">		while (thisIter.hasNext() &amp;&amp; thatIter.hasNext()) {</span>
 			// just compare product ids for now
-<span class="fc" id="L884">			r = thisIter.next().getId().compareTo(thatIter.next().getId());</span>
-<span class="pc bpc" id="L885" title="1 of 2 branches missed.">			if (r != 0) {</span>
-<span class="nc" id="L886">				return r;</span>
+<span class="fc" id="L883">			r = thisIter.next().getId().compareTo(thatIter.next().getId());</span>
+<span class="pc bpc" id="L884" title="1 of 2 branches missed.">			if (r != 0) {</span>
+<span class="nc" id="L885">				return r;</span>
 			}
 		}
 
-<span class="fc" id="L890">		return 0;</span>
+<span class="fc" id="L889">		return 0;</span>
 	}
 
 	/**
@@ -910,50 +909,49 @@ public class Event implements Comparable&lt;Event&gt; {
 	public static ProductSummary getMostPreferred(
 			final List&lt;ProductSummary&gt; products, final String preferredType,
 			final String preferredNotNullProperty) {
-<span class="nc" id="L913">		ProductSummary mostPreferred = null;</span>
+<span class="nc" id="L912">		ProductSummary mostPreferred = null;</span>
 
-<span class="nc" id="L915">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
-<span class="nc bnc" id="L916" title="All 2 branches missed.">		while (iter.hasNext()) {</span>
-<span class="nc" id="L917">			ProductSummary next = iter.next();</span>
+<span class="nc" id="L914">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
+<span class="nc bnc" id="L915" title="All 2 branches missed.">		while (iter.hasNext()) {</span>
+<span class="nc" id="L916">			ProductSummary next = iter.next();</span>
 
-<span class="nc bnc" id="L919" title="All 2 branches missed.">			if (preferredNotNullProperty != null) {</span>
-				// ignore products that don't have the preferredNotNullProperty
-<span class="nc bnc" id="L921" title="All 2 branches missed.">				if (next.getProperties().get(preferredNotNullProperty) == null) {</span>
-<span class="nc" id="L922">					continue;</span>
-				}
+			// ignore products that don't have the preferredNotNullProperty
+<span class="nc bnc" id="L919" title="All 2 branches missed.">			if (preferredNotNullProperty != null</span>
+<span class="nc bnc" id="L920" title="All 2 branches missed.">					&amp;&amp; next.getProperties().get(preferredNotNullProperty) == null) {</span>
+<span class="nc" id="L921">				continue;</span>
 			}
 
-<span class="nc bnc" id="L926" title="All 2 branches missed.">			if (mostPreferred == null) {</span>
+<span class="nc bnc" id="L924" title="All 2 branches missed.">			if (mostPreferred == null) {</span>
 				// first product is most preferred so far
-<span class="nc" id="L928">				mostPreferred = next;</span>
-<span class="nc" id="L929">				continue;</span>
+<span class="nc" id="L926">				mostPreferred = next;</span>
+<span class="nc" id="L927">				continue;</span>
 			}
 
-<span class="nc bnc" id="L932" title="All 2 branches missed.">			if (preferredType != null) {</span>
-<span class="nc bnc" id="L933" title="All 2 branches missed.">				if (next.getType().equals(preferredType)) {</span>
-<span class="nc bnc" id="L934" title="All 2 branches missed.">					if (!mostPreferred.getType().equals(preferredType)) {</span>
+<span class="nc bnc" id="L930" title="All 2 branches missed.">			if (preferredType != null) {</span>
+<span class="nc bnc" id="L931" title="All 2 branches missed.">				if (next.getType().equals(preferredType)) {</span>
+<span class="nc bnc" id="L932" title="All 2 branches missed.">					if (!mostPreferred.getType().equals(preferredType)) {</span>
 						// prefer products of this type
-<span class="nc" id="L936">						mostPreferred = next;</span>
+<span class="nc" id="L934">						mostPreferred = next;</span>
 					}
-<span class="nc bnc" id="L938" title="All 2 branches missed.">				} else if (mostPreferred.getType().equals(preferredType)) {</span>
+<span class="nc bnc" id="L936" title="All 2 branches missed.">				} else if (mostPreferred.getType().equals(preferredType)) {</span>
 					// already have preferred product of preferred type
-<span class="nc" id="L940">					continue;</span>
+<span class="nc" id="L938">					continue;</span>
 				}
 			}
 
-<span class="nc bnc" id="L944" title="All 2 branches missed.">			if (next.getPreferredWeight() &gt; mostPreferred.getPreferredWeight()) {</span>
+<span class="nc bnc" id="L942" title="All 2 branches missed.">			if (next.getPreferredWeight() &gt; mostPreferred.getPreferredWeight()) {</span>
 				// higher preferred weight
-<span class="nc" id="L946">				mostPreferred = next;</span>
-<span class="nc" id="L947">			} else if (next.getPreferredWeight() == mostPreferred</span>
-<span class="nc bnc" id="L948" title="All 2 branches missed.">					.getPreferredWeight()</span>
-<span class="nc" id="L949">					&amp;&amp; next.getUpdateTime()</span>
-<span class="nc bnc" id="L950" title="All 2 branches missed.">							.after(mostPreferred.getUpdateTime())) {</span>
+<span class="nc" id="L944">				mostPreferred = next;</span>
+<span class="nc" id="L945">			} else if (next.getPreferredWeight() == mostPreferred</span>
+<span class="nc bnc" id="L946" title="All 2 branches missed.">					.getPreferredWeight()</span>
+<span class="nc" id="L947">					&amp;&amp; next.getUpdateTime()</span>
+<span class="nc bnc" id="L948" title="All 2 branches missed.">							.after(mostPreferred.getUpdateTime())) {</span>
 				// same preferred weight, newer update
-<span class="nc" id="L952">				mostPreferred = next;</span>
+<span class="nc" id="L950">				mostPreferred = next;</span>
 			}
-<span class="nc" id="L954">		}</span>
+<span class="nc" id="L952">		}</span>
 
-<span class="nc" id="L956">		return mostPreferred;</span>
+<span class="nc" id="L954">		return mostPreferred;</span>
 	}
 
 	/**
@@ -965,17 +963,17 @@ public class Event implements Comparable&lt;Event&gt; {
 	 */
 	public static List&lt;ProductSummary&gt; getWithoutDeleted(
 			final List&lt;ProductSummary&gt; products) {
-<span class="fc" id="L968">		List&lt;ProductSummary&gt; withoutDeleted = new ArrayList&lt;ProductSummary&gt;();</span>
+<span class="fc" id="L966">		List&lt;ProductSummary&gt; withoutDeleted = new ArrayList&lt;ProductSummary&gt;();</span>
 
-<span class="fc" id="L970">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
-<span class="fc bfc" id="L971" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
-<span class="fc" id="L972">			ProductSummary next = iter.next();</span>
-<span class="fc bfc" id="L973" title="All 2 branches covered.">			if (!next.isDeleted()) {</span>
-<span class="fc" id="L974">				withoutDeleted.add(next);</span>
+<span class="fc" id="L968">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
+<span class="fc bfc" id="L969" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
+<span class="fc" id="L970">			ProductSummary next = iter.next();</span>
+<span class="fc bfc" id="L971" title="All 2 branches covered.">			if (!next.isDeleted()) {</span>
+<span class="fc" id="L972">				withoutDeleted.add(next);</span>
 			}
-<span class="fc" id="L976">		}</span>
+<span class="fc" id="L974">		}</span>
 
-<span class="fc" id="L978">		return withoutDeleted;</span>
+<span class="fc" id="L976">		return withoutDeleted;</span>
 	}
 
 	/**
@@ -987,17 +985,17 @@ public class Event implements Comparable&lt;Event&gt; {
 	 */
 	public static List&lt;ProductSummary&gt; getWithEventId(
 			final List&lt;ProductSummary&gt; products) {
-<span class="nc" id="L990">		List&lt;ProductSummary&gt; withEventId = new ArrayList&lt;ProductSummary&gt;();</span>
+<span class="nc" id="L988">		List&lt;ProductSummary&gt; withEventId = new ArrayList&lt;ProductSummary&gt;();</span>
 
-<span class="nc" id="L992">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
-<span class="nc bnc" id="L993" title="All 2 branches missed.">		while (iter.hasNext()) {</span>
-<span class="nc" id="L994">			ProductSummary next = iter.next();</span>
-<span class="nc bnc" id="L995" title="All 2 branches missed.">			if (next.getEventId() != null) {</span>
-<span class="nc" id="L996">				withEventId.add(next);</span>
+<span class="nc" id="L990">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
+<span class="nc bnc" id="L991" title="All 2 branches missed.">		while (iter.hasNext()) {</span>
+<span class="nc" id="L992">			ProductSummary next = iter.next();</span>
+<span class="nc bnc" id="L993" title="All 2 branches missed.">			if (next.getEventId() != null) {</span>
+<span class="nc" id="L994">				withEventId.add(next);</span>
 			}
-<span class="nc" id="L998">		}</span>
+<span class="nc" id="L996">		}</span>
 
-<span class="nc" id="L1000">		return withEventId;</span>
+<span class="nc" id="L998">		return withEventId;</span>
 	}
 
 	/**
@@ -1012,31 +1010,31 @@ public class Event implements Comparable&lt;Event&gt; {
 			final List&lt;ProductSummary&gt; products) {
 		// place product into latest, keyed by source+type+code,
 		// keeping only most recent update for each key
-<span class="fc" id="L1015">		Map&lt;String, ProductSummary&gt; latest = new HashMap&lt;String, ProductSummary&gt;();</span>
-<span class="fc" id="L1016">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
-<span class="fc bfc" id="L1017" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
-<span class="fc" id="L1018">			ProductSummary summary = iter.next();</span>
-<span class="fc" id="L1019">			ProductId id = summary.getId();</span>
+<span class="fc" id="L1013">		Map&lt;String, ProductSummary&gt; latest = new HashMap&lt;String, ProductSummary&gt;();</span>
+<span class="fc" id="L1014">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
+<span class="fc bfc" id="L1015" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
+<span class="fc" id="L1016">			ProductSummary summary = iter.next();</span>
+<span class="fc" id="L1017">			ProductId id = summary.getId();</span>
 
 			// key is combination of source, type, and code
 			// since none of these may contain &quot;:&quot;, it is used as a delimiter to
 			// prevent collisions.
-<span class="fc" id="L1024">			String key = new StringBuffer(id.getSource()).append(&quot;:&quot;).append(</span>
-<span class="fc" id="L1025">					id.getType()).append(&quot;:&quot;).append(id.getCode()).toString();</span>
-<span class="fc bfc" id="L1026" title="All 2 branches covered.">			if (!latest.containsKey(key)) {</span>
+<span class="fc" id="L1022">			String key = new StringBuffer(id.getSource()).append(&quot;:&quot;).append(</span>
+<span class="fc" id="L1023">					id.getType()).append(&quot;:&quot;).append(id.getCode()).toString();</span>
+<span class="fc bfc" id="L1024" title="All 2 branches covered.">			if (!latest.containsKey(key)) {</span>
 				// first product
-<span class="fc" id="L1028">				latest.put(key, summary);</span>
+<span class="fc" id="L1026">				latest.put(key, summary);</span>
 			} else {
 				// keep latest product
-<span class="fc" id="L1031">				ProductSummary other = latest.get(key);</span>
-<span class="fc bfc" id="L1032" title="All 2 branches covered.">				if (other.getId().getUpdateTime().before(id.getUpdateTime())) {</span>
-<span class="fc" id="L1033">					latest.put(key, summary);</span>
+<span class="fc" id="L1029">				ProductSummary other = latest.get(key);</span>
+<span class="fc bfc" id="L1030" title="All 2 branches covered.">				if (other.getId().getUpdateTime().before(id.getUpdateTime())) {</span>
+<span class="fc" id="L1031">					latest.put(key, summary);</span>
 				}
 			}
-<span class="fc" id="L1036">		}</span>
+<span class="fc" id="L1034">		}</span>
 
 		// those that are in the latest map have not been superseded
-<span class="fc" id="L1039">		return new ArrayList&lt;ProductSummary&gt;(latest.values());</span>
+<span class="fc" id="L1037">		return new ArrayList&lt;ProductSummary&gt;(latest.values());</span>
 	}
 
 	/**
@@ -1048,41 +1046,41 @@ public class Event implements Comparable&lt;Event&gt; {
 	 */
 	public static List&lt;ProductSummary&gt; getSortedMostPreferredFirst(
 			final List&lt;ProductSummary&gt; products) {
-<span class="fc" id="L1051">		List&lt;ProductSummary&gt; mostPreferredFirst = new ArrayList&lt;ProductSummary&gt;(</span>
+<span class="fc" id="L1049">		List&lt;ProductSummary&gt; mostPreferredFirst = new ArrayList&lt;ProductSummary&gt;(</span>
 				products);
-<span class="fc" id="L1053">		Collections</span>
-<span class="fc" id="L1054">				.sort(mostPreferredFirst, new MostPreferredFirstComparator());</span>
-<span class="fc" id="L1055">		return mostPreferredFirst;</span>
+<span class="fc" id="L1051">		Collections</span>
+<span class="fc" id="L1052">				.sort(mostPreferredFirst, new MostPreferredFirstComparator());</span>
+<span class="fc" id="L1053">		return mostPreferredFirst;</span>
 	}
 
 	static List&lt;ProductSummary&gt; productTypeMapToList(
 			final Map&lt;String, List&lt;ProductSummary&gt;&gt; products) {
-<span class="fc" id="L1060">		List&lt;ProductSummary&gt; list = new ArrayList&lt;ProductSummary&gt;();</span>
+<span class="fc" id="L1058">		List&lt;ProductSummary&gt; list = new ArrayList&lt;ProductSummary&gt;();</span>
 
-<span class="fc" id="L1062">		Iterator&lt;String&gt; iter = products.keySet().iterator();</span>
-<span class="fc bfc" id="L1063" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
-<span class="fc" id="L1064">			list.addAll(products.get(iter.next()));</span>
+<span class="fc" id="L1060">		Iterator&lt;String&gt; iter = products.keySet().iterator();</span>
+<span class="fc bfc" id="L1061" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
+<span class="fc" id="L1062">			list.addAll(products.get(iter.next()));</span>
 		}
 
-<span class="fc" id="L1067">		return list;</span>
+<span class="fc" id="L1065">		return list;</span>
 	}
 
 	static Map&lt;String, List&lt;ProductSummary&gt;&gt; productListToTypeMap(
 			final List&lt;ProductSummary&gt; products) {
-<span class="nc" id="L1072">		Map&lt;String, List&lt;ProductSummary&gt;&gt; typeMap = new HashMap&lt;String, List&lt;ProductSummary&gt;&gt;();</span>
+<span class="nc" id="L1070">		Map&lt;String, List&lt;ProductSummary&gt;&gt; typeMap = new HashMap&lt;String, List&lt;ProductSummary&gt;&gt;();</span>
 
-<span class="nc" id="L1074">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
-<span class="nc bnc" id="L1075" title="All 2 branches missed.">		while (iter.hasNext()) {</span>
-<span class="nc" id="L1076">			ProductSummary product = iter.next();</span>
-<span class="nc" id="L1077">			List&lt;ProductSummary&gt; typeProducts = typeMap.get(product.getType());</span>
-<span class="nc bnc" id="L1078" title="All 2 branches missed.">			if (typeProducts == null) {</span>
-<span class="nc" id="L1079">				typeProducts = new ArrayList&lt;ProductSummary&gt;();</span>
-<span class="nc" id="L1080">				typeMap.put(product.getType(), typeProducts);</span>
+<span class="nc" id="L1072">		Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
+<span class="nc bnc" id="L1073" title="All 2 branches missed.">		while (iter.hasNext()) {</span>
+<span class="nc" id="L1074">			ProductSummary product = iter.next();</span>
+<span class="nc" id="L1075">			List&lt;ProductSummary&gt; typeProducts = typeMap.get(product.getType());</span>
+<span class="nc bnc" id="L1076" title="All 2 branches missed.">			if (typeProducts == null) {</span>
+<span class="nc" id="L1077">				typeProducts = new ArrayList&lt;ProductSummary&gt;();</span>
+<span class="nc" id="L1078">				typeMap.put(product.getType(), typeProducts);</span>
 			}
-<span class="nc" id="L1082">			typeProducts.add(product);</span>
-<span class="nc" id="L1083">		}</span>
+<span class="nc" id="L1080">			typeProducts.add(product);</span>
+<span class="nc" id="L1081">		}</span>
 
-<span class="nc" id="L1085">		return typeMap;</span>
+<span class="nc" id="L1083">		return typeMap;</span>
 	}
 
 	/**
@@ -1095,59 +1093,59 @@ public class Event implements Comparable&lt;Event&gt; {
 	 */
 	public Map&lt;String, Event&gt; getSubEvents() {
 		// Map of sub-events keyed by product &quot;eventId&quot;
-<span class="fc" id="L1098">		Map&lt;String, Event&gt; subEvents = new HashMap&lt;String, Event&gt;();</span>
+<span class="fc" id="L1096">		Map&lt;String, Event&gt; subEvents = new HashMap&lt;String, Event&gt;();</span>
 		
 		// Map of events by source_type_code
-<span class="fc" id="L1101">		Map&lt;String, Event&gt; productEvents = new HashMap&lt;String, Event&gt;();</span>
+<span class="fc" id="L1099">		Map&lt;String, Event&gt; productEvents = new HashMap&lt;String, Event&gt;();</span>
 
 		// this is the event that will have products without event id...
-<span class="fc" id="L1104">		String preferredEventId = this.getEventId();</span>
-<span class="fc" id="L1105">		Event preferredSubEvent = new Event();</span>
+<span class="fc" id="L1102">		String preferredEventId = this.getEventId();</span>
+<span class="fc" id="L1103">		Event preferredSubEvent = new Event();</span>
 		// put a placeholder with no products into the map for this purpose.
-<span class="fc" id="L1107">		subEvents.put(preferredEventId, preferredSubEvent);</span>
+<span class="fc" id="L1105">		subEvents.put(preferredEventId, preferredSubEvent);</span>
 
 		// List of all products associated to the current event
-<span class="fc" id="L1110">		List&lt;ProductSummary&gt; allProducts = this.getAllProductList();</span>
+<span class="fc" id="L1108">		List&lt;ProductSummary&gt; allProducts = this.getAllProductList();</span>
 
 		// handle products with a current version
-<span class="fc" id="L1113">		HashSet&lt;ProductSummary&gt; withoutSuperseded = new HashSet&lt;ProductSummary&gt;(getWithoutSuperseded(allProducts));</span>
-<span class="fc" id="L1114">		Iterator&lt;ProductSummary&gt; products = withoutSuperseded.iterator();</span>
-<span class="fc bfc" id="L1115" title="All 2 branches covered.">		while (products.hasNext()) {</span>
-<span class="fc" id="L1116">			ProductSummary product = products.next();</span>
-<span class="fc" id="L1117">			Event subEvent = null;</span>
+<span class="fc" id="L1111">		HashSet&lt;ProductSummary&gt; withoutSuperseded = new HashSet&lt;ProductSummary&gt;(getWithoutSuperseded(allProducts));</span>
+<span class="fc" id="L1112">		Iterator&lt;ProductSummary&gt; products = withoutSuperseded.iterator();</span>
+<span class="fc bfc" id="L1113" title="All 2 branches covered.">		while (products.hasNext()) {</span>
+<span class="fc" id="L1114">			ProductSummary product = products.next();</span>
+<span class="fc" id="L1115">			Event subEvent = null;</span>
 
-<span class="fc" id="L1119">			String subEventId = product.getEventId();</span>
-<span class="fc bfc" id="L1120" title="All 2 branches covered.">			if (subEventId == null) {</span>
-				// TODO: try to find another version of product with id?
-<span class="fc" id="L1122">				subEvent = preferredSubEvent;</span>
+<span class="fc" id="L1117">			String subEventId = product.getEventId();</span>
+<span class="fc bfc" id="L1118" title="All 2 branches covered.">			if (subEventId == null) {</span>
+				// maybe try to find another version of product with id?
+<span class="fc" id="L1120">				subEvent = preferredSubEvent;</span>
 			} else {
-<span class="fc" id="L1124">				subEvent = subEvents.get(subEventId);</span>
-<span class="fc bfc" id="L1125" title="All 2 branches covered.">				if (subEvent == null) {</span>
+<span class="fc" id="L1122">				subEvent = subEvents.get(subEventId);</span>
+<span class="fc bfc" id="L1123" title="All 2 branches covered.">				if (subEvent == null) {</span>
 					// first product for this sub event
-<span class="fc" id="L1127">					subEvent = new Event();</span>
-<span class="fc" id="L1128">					subEvents.put(subEventId, subEvent);</span>
+<span class="fc" id="L1125">					subEvent = new Event();</span>
+<span class="fc" id="L1126">					subEvents.put(subEventId, subEvent);</span>
 				}
 			}
-<span class="fc" id="L1131">			subEvent.addProduct(product);</span>
+<span class="fc" id="L1129">			subEvent.addProduct(product);</span>
 
-<span class="fc" id="L1133">			ProductId id = product.getId();</span>
-<span class="fc" id="L1134">			String key = id.getSource() + &quot;_&quot; + id.getType() + &quot;_&quot; + id.getCode();</span>
-<span class="fc" id="L1135">			productEvents.put(key, subEvent);</span>
-<span class="fc" id="L1136">		}</span>
+<span class="fc" id="L1131">			ProductId id = product.getId();</span>
+<span class="fc" id="L1132">			String key = id.getSource() + &quot;_&quot; + id.getType() + &quot;_&quot; + id.getCode();</span>
+<span class="fc" id="L1133">			productEvents.put(key, subEvent);</span>
+<span class="fc" id="L1134">		}</span>
 
 		// handle superseded products
-<span class="fc" id="L1139">		HashSet&lt;ProductSummary&gt; superseded = new HashSet&lt;ProductSummary&gt;(allProducts);</span>
-<span class="fc" id="L1140">		superseded.removeAll(withoutSuperseded);</span>
-<span class="fc" id="L1141">		products = superseded.iterator();</span>
-<span class="fc bfc" id="L1142" title="All 2 branches covered.">		while (products.hasNext()) {</span>
-<span class="fc" id="L1143">			ProductSummary next = products.next();</span>
-<span class="fc" id="L1144">			ProductId id = next.getId();</span>
-<span class="fc" id="L1145">			String key = id.getSource() + &quot;_&quot; + id.getType() + &quot;_&quot; + id.getCode();</span>
-<span class="fc" id="L1146">			Event subEvent = productEvents.get(key);</span>
-<span class="fc" id="L1147">			subEvent.addProduct(next);</span>
-<span class="fc" id="L1148">		}</span>
+<span class="fc" id="L1137">		HashSet&lt;ProductSummary&gt; superseded = new HashSet&lt;ProductSummary&gt;(allProducts);</span>
+<span class="fc" id="L1138">		superseded.removeAll(withoutSuperseded);</span>
+<span class="fc" id="L1139">		products = superseded.iterator();</span>
+<span class="fc bfc" id="L1140" title="All 2 branches covered.">		while (products.hasNext()) {</span>
+<span class="fc" id="L1141">			ProductSummary next = products.next();</span>
+<span class="fc" id="L1142">			ProductId id = next.getId();</span>
+<span class="fc" id="L1143">			String key = id.getSource() + &quot;_&quot; + id.getType() + &quot;_&quot; + id.getCode();</span>
+<span class="fc" id="L1144">			Event subEvent = productEvents.get(key);</span>
+<span class="fc" id="L1145">			subEvent.addProduct(next);</span>
+<span class="fc" id="L1146">		}</span>
 
-<span class="fc" id="L1150">		return subEvents;</span>
+<span class="fc" id="L1148">		return subEvents;</span>
 	}
 
 	/**
@@ -1158,35 +1156,35 @@ public class Event implements Comparable&lt;Event&gt; {
 	 * @return true if there is an associate product, false otherwise.
 	 */
 	public boolean hasAssociateProduct(final Event otherEvent) {
-<span class="pc bpc" id="L1161" title="1 of 2 branches missed.">		if (otherEvent == null) {</span>
+<span class="pc bpc" id="L1159" title="1 of 2 branches missed.">		if (otherEvent == null) {</span>
 			// cannot have an association to a null event...
-<span class="nc" id="L1163">			return false;</span>
+<span class="nc" id="L1161">			return false;</span>
 		}
 
-<span class="fc" id="L1166">		String otherEventSource = otherEvent.getSource();</span>
-<span class="fc" id="L1167">		String otherEventSourceCode = otherEvent.getSourceCode();</span>
-<span class="pc bpc" id="L1168" title="2 of 4 branches missed.">		if (otherEventSource == null || otherEventSourceCode == null) {</span>
+<span class="fc" id="L1164">		String otherEventSource = otherEvent.getSource();</span>
+<span class="fc" id="L1165">		String otherEventSourceCode = otherEvent.getSourceCode();</span>
+<span class="pc bpc" id="L1166" title="2 of 4 branches missed.">		if (otherEventSource == null || otherEventSourceCode == null) {</span>
 			// same without source+code
-<span class="nc" id="L1170">			return false;</span>
+<span class="nc" id="L1168">			return false;</span>
 		}
 
 		// search associate products
-<span class="fc" id="L1174">		Iterator&lt;ProductSummary&gt; iter = getProducts(ASSOCIATE_PRODUCT_TYPE)</span>
-<span class="fc" id="L1175">				.iterator();</span>
-<span class="fc bfc" id="L1176" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
-<span class="fc" id="L1177">			ProductSummary associate = iter.next();</span>
+<span class="fc" id="L1172">		Iterator&lt;ProductSummary&gt; iter = getProducts(ASSOCIATE_PRODUCT_TYPE)</span>
+<span class="fc" id="L1173">				.iterator();</span>
+<span class="fc bfc" id="L1174" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
+<span class="fc" id="L1175">			ProductSummary associate = iter.next();</span>
 
-<span class="pc bpc" id="L1179" title="1 of 2 branches missed.">			if (otherEventSource.equalsIgnoreCase(associate.getProperties()</span>
-<span class="fc" id="L1180">					.get(OTHEREVENTSOURCE_PROPERTY))</span>
+<span class="pc bpc" id="L1177" title="1 of 2 branches missed.">			if (otherEventSource.equalsIgnoreCase(associate.getProperties()</span>
+<span class="fc" id="L1178">					.get(OTHEREVENTSOURCE_PROPERTY))</span>
 					&amp;&amp; otherEventSourceCode
-<span class="pc bpc" id="L1182" title="1 of 2 branches missed.">							.equalsIgnoreCase(associate.getProperties().get(</span>
+<span class="pc bpc" id="L1180" title="1 of 2 branches missed.">							.equalsIgnoreCase(associate.getProperties().get(</span>
 									OTHEREVENTSOURCECODE_PROPERTY))) {
 				// associated
-<span class="fc" id="L1185">				return true;</span>
+<span class="fc" id="L1183">				return true;</span>
 			}
-<span class="nc" id="L1187">		}</span>
+<span class="nc" id="L1185">		}</span>
 
-<span class="fc" id="L1189">		return false;</span>
+<span class="fc" id="L1187">		return false;</span>
 	}
 
 	/**
@@ -1197,42 +1195,42 @@ public class Event implements Comparable&lt;Event&gt; {
 	 * @return true if there is an disassociate product, false otherwise.
 	 */
 	public boolean hasDisassociateProduct(final Event otherEvent) {
-<span class="pc bpc" id="L1200" title="1 of 2 branches missed.">		if (otherEvent == null) {</span>
+<span class="pc bpc" id="L1198" title="1 of 2 branches missed.">		if (otherEvent == null) {</span>
 			// cannot have an disassociation to a null event...
-<span class="nc" id="L1202">			return false;</span>
+<span class="nc" id="L1200">			return false;</span>
 		}
 
-<span class="fc" id="L1205">		String otherEventSource = otherEvent.getSource();</span>
-<span class="fc" id="L1206">		String otherEventSourceCode = otherEvent.getSourceCode();</span>
-<span class="pc bpc" id="L1207" title="2 of 4 branches missed.">		if (otherEventSource == null || otherEventSourceCode == null) {</span>
+<span class="fc" id="L1203">		String otherEventSource = otherEvent.getSource();</span>
+<span class="fc" id="L1204">		String otherEventSourceCode = otherEvent.getSourceCode();</span>
+<span class="pc bpc" id="L1205" title="2 of 4 branches missed.">		if (otherEventSource == null || otherEventSourceCode == null) {</span>
 			// same without source+code
-<span class="nc" id="L1209">			return false;</span>
+<span class="nc" id="L1207">			return false;</span>
 		}
 
 		// search disassociate products
-<span class="fc" id="L1213">		Iterator&lt;ProductSummary&gt; iter = getProducts(DISASSOCIATE_PRODUCT_TYPE)</span>
-<span class="fc" id="L1214">				.iterator();</span>
-<span class="fc bfc" id="L1215" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
-<span class="fc" id="L1216">			ProductSummary associate = iter.next();</span>
+<span class="fc" id="L1211">		Iterator&lt;ProductSummary&gt; iter = getProducts(DISASSOCIATE_PRODUCT_TYPE)</span>
+<span class="fc" id="L1212">				.iterator();</span>
+<span class="fc bfc" id="L1213" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
+<span class="fc" id="L1214">			ProductSummary associate = iter.next();</span>
 
-<span class="pc bpc" id="L1218" title="1 of 2 branches missed.">			if (otherEventSource.equalsIgnoreCase(associate.getProperties()</span>
-<span class="fc" id="L1219">					.get(OTHEREVENTSOURCE_PROPERTY))</span>
+<span class="pc bpc" id="L1216" title="1 of 2 branches missed.">			if (otherEventSource.equalsIgnoreCase(associate.getProperties()</span>
+<span class="fc" id="L1217">					.get(OTHEREVENTSOURCE_PROPERTY))</span>
 					&amp;&amp; otherEventSourceCode
-<span class="pc bpc" id="L1221" title="1 of 2 branches missed.">							.equalsIgnoreCase(associate.getProperties().get(</span>
+<span class="pc bpc" id="L1219" title="1 of 2 branches missed.">							.equalsIgnoreCase(associate.getProperties().get(</span>
 									OTHEREVENTSOURCECODE_PROPERTY))) {
 				// disassociated
-<span class="fc" id="L1224">				return true;</span>
+<span class="fc" id="L1222">				return true;</span>
 			}
-<span class="nc" id="L1226">		}</span>
+<span class="nc" id="L1224">		}</span>
 
-<span class="fc" id="L1228">		return false;</span>
+<span class="fc" id="L1226">		return false;</span>
 	}
 
 	/**
 	 * Same as isAssociated(that, new DefaultAssociator());
 	 */
 	public boolean isAssociated(final Event that) {
-<span class="fc" id="L1235">		return this.isAssociated(that, new DefaultAssociator());</span>
+<span class="fc" id="L1233">		return this.isAssociated(that, new DefaultAssociator());</span>
 	}
 
 	/**
@@ -1258,37 +1256,37 @@ public class Event implements Comparable&lt;Event&gt; {
 	 * @return true if associated, false otherwise.
 	 */
 	public boolean isAssociated(final Event that, final Associator associator) {
-<span class="fc" id="L1261">		return associator.eventsAssociated(this, that);</span>
+<span class="fc" id="L1259">		return associator.eventsAssociated(this, that);</span>
 	}
 
 	public void log(final Logger logger) {
-<span class="pc bpc" id="L1265" title="1 of 2 branches missed.">		if (logger.isLoggable(Level.FINE)) {</span>
-<span class="fc" id="L1266">			EventSummary summary = this.getEventSummary();</span>
-<span class="fc" id="L1267">			logger.fine(new StringBuffer(&quot;Event&quot;)</span>
-<span class="fc" id="L1268">					.append(&quot;indexid=&quot;).append(summary.getIndexId())</span>
-<span class="fc" id="L1269">					.append(&quot;, eventid=&quot;).append(summary.getId())</span>
-<span class="fc" id="L1270">					.append(&quot;, latitude=&quot;).append(summary.getLatitude())</span>
-<span class="fc" id="L1271">					.append(&quot;, longitude=&quot;).append(summary.getLongitude())</span>
-<span class="fc" id="L1272">					.append(&quot;, time=&quot;).append(summary.getTime())</span>
-<span class="fc" id="L1273">					.append(&quot;, deleted=&quot;).append(summary.isDeleted()).toString());</span>
+<span class="pc bpc" id="L1263" title="1 of 2 branches missed.">		if (logger.isLoggable(Level.FINE)) {</span>
+<span class="fc" id="L1264">			EventSummary summary = this.getEventSummary();</span>
+<span class="fc" id="L1265">			logger.fine(new StringBuffer(&quot;Event&quot;)</span>
+<span class="fc" id="L1266">					.append(&quot;indexid=&quot;).append(summary.getIndexId())</span>
+<span class="fc" id="L1267">					.append(&quot;, eventid=&quot;).append(summary.getId())</span>
+<span class="fc" id="L1268">					.append(&quot;, latitude=&quot;).append(summary.getLatitude())</span>
+<span class="fc" id="L1269">					.append(&quot;, longitude=&quot;).append(summary.getLongitude())</span>
+<span class="fc" id="L1270">					.append(&quot;, time=&quot;).append(summary.getTime())</span>
+<span class="fc" id="L1271">					.append(&quot;, deleted=&quot;).append(summary.isDeleted()).toString());</span>
 
-<span class="fc bfc" id="L1275" title="All 2 branches covered.">			if (logger.isLoggable(Level.FINER)) {</span>
-<span class="fc" id="L1276">				StringBuffer buf = new StringBuffer(&quot;Products in event&quot;);</span>
-<span class="fc" id="L1277">				List&lt;ProductSummary&gt; products = this.getAllProductList();</span>
-<span class="fc" id="L1278">				Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
-<span class="fc bfc" id="L1279" title="All 2 branches covered.">				while (iter.hasNext()) {</span>
-<span class="fc" id="L1280">					ProductSummary next = iter.next();</span>
-<span class="fc" id="L1281">					buf.append(&quot;\n\tstatus=&quot;).append(next.getStatus())</span>
-<span class="fc" id="L1282">							.append(&quot;, id=&quot;).append(next.getId().toString())</span>
-<span class="fc" id="L1283">							.append(&quot;, eventid=&quot;).append(next.getEventId())</span>
-<span class="fc" id="L1284">							.append(&quot;, latitude=&quot;).append(next.getEventLatitude())</span>
-<span class="fc" id="L1285">							.append(&quot;, longitude=&quot;).append(next.getEventLongitude())</span>
-<span class="fc" id="L1286">							.append(&quot;, time=&quot;).append(next.getEventTime());</span>
-<span class="fc" id="L1287">				}</span>
-<span class="fc" id="L1288">				logger.finer(buf.toString());</span>
+<span class="fc bfc" id="L1273" title="All 2 branches covered.">			if (logger.isLoggable(Level.FINER)) {</span>
+<span class="fc" id="L1274">				StringBuffer buf = new StringBuffer(&quot;Products in event&quot;);</span>
+<span class="fc" id="L1275">				List&lt;ProductSummary&gt; products = this.getAllProductList();</span>
+<span class="fc" id="L1276">				Iterator&lt;ProductSummary&gt; iter = products.iterator();</span>
+<span class="fc bfc" id="L1277" title="All 2 branches covered.">				while (iter.hasNext()) {</span>
+<span class="fc" id="L1278">					ProductSummary next = iter.next();</span>
+<span class="fc" id="L1279">					buf.append(&quot;\n\tstatus=&quot;).append(next.getStatus())</span>
+<span class="fc" id="L1280">							.append(&quot;, id=&quot;).append(next.getId().toString())</span>
+<span class="fc" id="L1281">							.append(&quot;, eventid=&quot;).append(next.getEventId())</span>
+<span class="fc" id="L1282">							.append(&quot;, latitude=&quot;).append(next.getEventLatitude())</span>
+<span class="fc" id="L1283">							.append(&quot;, longitude=&quot;).append(next.getEventLongitude())</span>
+<span class="fc" id="L1284">							.append(&quot;, time=&quot;).append(next.getEventTime());</span>
+<span class="fc" id="L1285">				}</span>
+<span class="fc" id="L1286">				logger.finer(buf.toString());</span>
 			}
 		}
-<span class="fc" id="L1291">	}</span>
+<span class="fc" id="L1289">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -13,7 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * ShakeMap class for ShakeMap products specifically.
+ * ShakeMap object to add additional Product properties based on contents.
  *
  * This subclass of Product provides access to additional ShakeMap-specific
  * attributes and loads these attributes, as well as additional Product
@@ -256,26 +256,28 @@ public class ShakeMap extends Product {
 <span class="fc" id="L256">	};</span>
 
 	/**
-	 * @param property,
-	 *            the property to check on the PDL object
+	 * @param productValue
+	 *            the value from the PDL object
+	 * @param xmlValue
+	 *            the value from the XML document
 	 * @return if the shakemap property is already set
 	 */
 	public boolean valueIsEmpty (String productValue, String xmlValue) {
 		// nothing to be set
-<span class="pc bpc" id="L265" title="1 of 2 branches missed.">		if (xmlValue == null) {</span>
-<span class="nc" id="L266">			return false;</span>
+<span class="pc bpc" id="L267" title="1 of 2 branches missed.">		if (xmlValue == null) {</span>
+<span class="nc" id="L268">			return false;</span>
 		}
 		// no value has been set
-<span class="fc bfc" id="L269" title="All 2 branches covered.">		if (productValue == null) {</span>
-<span class="fc" id="L270">			return true;</span>
+<span class="fc bfc" id="L271" title="All 2 branches covered.">		if (productValue == null) {</span>
+<span class="fc" id="L272">			return true;</span>
 		}
 		// value is set and values are different, log warning
-<span class="fc bfc" id="L273" title="All 2 branches covered.">		if (!productValue.equals(xmlValue)) {</span>
-<span class="fc" id="L274">			LOGGER.log(Level.FINE,</span>
+<span class="fc bfc" id="L275" title="All 2 branches covered.">		if (!productValue.equals(xmlValue)) {</span>
+<span class="fc" id="L276">			LOGGER.log(Level.FINE,</span>
 					&quot;The ShakeMap property value: \&quot;&quot; + xmlValue + &quot;\&quot;&quot; +
 					&quot; does not match the product value: \&quot;&quot; + productValue + &quot;\&quot;.&quot;);
 		}
-<span class="fc" id="L278">		return false;</span>
+<span class="fc" id="L280">		return false;</span>
 	}
 
 	/**
@@ -283,14 +285,14 @@ public class ShakeMap extends Product {
 	 *            the map status to set
 	 */
 	public void setMapStatus(String mapStatus) {
-<span class="fc" id="L286">		getProperties().put(MAP_STATUS_PROPERTY, mapStatus);</span>
-<span class="fc" id="L287">	}</span>
+<span class="fc" id="L288">		getProperties().put(MAP_STATUS_PROPERTY, mapStatus);</span>
+<span class="fc" id="L289">	}</span>
 
 	/**
 	 * @return the status of this map
 	 */
 	public String getMapStatus() {
-<span class="fc" id="L293">		return getProperties().get(MAP_STATUS_PROPERTY);</span>
+<span class="fc" id="L295">		return getProperties().get(MAP_STATUS_PROPERTY);</span>
 	}
 
 	/**
@@ -298,14 +300,14 @@ public class ShakeMap extends Product {
 	 *            the event type to set
 	 */
 	public void setEventType(String eventType) {
-<span class="fc" id="L301">		getProperties().put(EVENT_TYPE_PROPERTY, eventType);</span>
-<span class="fc" id="L302">	}</span>
+<span class="fc" id="L303">		getProperties().put(EVENT_TYPE_PROPERTY, eventType);</span>
+<span class="fc" id="L304">	}</span>
 
 	/**
 	 * @return the event type of this product as defined in ShakeMap
 	 */
 	public String getEventType() {
-<span class="fc" id="L308">		return getProperties().get(EVENT_TYPE_PROPERTY);</span>
+<span class="fc" id="L310">		return getProperties().get(EVENT_TYPE_PROPERTY);</span>
 	}
 
 	/**
@@ -313,23 +315,23 @@ public class ShakeMap extends Product {
 	 *            the process timestamp to set
 	 */
 	public void setProcessTimestamp(Date processTimestamp) {
-<span class="fc" id="L316">		getProperties().put(PROCESS_TIMESTAMP_PROPERTY,</span>
-<span class="fc" id="L317">				XmlUtils.formatDate(processTimestamp));</span>
-<span class="fc" id="L318">	}</span>
+<span class="fc" id="L318">		getProperties().put(PROCESS_TIMESTAMP_PROPERTY,</span>
+<span class="fc" id="L319">				XmlUtils.formatDate(processTimestamp));</span>
+<span class="fc" id="L320">	}</span>
 
 	/**
 	 * @return the process timestamp of this ShakeMap
 	 */
 	public Date getProcessTimestamp() {
-<span class="fc" id="L324">		return XmlUtils</span>
-<span class="fc" id="L325">				.getDate(getProperties().get(PROCESS_TIMESTAMP_PROPERTY));</span>
+<span class="fc" id="L326">		return XmlUtils</span>
+<span class="fc" id="L327">				.getDate(getProperties().get(PROCESS_TIMESTAMP_PROPERTY));</span>
 	}
 
 	/**
 	 * @return the event description text for this ShakeMap
 	 */
 	public String getEventDescription() {
-<span class="fc" id="L332">		return getProperties().get(EVENT_DESCRIPTION_PROPERTY);</span>
+<span class="fc" id="L334">		return getProperties().get(EVENT_DESCRIPTION_PROPERTY);</span>
 	}
 
 	/**
@@ -337,14 +339,14 @@ public class ShakeMap extends Product {
 	 *            the event description to set
 	 */
 	public void setEventDescription(String eventDescription) {
-<span class="fc" id="L340">		getProperties().put(EVENT_DESCRIPTION_PROPERTY, eventDescription);</span>
-<span class="fc" id="L341">	}</span>
+<span class="fc" id="L342">		getProperties().put(EVENT_DESCRIPTION_PROPERTY, eventDescription);</span>
+<span class="fc" id="L343">	}</span>
 
 	/**
 	 * @return the minimum longitude boundary of this ShakeMap
 	 */
 	public BigDecimal getMinimumLongitude() {
-<span class="fc" id="L347">		return getBigDecimal(getProperties().get(MINIMUM_LONGITUDE_PROPERTY));</span>
+<span class="fc" id="L349">		return getBigDecimal(getProperties().get(MINIMUM_LONGITUDE_PROPERTY));</span>
 	}
 
 	/**
@@ -352,15 +354,15 @@ public class ShakeMap extends Product {
 	 *            the minimum longitude to set
 	 */
 	public void setMinimumLongitude(BigDecimal minimumLongitude) {
-<span class="fc" id="L355">		getProperties().put(MINIMUM_LONGITUDE_PROPERTY,</span>
-<span class="fc" id="L356">				minimumLongitude.toPlainString());</span>
-<span class="fc" id="L357">	}</span>
+<span class="fc" id="L357">		getProperties().put(MINIMUM_LONGITUDE_PROPERTY,</span>
+<span class="fc" id="L358">				minimumLongitude.toPlainString());</span>
+<span class="fc" id="L359">	}</span>
 
 	/**
 	 * @return the maximum longitude boundary of this ShakeMap
 	 */
 	public BigDecimal getMaximumLongitude() {
-<span class="fc" id="L363">		return getBigDecimal(getProperties().get(MAXIMUM_LONGITUDE_PROPERTY));</span>
+<span class="fc" id="L365">		return getBigDecimal(getProperties().get(MAXIMUM_LONGITUDE_PROPERTY));</span>
 	}
 
 	/**
@@ -368,15 +370,15 @@ public class ShakeMap extends Product {
 	 *            the maximum longitude to set
 	 */
 	public void setMaximumLongitude(BigDecimal maximumLongitude) {
-<span class="fc" id="L371">		getProperties().put(MAXIMUM_LONGITUDE_PROPERTY,</span>
-<span class="fc" id="L372">				maximumLongitude.toPlainString());</span>
-<span class="fc" id="L373">	}</span>
+<span class="fc" id="L373">		getProperties().put(MAXIMUM_LONGITUDE_PROPERTY,</span>
+<span class="fc" id="L374">				maximumLongitude.toPlainString());</span>
+<span class="fc" id="L375">	}</span>
 
 	/**
 	 * @return the minimum latitude boundary of this ShakeMap
 	 */
 	public BigDecimal getMinimumLatitude() {
-<span class="fc" id="L379">		return getBigDecimal(getProperties().get(MINIMUM_LATITUDE_PROPERTY));</span>
+<span class="fc" id="L381">		return getBigDecimal(getProperties().get(MINIMUM_LATITUDE_PROPERTY));</span>
 	}
 
 	/**
@@ -384,15 +386,15 @@ public class ShakeMap extends Product {
 	 *            the minimum latitude to set
 	 */
 	public void setMinimumLatitude(BigDecimal minimumLatitude) {
-<span class="fc" id="L387">		getProperties().put(MINIMUM_LATITUDE_PROPERTY,</span>
-<span class="fc" id="L388">				minimumLatitude.toPlainString());</span>
-<span class="fc" id="L389">	}</span>
+<span class="fc" id="L389">		getProperties().put(MINIMUM_LATITUDE_PROPERTY,</span>
+<span class="fc" id="L390">				minimumLatitude.toPlainString());</span>
+<span class="fc" id="L391">	}</span>
 
 	/**
 	 * @return the maximum latitude boundary of this ShakeMap
 	 */
 	public BigDecimal getMaximumLatitude() {
-<span class="fc" id="L395">		return getBigDecimal(getProperties().get(MAXIMUM_LATITUDE_PROPERTY));</span>
+<span class="fc" id="L397">		return getBigDecimal(getProperties().get(MAXIMUM_LATITUDE_PROPERTY));</span>
 	}
 
 	/**
@@ -400,29 +402,29 @@ public class ShakeMap extends Product {
 	 *            the maximum latitude to set
 	 */
 	public void setMaximumLatitude(BigDecimal maximumLatitude) {
-<span class="fc" id="L403">		getProperties().put(MAXIMUM_LATITUDE_PROPERTY,</span>
-<span class="fc" id="L404">				maximumLatitude.toPlainString());</span>
-<span class="fc" id="L405">	}</span>
+<span class="fc" id="L405">		getProperties().put(MAXIMUM_LATITUDE_PROPERTY,</span>
+<span class="fc" id="L406">				maximumLatitude.toPlainString());</span>
+<span class="fc" id="L407">	}</span>
 
 	/**
 	 * Returns String value as BigDecimal
 	 */
 	protected BigDecimal getBigDecimal (String value) {
-<span class="fc bfc" id="L411" title="All 2 branches covered.">		if (value == null) {</span>
-<span class="fc" id="L412">			return null;</span>
+<span class="fc bfc" id="L413" title="All 2 branches covered.">		if (value == null) {</span>
+<span class="fc" id="L414">			return null;</span>
 		}
-<span class="fc" id="L414">		return new BigDecimal(value);</span>
+<span class="fc" id="L416">		return new BigDecimal(value);</span>
 	}
 
 	/**
 	 * Returns BigDecimal value as String
 	 */
 	protected String getString (BigDecimal value) {
-<span class="fc bfc" id="L421" title="All 2 branches covered.">		if (value == null) {</span>
-<span class="fc" id="L422">			return null;</span>
+<span class="fc bfc" id="L423" title="All 2 branches covered.">		if (value == null) {</span>
+<span class="fc" id="L424">			return null;</span>
 		}
-<span class="fc" id="L424">		return value.toString();</span>
+<span class="fc" id="L426">		return value.toString();</span>
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

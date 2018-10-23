@@ -3,19 +3,19 @@
  */
 package gov.usgs.earthquake.product.io;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
+import java.net.URL;
+import java.util.Base64;
+
+import gov.usgs.util.StreamUtils;
+import gov.usgs.util.XmlUtils;
+
 import gov.usgs.earthquake.product.Content;
 import gov.usgs.earthquake.product.URLContent;
 import gov.usgs.earthquake.product.ProductId;
 
-import gov.usgs.util.Base64;
-import gov.usgs.util.StreamUtils;
-import gov.usgs.util.XmlUtils;
-
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import java.net.URI;
-import java.net.URL;
 
 /**
  * Store a product to an OutputStream using XML.
@@ -144,10 +144,10 @@ public class XmlProductHandler implements ProductHandler {
 <span class="fc" id="L144">			out.write(buf.toString().getBytes());</span>
 
 <span class="fc" id="L146">			InputStream in = null;</span>
-<span class="fc" id="L147">			Base64.OutputStream base64out = null;</span>
+<span class="fc" id="L147">			OutputStream base64out = null;</span>
 			try {
 <span class="fc" id="L149">				in = content.getInputStream();</span>
-<span class="fc" id="L150">				base64out = new Base64.OutputStream(</span>
+<span class="fc" id="L150">				base64out = Base64.getEncoder().wrap(</span>
 						new StreamUtils.UnclosableOutputStream(out));
 				// write element content
 <span class="fc" id="L153">				StreamUtils.transferStream(in, base64out);</span>
@@ -233,4 +233,4 @@ public class XmlProductHandler implements ProductHandler {
 
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

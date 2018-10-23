@@ -113,8 +113,8 @@ public class ListenerNotifierThread implements Runnable {
 	 */
 	public void notify(final NotificationEvent event) {
 <span class="nc bnc" id="L115" title="All 2 branches missed.">		if (listener instanceof AbstractListener) {</span>
-<span class="nc bnc" id="L116" title="All 2 branches missed.">			if (!((AbstractListener) listener).accept(event.getNotification()</span>
-<span class="nc" id="L117">					.getProductId())) {</span>
+<span class="nc" id="L116">			AbstractListener abstractListener = (AbstractListener) listener;</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">			if (!abstractListener.accept(event.getNotification().getProductId())) {</span>
 <span class="nc" id="L118">				return;</span>
 			}
 		}
@@ -168,4 +168,4 @@ public class ListenerNotifierThread implements Runnable {
 <span class="nc" id="L168">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

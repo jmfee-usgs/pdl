@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * Can be used to schedule interrupt based timeouts, multiple attempts, and
  * Future style exception tracking for Runnable or Callable objects.
  * 
- * @param &lt;T&gt;
+ * @param &lt;T&gt; return type for callable.
  */
 public final class ExecutorTask&lt;T&gt; implements Future&lt;T&gt;, Runnable {
 
@@ -90,10 +90,10 @@ public final class ExecutorTask&lt;T&gt; implements Future&lt;T&gt;, Runnable {
 	 *            ExecutorService that this task will be submitted to.
 	 * @param maxTries
 	 *            maximum number of tries callable can throw an exception or
-	 *            timeout before giving up. &lt; 1 means never run.
+	 *            timeout before giving up. &amp;lt; 1 means never run.
 	 * @param timeout
 	 *            number of milliseconds to allow callable to run before it is
-	 *            interrupted. &lt;= 0 means never timeout.
+	 *            interrupted. &amp;lt;= 0 means never timeout.
 	 * @param callable
 	 *            the callable to call. To work well, the callable should handle
 	 *            interrupts gracefully.
@@ -121,10 +121,10 @@ public final class ExecutorTask&lt;T&gt; implements Future&lt;T&gt;, Runnable {
 	 *            ExecutorService that this task will be submitted to.
 	 * @param maxTries
 	 *            maximum number of tries callable can throw an exception or
-	 *            timeout before giving up. &lt; 1 means never run.
+	 *            timeout before giving up. &amp;lt; 1 means never run.
 	 * @param timeout
 	 *            number of milliseconds to allow callable to run before it is
-	 *            interrupted. &lt;= 0 means never timeout.
+	 *            interrupted. &amp;lt;= 0 means never timeout.
 	 * @param callable
 	 *            the callable to call. To work well, the callable should handle
 	 *            interrupts gracefully.
@@ -413,4 +413,4 @@ public final class ExecutorTask&lt;T&gt; implements Future&lt;T&gt;, Runnable {
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

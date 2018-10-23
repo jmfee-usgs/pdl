@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">5.633s</div>
+<div class="counter">5.627s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,22 +79,22 @@
 </thead>
 <tr>
 <td class="success">testNoTimeout</td>
-<td class="success">0.152s</td>
+<td class="success">0.158s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testShutdownWithTimeout</td>
-<td class="success">0.256s</td>
+<td class="success">0.259s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testSlowResponderWithTimeoutOutputStream</td>
-<td class="success">5.062s</td>
+<td class="success">5.057s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testTimeout</td>
-<td class="success">0.163s</td>
+<td class="success">0.153s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -102,15 +102,15 @@
 <div id="tab1" class="tab">
 <h2>Standard error</h2>
 <span class="code">
-<pre>Accepted connection from Socket[addr=/127.0.0.1,port=59625,localport=1234]
+<pre>Accepted connection from Socket[addr=/127.0.0.1,port=63226,localport=1234]
 java.net.SocketTimeoutException: Read timed out
 	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
 	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
 	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:171)
 	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:141)
-	at gov.usgs.util.StreamUtils.transferStream(StreamUtils.java:240)
-	at gov.usgs.util.StreamUtils.transferStream(StreamUtils.java:216)
-	at gov.usgs.util.StreamUtils.readStream(StreamUtils.java:199)
+	at gov.usgs.util.StreamUtils.transferStream(StreamUtils.java:238)
+	at gov.usgs.util.StreamUtils.transferStream(StreamUtils.java:214)
+	at gov.usgs.util.StreamUtils.readStream(StreamUtils.java:197)
 	at gov.usgs.earthquake.distribution.SocketTimeoutTest.testTimeout(SocketTimeoutTest.java:67)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -134,7 +134,7 @@ java.net.SocketTimeoutException: Read timed out
 	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
 	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:66)
 	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
-	at jdk.internal.reflect.GeneratedMethodAccessor15.invoke(Unknown Source)
+	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
 	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
@@ -143,7 +143,7 @@ java.net.SocketTimeoutException: Read timed out
 	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
 	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
 	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:117)
-	at jdk.internal.reflect.GeneratedMethodAccessor14.invoke(Unknown Source)
+	at jdk.internal.reflect.GeneratedMethodAccessor10.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
 	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
@@ -158,7 +158,7 @@ java.net.SocketTimeoutException: Read timed out
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
 	at java.base/java.lang.Thread.run(Thread.java:844)
 timeout worked
-Accepted connection from Socket[addr=/127.0.0.1,port=59627,localport=1234]
+Accepted connection from Socket[addr=/127.0.0.1,port=63227,localport=1234]
 sent 408332 bytes before write timeout
 java.net.SocketException: Socket closed
 	at java.base/java.net.SocketOutputStream.socketWrite(SocketOutputStream.java:118)
@@ -187,7 +187,7 @@ java.net.SocketException: Socket closed
 	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
 	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:66)
 	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
-	at jdk.internal.reflect.GeneratedMethodAccessor15.invoke(Unknown Source)
+	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
 	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
@@ -196,7 +196,7 @@ java.net.SocketException: Socket closed
 	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
 	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
 	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:117)
-	at jdk.internal.reflect.GeneratedMethodAccessor14.invoke(Unknown Source)
+	at jdk.internal.reflect.GeneratedMethodAccessor10.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
 	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
@@ -210,17 +210,27 @@ java.net.SocketException: Socket closed
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:55)
 	at java.base/java.lang.Thread.run(Thread.java:844)
-Accepted connection from Socket[addr=/127.0.0.1,port=59628,localport=1234]
+Tue Oct 23 17:18:01 MDT 2018
+FINER	thread=50	[null] running listener cleanup
+Tue Oct 23 17:18:02 MDT 2018
+FINER	thread=50	[null] running listener cleanup
+Tue Oct 23 17:18:03 MDT 2018
+FINER	thread=50	[null] running listener cleanup
+Tue Oct 23 17:18:04 MDT 2018
+FINER	thread=50	[null] running listener cleanup
+Tue Oct 23 17:18:05 MDT 2018
+FINER	thread=50	[null] running listener cleanup
+Accepted connection from Socket[addr=/127.0.0.1,port=63228,localport=1234]
 It worked!
-Accepted connection from Socket[addr=/127.0.0.1,port=59630,localport=1234]
+Accepted connection from Socket[addr=/127.0.0.1,port=63229,localport=1234]
 java.net.SocketTimeoutException: Read timed out
 	at java.base/java.net.SocketInputStream.socketRead0(Native Method)
 	at java.base/java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
 	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:171)
 	at java.base/java.net.SocketInputStream.read(SocketInputStream.java:141)
-	at gov.usgs.util.StreamUtils.transferStream(StreamUtils.java:240)
-	at gov.usgs.util.StreamUtils.transferStream(StreamUtils.java:216)
-	at gov.usgs.util.StreamUtils.readStream(StreamUtils.java:199)
+	at gov.usgs.util.StreamUtils.transferStream(StreamUtils.java:238)
+	at gov.usgs.util.StreamUtils.transferStream(StreamUtils.java:214)
+	at gov.usgs.util.StreamUtils.readStream(StreamUtils.java:197)
 	at gov.usgs.earthquake.distribution.SocketTimeoutTest.testShutdownWithTimeout(SocketTimeoutTest.java:99)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -244,7 +254,7 @@ java.net.SocketTimeoutException: Read timed out
 	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
 	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:66)
 	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
-	at jdk.internal.reflect.GeneratedMethodAccessor15.invoke(Unknown Source)
+	at jdk.internal.reflect.GeneratedMethodAccessor11.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
 	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
@@ -253,7 +263,7 @@ java.net.SocketTimeoutException: Read timed out
 	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:93)
 	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
 	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:117)
-	at jdk.internal.reflect.GeneratedMethodAccessor14.invoke(Unknown Source)
+	at jdk.internal.reflect.GeneratedMethodAccessor10.invoke(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
 	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:35)
@@ -279,7 +289,7 @@ timeout worked
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 4.9</a> at Aug 22, 2018, 5:04:57 PM</p>
+<a href="http://www.gradle.org">Gradle 4.10</a> at Oct 23, 2018, 5:18:17 PM</p>
 </div>
 </div>
 </body>

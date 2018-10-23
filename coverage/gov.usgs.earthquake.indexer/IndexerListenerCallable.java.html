@@ -24,39 +24,38 @@ public class IndexerListenerCallable implements Callable&lt;Void&gt; {
 	 *            the listener to notify
 	 * @param event
 	 *            the notification to send
-	 * @return a Callable
 	 */
 	public IndexerListenerCallable(final IndexerListener listener,
-<span class="fc" id="L30">			final IndexerEvent event) {</span>
-<span class="fc" id="L31">		this.listener = listener;</span>
-<span class="fc" id="L32">		this.event = event;</span>
-<span class="fc" id="L33">	}</span>
+<span class="fc" id="L29">			final IndexerEvent event) {</span>
+<span class="fc" id="L30">		this.listener = listener;</span>
+<span class="fc" id="L31">		this.event = event;</span>
+<span class="fc" id="L32">	}</span>
 
 	public Void call() throws Exception {
 		try {
-<span class="fc" id="L37">			listener.onIndexerEvent(event);</span>
-<span class="fc" id="L38">			return null;</span>
-<span class="fc" id="L39">		} catch (Exception e) {</span>
-<span class="fc" id="L40">			ProductSummary summary = event.getSummary();</span>
+<span class="fc" id="L36">			listener.onIndexerEvent(event);</span>
+<span class="fc" id="L37">			return null;</span>
+<span class="fc" id="L38">		} catch (Exception e) {</span>
+<span class="fc" id="L39">			ProductSummary summary = event.getSummary();</span>
 
-<span class="fc" id="L42">			LOGGER.log(Level.WARNING, &quot;[&quot;</span>
-<span class="fc" id="L43">					+ event.getIndexer().getName()</span>
+<span class="fc" id="L41">			LOGGER.log(Level.WARNING, &quot;[&quot;</span>
+<span class="fc" id="L42">					+ event.getIndexer().getName()</span>
 					+ &quot;] listener (&quot;
-<span class="fc" id="L45">					+ listener.getName()</span>
+<span class="fc" id="L44">					+ listener.getName()</span>
 					+ &quot;) threw exception&quot;
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">					+ (summary != null ? &quot;, for product id=&quot;</span>
-<span class="pc" id="L48">							+ summary.getId().toString() : &quot;&quot;), e);</span>
+<span class="pc bpc" id="L46" title="1 of 2 branches missed.">					+ (summary != null ? &quot;, for product id=&quot;</span>
+<span class="pc" id="L47">							+ summary.getId().toString() : &quot;&quot;), e);</span>
 
 			// track exception
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">			if (summary != null) {</span>
-<span class="fc" id="L52">				new ProductTracker(summary.getTrackerURL()).exception(listener</span>
-<span class="fc" id="L53">						.getClass().getCanonicalName(), summary.getId(), e);</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">			if (summary != null) {</span>
+<span class="fc" id="L51">				new ProductTracker(summary.getTrackerURL()).exception(listener</span>
+<span class="fc" id="L52">						.getClass().getCanonicalName(), summary.getId(), e);</span>
 			}
 
 			// but rethrow for outside handling
-<span class="fc" id="L57">			throw e;</span>
+<span class="fc" id="L56">			throw e;</span>
 		}
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

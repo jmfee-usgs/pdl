@@ -17,7 +17,7 @@ import gov.usgs.earthquake.product.Product;
 import gov.usgs.util.Config;
 
 /**
- * Convert EIDS Message into products.
+ * Convert messages from EIDS into products.
  * 
  * Listens to messages from an EIDSClient. Uses EQXMLProductParser and
  * EventAddonParser to build products. Any built products are sent to all
@@ -157,21 +157,18 @@ import gov.usgs.util.Config;
 
 			@Override
 			public String getName() {
-				// TODO Auto-generated method stub
-<span class="nc" id="L161">				return null;</span>
+<span class="nc" id="L160">				return null;</span>
 			}
 
 			@Override
 			public void setName(String arg0) {
-				// TODO Auto-generated method stub
-
-<span class="nc" id="L168">			}</span>
+<span class="nc" id="L165">			}</span>
 		});
 
-<span class="nc" id="L171">		EIDSClient client = new EIDSClient(&quot;eids1.cr.usgs.gov&quot;, 39977);</span>
-<span class="nc" id="L172">		client.addListener(builder);</span>
-<span class="nc" id="L173">		client.startup();</span>
-<span class="nc" id="L174">	}</span>
+<span class="nc" id="L168">		EIDSClient client = new EIDSClient(&quot;eids1.cr.usgs.gov&quot;, 39977);</span>
+<span class="nc" id="L169">		client.addListener(builder);</span>
+<span class="nc" id="L170">		client.startup();</span>
+<span class="nc" id="L171">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

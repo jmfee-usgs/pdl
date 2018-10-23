@@ -8,18 +8,20 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 /**
- * Console redirection utility. Replaces system.out and system.err with
+ * Console redirection utility.
+ * 
+ * Replaces system.out and system.err with
  * printstreams that log all writes when flushed.
  */
-<span class="nc" id="L14">public class RedirectConsole {</span>
+<span class="nc" id="L16">public class RedirectConsole {</span>
 
 	/** Logger to handle writes to system.err. */
-<span class="nc" id="L17">	private static final Logger SYSTEM_ERR_LOGGER = Logger</span>
-<span class="nc" id="L18">			.getLogger(&quot;system.err&quot;);</span>
+<span class="nc" id="L19">	private static final Logger SYSTEM_ERR_LOGGER = Logger</span>
+<span class="nc" id="L20">			.getLogger(&quot;system.err&quot;);</span>
 
 	/** Logger to handle writes to system.out. */
-<span class="nc" id="L21">	private static final Logger SYSTEM_OUT_LOGGER = Logger</span>
-<span class="nc" id="L22">			.getLogger(&quot;system.out&quot;);</span>
+<span class="nc" id="L23">	private static final Logger SYSTEM_OUT_LOGGER = Logger</span>
+<span class="nc" id="L24">			.getLogger(&quot;system.out&quot;);</span>
 
 	/** The previous system.err stream. */
 	private static PrintStream PREVIOUS_SYSTEM_ERR;
@@ -36,16 +38,16 @@ import java.util.logging.Logger;
 	 * Use the cancel method to undo this redirection.
 	 */
 	public static void redirect() {
-<span class="nc bnc" id="L39" title="All 4 branches missed.">		if (PREVIOUS_SYSTEM_ERR != null || PREVIOUS_SYSTEM_OUT != null) {</span>
-<span class="nc" id="L40">			cancel();</span>
+<span class="nc bnc" id="L41" title="All 4 branches missed.">		if (PREVIOUS_SYSTEM_ERR != null || PREVIOUS_SYSTEM_OUT != null) {</span>
+<span class="nc" id="L42">			cancel();</span>
 		}
 
-<span class="nc" id="L43">		PREVIOUS_SYSTEM_OUT = System.out;</span>
-<span class="nc" id="L44">		System.setOut(new LoggerPrintStream(&quot;STDOUT&quot;, SYSTEM_OUT_LOGGER));</span>
+<span class="nc" id="L45">		PREVIOUS_SYSTEM_OUT = System.out;</span>
+<span class="nc" id="L46">		System.setOut(new LoggerPrintStream(&quot;STDOUT&quot;, SYSTEM_OUT_LOGGER));</span>
 
-<span class="nc" id="L46">		PREVIOUS_SYSTEM_ERR = System.err;</span>
-<span class="nc" id="L47">		System.setErr(new LoggerPrintStream(&quot;STDERR&quot;, SYSTEM_ERR_LOGGER));</span>
-<span class="nc" id="L48">	}</span>
+<span class="nc" id="L48">		PREVIOUS_SYSTEM_ERR = System.err;</span>
+<span class="nc" id="L49">		System.setErr(new LoggerPrintStream(&quot;STDERR&quot;, SYSTEM_ERR_LOGGER));</span>
+<span class="nc" id="L50">	}</span>
 
 	/**
 	 * Undo a redirection previously setup using redirect().
@@ -54,21 +56,21 @@ import java.util.logging.Logger;
 	 * called.
 	 */
 	public static void cancel() {
-<span class="nc bnc" id="L57" title="All 2 branches missed.">		if (PREVIOUS_SYSTEM_OUT != null) {</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">		if (PREVIOUS_SYSTEM_OUT != null) {</span>
 			// flush any pending output
-<span class="nc" id="L59">			System.out.flush();</span>
+<span class="nc" id="L61">			System.out.flush();</span>
 			// restore previous output stream
-<span class="nc" id="L61">			System.setOut(PREVIOUS_SYSTEM_OUT);</span>
-<span class="nc" id="L62">			PREVIOUS_SYSTEM_OUT = null;</span>
+<span class="nc" id="L63">			System.setOut(PREVIOUS_SYSTEM_OUT);</span>
+<span class="nc" id="L64">			PREVIOUS_SYSTEM_OUT = null;</span>
 		}
-<span class="nc bnc" id="L64" title="All 2 branches missed.">		if (PREVIOUS_SYSTEM_ERR != null) {</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">		if (PREVIOUS_SYSTEM_ERR != null) {</span>
 			// flush any pending output
-<span class="nc" id="L66">			System.err.flush();</span>
+<span class="nc" id="L68">			System.err.flush();</span>
 			// restore previous error stream
-<span class="nc" id="L68">			System.setErr(PREVIOUS_SYSTEM_ERR);</span>
-<span class="nc" id="L69">			PREVIOUS_SYSTEM_ERR = null;</span>
+<span class="nc" id="L70">			System.setErr(PREVIOUS_SYSTEM_ERR);</span>
+<span class="nc" id="L71">			PREVIOUS_SYSTEM_ERR = null;</span>
 		}
-<span class="nc" id="L71">	}</span>
+<span class="nc" id="L73">	}</span>
 
 	/**
 	 * A PrintStream that writes messages to a Logger object.
@@ -83,26 +85,26 @@ import java.util.logging.Logger;
 
 		public LoggerPrintStream(final String name, final Logger logger) {
 			// true is for autoflush
-<span class="nc" id="L86">			super(new ByteArrayOutputStream(), true);</span>
-<span class="nc" id="L87">			this.name = name;</span>
-<span class="nc" id="L88">			this.logger = logger;</span>
-<span class="nc" id="L89">		}</span>
+<span class="nc" id="L88">			super(new ByteArrayOutputStream(), true);</span>
+<span class="nc" id="L89">			this.name = name;</span>
+<span class="nc" id="L90">			this.logger = logger;</span>
+<span class="nc" id="L91">		}</span>
 
 		/**
 		 * Override to force synchronization.
 		 */
 		@Override
 		public synchronized void write(final byte[] b) throws IOException {
-<span class="nc" id="L96">			super.write(b);</span>
-<span class="nc" id="L97">		}</span>
+<span class="nc" id="L98">			super.write(b);</span>
+<span class="nc" id="L99">		}</span>
 
 		/**
 		 * Override to force synchronization.
 		 */
 		@Override
 		public synchronized void write(final int b) {
-<span class="nc" id="L104">			super.write(b);</span>
-<span class="nc" id="L105">		}</span>
+<span class="nc" id="L106">			super.write(b);</span>
+<span class="nc" id="L107">		}</span>
 
 		/**
 		 * Override to force synchronization.
@@ -110,25 +112,25 @@ import java.util.logging.Logger;
 		@Override
 		public synchronized void write(final byte[] buf, final int off,
 				final int len) {
-<span class="nc" id="L113">			super.write(buf, off, len);</span>
-<span class="nc" id="L114">		}</span>
+<span class="nc" id="L115">			super.write(buf, off, len);</span>
+<span class="nc" id="L116">		}</span>
 
 		/**
 		 * Flush forces message to be written to log file.
 		 */
 		@Override
 		public synchronized void flush() {
-<span class="nc" id="L121">			ByteArrayOutputStream baos = (ByteArrayOutputStream) out;</span>
+<span class="nc" id="L123">			ByteArrayOutputStream baos = (ByteArrayOutputStream) out;</span>
 			try {
-<span class="nc" id="L123">				logger.log(new LogRecord(Level.INFO, this.name + &quot; &quot;</span>
-<span class="nc" id="L124">						+ baos.toString().trim()));</span>
+<span class="nc" id="L125">				logger.log(new LogRecord(Level.INFO, this.name + &quot; &quot;</span>
+<span class="nc" id="L126">						+ baos.toString().trim()));</span>
 			} finally {
 				// tried to write at least, clear buffer...
-<span class="nc" id="L127">				out = new ByteArrayOutputStream();</span>
+<span class="nc" id="L129">				out = new ByteArrayOutputStream();</span>
 			}
-<span class="nc" id="L129">		}</span>
+<span class="nc" id="L131">		}</span>
 
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

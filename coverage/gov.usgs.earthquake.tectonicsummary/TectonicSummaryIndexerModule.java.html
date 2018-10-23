@@ -6,40 +6,38 @@ import gov.usgs.earthquake.indexer.ProductSummary;
 import gov.usgs.earthquake.product.Product;
 
 /**
- * A specialized implementation of the IndexerModule interface for Tectonic
- * Summary products.
+ * Tectonic Summary indexer module.
  *
  * Provides a higher and more specific level of support for tectonic summary
  * products, including checking for &quot;Reviewed&quot; status on the tectonic summary.
  * These &quot;Reviewed tectonic summmaries will always be preferred.
- *
  */
-
-<span class="fc" id="L18">public class TectonicSummaryIndexerModule extends DefaultIndexerModule {</span>
+@Deprecated()
+<span class="fc" id="L16">public class TectonicSummaryIndexerModule extends DefaultIndexerModule {</span>
 
 	public static final int REVIEWED_TECTONIC_SUMMARY_WEIGHT = 200;
 
 	@Override
 	public int getSupportLevel(Product product) {
-<span class="fc" id="L24">		int supportLevel = IndexerModule.LEVEL_UNSUPPORTED;</span>
-<span class="fc" id="L25">		String type = getBaseProductType(product.getId().getType());</span>
+<span class="fc" id="L22">		int supportLevel = IndexerModule.LEVEL_UNSUPPORTED;</span>
+<span class="fc" id="L23">		String type = getBaseProductType(product.getId().getType());</span>
 		// support tectonic summary products
-<span class="fc bfc" id="L27" title="All 2 branches covered.">		if (type.equals(&quot;tectonic-summary&quot;)) {</span>
-<span class="fc" id="L28">			supportLevel = IndexerModule.LEVEL_SUPPORTED;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">		if (type.equals(&quot;tectonic-summary&quot;)) {</span>
+<span class="fc" id="L26">			supportLevel = IndexerModule.LEVEL_SUPPORTED;</span>
 		}
-<span class="fc" id="L30">		return supportLevel;</span>
+<span class="fc" id="L28">		return supportLevel;</span>
 	}
 
 	@Override
 	protected long getPreferredWeight(final ProductSummary summary) {
-<span class="fc" id="L35">		long preferredWeight = super.getPreferredWeight(summary);</span>
-<span class="fc" id="L36">		String reviewStatus = summary.getProperties().get(&quot;review-status&quot;);</span>
+<span class="fc" id="L33">		long preferredWeight = super.getPreferredWeight(summary);</span>
+<span class="fc" id="L34">		String reviewStatus = summary.getProperties().get(&quot;review-status&quot;);</span>
 
-<span class="fc bfc" id="L38" title="All 2 branches covered.">		if (&quot;REVIEWED&quot;.equalsIgnoreCase(reviewStatus)) {</span>
-<span class="fc" id="L39">			preferredWeight += REVIEWED_TECTONIC_SUMMARY_WEIGHT;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">		if (&quot;REVIEWED&quot;.equalsIgnoreCase(reviewStatus)) {</span>
+<span class="fc" id="L37">			preferredWeight += REVIEWED_TECTONIC_SUMMARY_WEIGHT;</span>
 		}
 
-<span class="fc" id="L42">		return preferredWeight;</span>
+<span class="fc" id="L40">		return preferredWeight;</span>
 	}
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

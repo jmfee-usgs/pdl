@@ -331,7 +331,7 @@ public class JDBCNotificationIndex extends JDBCConnection implements
 			// extract schema from jar
 <span class="fc" id="L332">			URL schemaURL = JDBCNotificationIndex.class.getClassLoader()</span>
 <span class="fc" id="L333">					.getResource(JDBC_DB_SCHEMA);</span>
-<span class="fc bfc" id="L334" title="All 2 branches covered.">			if (schemaURL == null) {</span>
+<span class="pc bpc" id="L334" title="1 of 2 branches missed.">			if (schemaURL == null) {</span>
 <span class="fc" id="L335">				schemaURL = new File(JDBC_DB_SCHEMA).toURI().toURL();</span>
 			}
 <span class="fc" id="L337">			StreamUtils.transferStream(schemaURL, indexFile);</span>
@@ -782,7 +782,7 @@ public class JDBCNotificationIndex extends JDBCConnection implements
 <span class="fc" id="L782">				_dml_addTmpCode.executeBatch();</span>
 			}
 
-			// TODO: is this the problem? reading with uncommitted writes?
+			// is this a problem? reading with uncommitted writes?
 <span class="fc" id="L786">			PreparedStatement ps = getCorrectStatement(sources, types, codes);</span>
 <span class="fc" id="L787">			n = getNotifications(ps);</span>
 		} finally {
@@ -838,7 +838,7 @@ public class JDBCNotificationIndex extends JDBCConnection implements
 	 * @throws Exception
 	 *             If a &lt;code&gt;SQLException&lt;/code&gt; occurs.
 	 */
-	protected List&lt;Notification&gt; getNotifications(PreparedStatement ps)
+	protected synchronized List&lt;Notification&gt; getNotifications(PreparedStatement ps)
 			throws Exception {
 <span class="fc" id="L843">		List&lt;Notification&gt; n = new ArrayList&lt;Notification&gt;();</span>
 <span class="fc" id="L844">		ResultSet rs = null;</span>
@@ -934,4 +934,4 @@ public class JDBCNotificationIndex extends JDBCConnection implements
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

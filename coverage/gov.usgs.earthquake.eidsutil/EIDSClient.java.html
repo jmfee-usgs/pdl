@@ -160,19 +160,20 @@ public class EIDSClient implements EIDSListener {
 <span class="fc" id="L160">		client.startup();</span>
 
 		// if this is the first time through
-<span class="pc bpc" id="L163" title="1 of 2 branches missed.">		if (clientRestartTimer == null) {</span>
-<span class="pc bpc" id="L164" title="1 of 2 branches missed.">			if (clientRestartInterval &gt; 0) {</span>
-<span class="fc" id="L165">				clientRestartTimer = new Timer();</span>
-<span class="fc" id="L166">				clientRestartTimer.schedule(new TimerTask() {</span>
-					public void run() {
-<span class="nc" id="L168">						reinitConnection();</span>
-<span class="nc" id="L169">					}</span>
-<span class="fc" id="L170">				}, clientRestartInterval, // before first execution</span>
-<span class="fc" id="L171">						clientRestartInterval // between subsequent executions</span>
-						);
-			}
+<span class="pc bpc" id="L163" title="2 of 4 branches missed.">		if (clientRestartTimer == null &amp;&amp; clientRestartInterval &gt; 0) {</span>
+<span class="fc" id="L164">			clientRestartTimer = new Timer();</span>
+<span class="fc" id="L165">			clientRestartTimer.schedule(</span>
+<span class="fc" id="L166">					new TimerTask() {</span>
+						public void run() {
+<span class="nc" id="L168">							reinitConnection();</span>
+<span class="nc" id="L169">						}</span>
+					},
+					// before first execution
+<span class="fc" id="L172">					clientRestartInterval,</span>
+					// between subsequent executions
+<span class="fc" id="L174">					clientRestartInterval);</span>
 		}
-<span class="fc" id="L175">	}</span>
+<span class="fc" id="L176">	}</span>
 
 	/**
 	 * Shuts down a running client.
@@ -180,14 +181,14 @@ public class EIDSClient implements EIDSListener {
 	 * Does not call system.exit.
 	 */
 	public void shutdown() {
-<span class="pc bpc" id="L183" title="1 of 2 branches missed.">		if (clientRestartTimer != null) {</span>
-<span class="fc" id="L184">			clientRestartTimer.cancel();</span>
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">		if (clientRestartTimer != null) {</span>
+<span class="fc" id="L185">			clientRestartTimer.cancel();</span>
 		}
-<span class="pc bpc" id="L186" title="1 of 2 branches missed.">		if (client != null) {</span>
-<span class="fc" id="L187">			client.shutdown();</span>
-<span class="fc" id="L188">			client = null;</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">		if (client != null) {</span>
+<span class="fc" id="L188">			client.shutdown();</span>
+<span class="fc" id="L189">			client = null;</span>
 		}
-<span class="fc" id="L190">	}</span>
+<span class="fc" id="L191">	}</span>
 
 	/**
 	 * Add a listener.
@@ -196,8 +197,8 @@ public class EIDSClient implements EIDSListener {
 	 *            the listener to add.
 	 */
 	public synchronized void addListener(final EIDSListener listener) {
-<span class="fc" id="L199">		this.listeners.add(listener);</span>
-<span class="fc" id="L200">	}</span>
+<span class="fc" id="L200">		this.listeners.add(listener);</span>
+<span class="fc" id="L201">	}</span>
 
 	/**
 	 * Remove a listener.
@@ -206,23 +207,23 @@ public class EIDSClient implements EIDSListener {
 	 *            the listener to remove.
 	 */
 	public synchronized void removeListener(final EIDSListener listener) {
-<span class="nc" id="L209">		this.listeners.remove(listener);</span>
-<span class="nc" id="L210">	}</span>
+<span class="nc" id="L210">		this.listeners.remove(listener);</span>
+<span class="nc" id="L211">	}</span>
 
 	public void onEIDSMessage(EIDSMessageEvent event) {
 		// iterate over a copy of the listeners list
-<span class="fc" id="L214">		Iterator&lt;EIDSListener&gt; iter = new LinkedList&lt;EIDSListener&gt;(listeners)</span>
-<span class="fc" id="L215">				.iterator();</span>
-<span class="fc bfc" id="L216" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
-<span class="fc" id="L217">			iter.next().onEIDSMessage(event);</span>
+<span class="fc" id="L215">		Iterator&lt;EIDSListener&gt; iter = new LinkedList&lt;EIDSListener&gt;(listeners)</span>
+<span class="fc" id="L216">				.iterator();</span>
+<span class="fc bfc" id="L217" title="All 2 branches covered.">		while (iter.hasNext()) {</span>
+<span class="fc" id="L218">			iter.next().onEIDSMessage(event);</span>
 		}
-<span class="fc" id="L219">	}</span>
+<span class="fc" id="L220">	}</span>
 
 	/**
 	 * @return the serverHost
 	 */
 	public String getServerHost() {
-<span class="nc" id="L225">		return serverHost;</span>
+<span class="nc" id="L226">		return serverHost;</span>
 	}
 
 	/**
@@ -230,14 +231,14 @@ public class EIDSClient implements EIDSListener {
 	 *            the serverHost to set
 	 */
 	public void setServerHost(String serverHost) {
-<span class="nc" id="L233">		this.serverHost = serverHost;</span>
-<span class="nc" id="L234">	}</span>
+<span class="nc" id="L234">		this.serverHost = serverHost;</span>
+<span class="nc" id="L235">	}</span>
 
 	/**
 	 * @return the serverPort
 	 */
 	public Integer getServerPort() {
-<span class="nc" id="L240">		return serverPort;</span>
+<span class="nc" id="L241">		return serverPort;</span>
 	}
 
 	/**
@@ -245,14 +246,14 @@ public class EIDSClient implements EIDSListener {
 	 *            the serverPort to set
 	 */
 	public void setServerPort(Integer serverPort) {
-<span class="nc" id="L248">		this.serverPort = serverPort;</span>
-<span class="nc" id="L249">	}</span>
+<span class="nc" id="L249">		this.serverPort = serverPort;</span>
+<span class="nc" id="L250">	}</span>
 
 	/**
 	 * @return the alternateServersList
 	 */
 	public String getAlternateServersList() {
-<span class="nc" id="L255">		return alternateServersList;</span>
+<span class="nc" id="L256">		return alternateServersList;</span>
 	}
 
 	/**
@@ -260,14 +261,14 @@ public class EIDSClient implements EIDSListener {
 	 *            the alternateServersList to set
 	 */
 	public void setAlternateServersList(String alternateServersList) {
-<span class="nc" id="L263">		this.alternateServersList = alternateServersList;</span>
-<span class="nc" id="L264">	}</span>
+<span class="nc" id="L264">		this.alternateServersList = alternateServersList;</span>
+<span class="nc" id="L265">	}</span>
 
 	/**
 	 * @return the maxServerEventAgeDays
 	 */
 	public Double getMaxServerEventAgeDays() {
-<span class="nc" id="L270">		return maxServerEventAgeDays;</span>
+<span class="nc" id="L271">		return maxServerEventAgeDays;</span>
 	}
 
 	/**
@@ -275,14 +276,14 @@ public class EIDSClient implements EIDSListener {
 	 *            the maxServerEventAgeDays to set
 	 */
 	public void setMaxServerEventAgeDays(Double maxServerEventAgeDays) {
-<span class="nc" id="L278">		this.maxServerEventAgeDays = maxServerEventAgeDays;</span>
-<span class="nc" id="L279">	}</span>
+<span class="nc" id="L279">		this.maxServerEventAgeDays = maxServerEventAgeDays;</span>
+<span class="nc" id="L280">	}</span>
 
 	/**
 	 * @return the trackingFileName
 	 */
 	public String getTrackingFileName() {
-<span class="nc" id="L285">		return trackingFileName;</span>
+<span class="nc" id="L286">		return trackingFileName;</span>
 	}
 
 	/**
@@ -290,30 +291,30 @@ public class EIDSClient implements EIDSListener {
 	 *            the trackingFileName to set
 	 */
 	public void setTrackingFileName(String trackingFileName) {
-<span class="nc" id="L293">		this.trackingFileName = trackingFileName;</span>
-<span class="nc" id="L294">	}</span>
+<span class="nc" id="L294">		this.trackingFileName = trackingFileName;</span>
+<span class="nc" id="L295">	}</span>
 
 	public Long getClientRestartInterval() {
-<span class="nc" id="L297">		return clientRestartInterval;</span>
+<span class="nc" id="L298">		return clientRestartInterval;</span>
 	}
 
 	public void setClientRestartInterval(Long clientRestartInterval) {
-<span class="nc" id="L301">		this.clientRestartInterval = clientRestartInterval;</span>
-<span class="nc" id="L302">	}</span>
+<span class="nc" id="L302">		this.clientRestartInterval = clientRestartInterval;</span>
+<span class="nc" id="L303">	}</span>
 
 	public void setDebug(boolean debug) {
-<span class="nc" id="L305">		this.debug = debug;</span>
-<span class="nc" id="L306">	}</span>
+<span class="nc" id="L306">		this.debug = debug;</span>
+<span class="nc" id="L307">	}</span>
 
 	public boolean isDebug() {
-<span class="nc" id="L309">		return debug;</span>
+<span class="nc" id="L310">		return debug;</span>
 	}
 
 	public boolean reinitConnection() {
-<span class="nc bnc" id="L313" title="All 2 branches missed.">		if (client != null) {</span>
-<span class="nc" id="L314">			return client.getConnManagerObj().reinitConnection();</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">		if (client != null) {</span>
+<span class="nc" id="L315">			return client.getConnManagerObj().reinitConnection();</span>
 		}
-<span class="nc" id="L316">		return false;</span>
+<span class="nc" id="L317">		return false;</span>
 	}
 
 	/**
@@ -323,34 +324,34 @@ public class EIDSClient implements EIDSListener {
 	 * @throws Exception
 	 */
 	public static void main(final String[] args) throws Exception {
-<span class="nc" id="L326">		EIDSListener listener = new EIDSListener() {</span>
+<span class="nc" id="L327">		EIDSListener listener = new EIDSListener() {</span>
 			public void onEIDSMessage(EIDSMessageEvent event) {
-<span class="nc" id="L328">				System.err.println(event.getServerHost() + &quot; &quot;</span>
-<span class="nc" id="L329">						+ event.getServerSequence());</span>
-<span class="nc" id="L330">				System.err.println(event.getMessage());</span>
-<span class="nc" id="L331">			}</span>
+<span class="nc" id="L329">				System.err.println(event.getServerHost() + &quot; &quot;</span>
+<span class="nc" id="L330">						+ event.getServerSequence());</span>
+<span class="nc" id="L331">				System.err.println(event.getMessage());</span>
+<span class="nc" id="L332">			}</span>
 		};
 
-<span class="nc" id="L334">		String host = &quot;eids1.cr.usgs.gov&quot;;</span>
-<span class="nc" id="L335">		int port = 39977;</span>
-<span class="nc" id="L336">		boolean debug = false;</span>
+<span class="nc" id="L335">		String host = &quot;eids1.cr.usgs.gov&quot;;</span>
+<span class="nc" id="L336">		int port = 39977;</span>
+<span class="nc" id="L337">		boolean debug = false;</span>
 
-<span class="nc bnc" id="L338" title="All 2 branches missed.">		for (String arg : args) {</span>
-<span class="nc bnc" id="L339" title="All 2 branches missed.">			if (arg.startsWith(&quot;--host=&quot;)) {</span>
-<span class="nc" id="L340">				host = arg.replace(&quot;--host=&quot;, &quot;&quot;);</span>
-<span class="nc bnc" id="L341" title="All 2 branches missed.">			} else if (arg.startsWith(&quot;--port=&quot;)) {</span>
-<span class="nc" id="L342">				port = Integer.parseInt(arg.replace(&quot;--port=&quot;, &quot;&quot;));</span>
-<span class="nc bnc" id="L343" title="All 2 branches missed.">			} else if (arg.equals(&quot;--debug&quot;)) {</span>
-<span class="nc" id="L344">				debug = true;</span>
+<span class="nc bnc" id="L339" title="All 2 branches missed.">		for (String arg : args) {</span>
+<span class="nc bnc" id="L340" title="All 2 branches missed.">			if (arg.startsWith(&quot;--host=&quot;)) {</span>
+<span class="nc" id="L341">				host = arg.replace(&quot;--host=&quot;, &quot;&quot;);</span>
+<span class="nc bnc" id="L342" title="All 2 branches missed.">			} else if (arg.startsWith(&quot;--port=&quot;)) {</span>
+<span class="nc" id="L343">				port = Integer.parseInt(arg.replace(&quot;--port=&quot;, &quot;&quot;));</span>
+<span class="nc bnc" id="L344" title="All 2 branches missed.">			} else if (arg.equals(&quot;--debug&quot;)) {</span>
+<span class="nc" id="L345">				debug = true;</span>
 			}
 		}
 
-<span class="nc" id="L348">		EIDSClient client = new EIDSClient(host, port);</span>
-<span class="nc" id="L349">		client.setClientRestartInterval(10000L);</span>
-<span class="nc" id="L350">		client.setDebug(debug);</span>
-<span class="nc" id="L351">		client.addListener(listener);</span>
-<span class="nc" id="L352">		client.startup();</span>
-<span class="nc" id="L353">	}</span>
+<span class="nc" id="L349">		EIDSClient client = new EIDSClient(host, port);</span>
+<span class="nc" id="L350">		client.setClientRestartInterval(10000L);</span>
+<span class="nc" id="L351">		client.setDebug(debug);</span>
+<span class="nc" id="L352">		client.addListener(listener);</span>
+<span class="nc" id="L353">		client.startup();</span>
+<span class="nc" id="L354">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">6.012s</div>
+<div class="counter">6.026s</div>
 <p>duration</p>
 </div>
 </td>
@@ -66,9 +66,6 @@
 <li>
 <a href="#tab1">Standard output</a>
 </li>
-<li>
-<a href="#tab2">Standard error</a>
-</li>
 </ul>
 <div id="tab0" class="tab">
 <h2>Tests</h2>
@@ -82,22 +79,22 @@
 </thead>
 <tr>
 <td class="success">testAutoClearHeartbeat</td>
-<td class="success">5.003s</td>
+<td class="success">5.018s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testJSONHeartbeatListener</td>
-<td class="success">0.001s</td>
+<td class="success">0.003s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testManualClearHeartbeat</td>
-<td class="success">1.001s</td>
+<td class="success">1.000s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">testWriteHeartbeat</td>
-<td class="success">0.007s</td>
+<td class="success">0.005s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -106,64 +103,8 @@
 <h2>Standard output</h2>
 <span class="code">
 <pre>Test scheduled heartbeat data clearing, JSON={}
-Test sendHeartbeatMessage and JSON={&quot;TestComponent1&quot;:{&quot;key13&quot;:{&quot;date&quot;:&quot;1534979038702&quot;,&quot;message&quot;:&quot;value13&quot;},&quot;key12&quot;:{&quot;date&quot;:&quot;1534979038702&quot;,&quot;message&quot;:&quot;value12&quot;},&quot;key11&quot;:{&quot;date&quot;:&quot;1534979038702&quot;,&quot;message&quot;:&quot;value11&quot;}},&quot;TestComponent2&quot;:{&quot;key23&quot;:{&quot;date&quot;:&quot;1534979038702&quot;,&quot;message&quot;:&quot;value23&quot;},&quot;key22&quot;:{&quot;date&quot;:&quot;1534979038702&quot;,&quot;message&quot;:&quot;value22&quot;},&quot;key21&quot;:{&quot;date&quot;:&quot;1534979038702&quot;,&quot;message&quot;:&quot;value21&quot;}}}
+Test sendHeartbeatMessage and JSON={&quot;TestComponent1&quot;:{&quot;key13&quot;:{&quot;message&quot;:&quot;value13&quot;,&quot;date&quot;:&quot;1540336655285&quot;},&quot;key12&quot;:{&quot;message&quot;:&quot;value12&quot;,&quot;date&quot;:&quot;1540336655285&quot;},&quot;key11&quot;:{&quot;message&quot;:&quot;value11&quot;,&quot;date&quot;:&quot;1540336655285&quot;}},&quot;TestComponent2&quot;:{&quot;key23&quot;:{&quot;message&quot;:&quot;value23&quot;,&quot;date&quot;:&quot;1540336655285&quot;},&quot;key22&quot;:{&quot;message&quot;:&quot;value22&quot;,&quot;date&quot;:&quot;1540336655285&quot;},&quot;key21&quot;:{&quot;message&quot;:&quot;value21&quot;,&quot;date&quot;:&quot;1540336655285&quot;}}}
 Manual test heartbeat data cleared, JSON={}
-</pre>
-</span>
-</div>
-<div id="tab2" class="tab">
-<h2>Standard error</h2>
-<span class="code">
-<pre>CONFIG	thread=13	[null] maxTries = 1
-CONFIG	thread=13	[null] maxTries = 1
-CONFIG	thread=13	[null] timeout = 0ms
-CONFIG	thread=13	[null] retry delay = 300000ms
-CONFIG	thread=13	[null] process duplicates = false
-CONFIG	thread=13	[null] include paths = []
-CONFIG	thread=13	[null] exclude paths = []
-CONFIG	thread=13	[null] heartbeat file = /Users/jmfee/Documents/git/pdl/heartbeat.dat
-CONFIG	thread=13	[null] heartbeat timeout = 100ms
-FINER	thread=287	[null] running listener cleanup
-Wed Aug 22 17:03:54 MDT 2018
-FINER	thread=287	[null] running listener cleanup
-Wed Aug 22 17:03:55 MDT 2018
-FINER	thread=287	[null] running listener cleanup
-Wed Aug 22 17:03:56 MDT 2018
-FINER	thread=287	[null] running listener cleanup
-Wed Aug 22 17:03:57 MDT 2018
-FINER	thread=287	[null] running listener cleanup
-Wed Aug 22 17:03:58 MDT 2018
-FINER	thread=287	[null] running listener cleanup
-CONFIG	thread=13	[null] maxTries = 1
-CONFIG	thread=13	[null] maxTries = 1
-CONFIG	thread=13	[null] timeout = 0ms
-CONFIG	thread=13	[null] retry delay = 300000ms
-CONFIG	thread=13	[null] process duplicates = false
-CONFIG	thread=13	[null] include paths = []
-CONFIG	thread=13	[null] exclude paths = []
-CONFIG	thread=13	[null] heartbeat file = /Users/jmfee/Documents/git/pdl/heartbeat.dat
-CONFIG	thread=13	[null] heartbeat timeout = 1800000ms
-CONFIG	thread=13	[null] maxTries = 1
-CONFIG	thread=13	[null] maxTries = 1
-CONFIG	thread=13	[null] timeout = 0ms
-CONFIG	thread=13	[null] retry delay = 300000ms
-CONFIG	thread=13	[null] process duplicates = false
-CONFIG	thread=13	[null] include paths = []
-CONFIG	thread=13	[null] exclude paths = []
-CONFIG	thread=13	[null] heartbeat file = /Users/jmfee/Documents/git/pdl/heartbeat.dat
-CONFIG	thread=13	[null] heartbeat timeout = 100ms
-Wed Aug 22 17:03:59 MDT 2018
-FINER	thread=287	[null] running listener cleanup
-FINER	thread=13	[null] running listener cleanup
-CONFIG	thread=13	[null] maxTries = 1
-CONFIG	thread=13	[null] maxTries = 1
-CONFIG	thread=13	[null] timeout = 0ms
-CONFIG	thread=13	[null] retry delay = 300000ms
-CONFIG	thread=13	[null] process duplicates = false
-CONFIG	thread=13	[null] include paths = []
-CONFIG	thread=13	[null] exclude paths = []
-CONFIG	thread=13	[null] heartbeat file = /Users/jmfee/Documents/git/pdl/heartbeat.dat
-CONFIG	thread=13	[null] heartbeat timeout = 1800000ms
 </pre>
 </span>
 </div>
@@ -175,7 +116,7 @@ CONFIG	thread=13	[null] heartbeat timeout = 1800000ms
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 4.9</a> at Aug 22, 2018, 5:04:57 PM</p>
+<a href="http://www.gradle.org">Gradle 4.10</a> at Oct 23, 2018, 5:18:17 PM</p>
 </div>
 </div>
 </body>

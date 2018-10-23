@@ -5,16 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * This represents a search request, which is a series of ProductIndexQuery
- * objects paired with methods.
+ * A search request, which is one or more {@link SearchQuery}s.
  */
 public class SearchRequest implements Comparable&lt;SearchRequest&gt; {
 
-<span class="fc" id="L13">	private final List&lt;SearchQuery&gt; queries = new LinkedList&lt;SearchQuery&gt;();</span>
+<span class="fc" id="L12">	private final List&lt;SearchQuery&gt; queries = new LinkedList&lt;SearchQuery&gt;();</span>
 
 	/** Construct a new SearchRequest. */
-<span class="fc" id="L16">	public SearchRequest() {</span>
-<span class="fc" id="L17">	}</span>
+<span class="fc" id="L15">	public SearchRequest() {</span>
+<span class="fc" id="L16">	}</span>
 
 	/**
 	 * Add another query to this request.
@@ -23,19 +22,19 @@ public class SearchRequest implements Comparable&lt;SearchRequest&gt; {
 	 *            the query to add
 	 */
 	public void addQuery(final SearchQuery query) {
-<span class="fc" id="L26">		this.queries.add(query);</span>
-<span class="fc" id="L27">	}</span>
+<span class="fc" id="L25">		this.queries.add(query);</span>
+<span class="fc" id="L26">	}</span>
 
 	/**
 	 * @return The list of queries that are part of this request.
 	 */
 	public List&lt;SearchQuery&gt; getQueries() {
-<span class="fc" id="L33">		return this.queries;</span>
+<span class="fc" id="L32">		return this.queries;</span>
 	}
 
 	@Override
 	public boolean equals(Object that) {
-<span class="pc bpc" id="L38" title="1 of 2 branches missed.">		return (this.compareTo((SearchRequest) that)) == 0;</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">		return (this.compareTo((SearchRequest) that)) == 0;</span>
 	}
 
 	@Override
@@ -43,22 +42,22 @@ public class SearchRequest implements Comparable&lt;SearchRequest&gt; {
 		int r;
 
 		// test list size first
-<span class="pc bpc" id="L46" title="1 of 2 branches missed.">		if ((r = (this.queries.size() - that.queries.size())) != 0) {</span>
-<span class="nc" id="L47">			return r;</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">		if ((r = (this.queries.size() - that.queries.size())) != 0) {</span>
+<span class="nc" id="L46">			return r;</span>
 		}
 
-<span class="fc" id="L50">		Iterator&lt;SearchQuery&gt; thisIter = this.queries.iterator();</span>
-<span class="fc" id="L51">		Iterator&lt;SearchQuery&gt; thatIter = that.queries.iterator();</span>
+<span class="fc" id="L49">		Iterator&lt;SearchQuery&gt; thisIter = this.queries.iterator();</span>
+<span class="fc" id="L50">		Iterator&lt;SearchQuery&gt; thatIter = that.queries.iterator();</span>
 
-<span class="pc bpc" id="L53" title="1 of 4 branches missed.">		while (thisIter.hasNext() &amp;&amp; thatIter.hasNext()) {</span>
-<span class="fc" id="L54">			r = thisIter.next().compareTo(thatIter.next());</span>
-<span class="pc bpc" id="L55" title="1 of 2 branches missed.">			if (r != 0) {</span>
-<span class="nc" id="L56">				return r;</span>
+<span class="pc bpc" id="L52" title="1 of 4 branches missed.">		while (thisIter.hasNext() &amp;&amp; thatIter.hasNext()) {</span>
+<span class="fc" id="L53">			r = thisIter.next().compareTo(thatIter.next());</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">			if (r != 0) {</span>
+<span class="nc" id="L55">				return r;</span>
 			}
 		}
 
-<span class="fc" id="L60">		return 0;</span>
+<span class="fc" id="L59">		return 0;</span>
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

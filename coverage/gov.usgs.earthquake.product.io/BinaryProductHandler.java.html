@@ -16,14 +16,13 @@ import java.net.URL;
  * Binary representation of data types:
  * &lt;dl&gt;
  * &lt;dt&gt;Integer&lt;/dt&gt;
- * &lt;dd&gt;4-bytes
- * &lt;dd&gt;
+ * &lt;dd&gt;4-bytes&lt;/dd&gt;
  * &lt;dt&gt;Long&lt;/dt&gt;
  * &lt;dd&gt;8-bytes&lt;/dd&gt;
  * &lt;dt&gt;Date&lt;/dt&gt;
  * &lt;dd&gt;Long (Date.getTime())&lt;/dd&gt;
  * &lt;dt&gt;byte[]&lt;/dt&gt;
- * &lt;dd&gt;Integer length, raw bytes&lt;/dt&gt;
+ * &lt;dd&gt;Integer length, raw bytes&lt;/dd&gt;
  * &lt;dt&gt;String&lt;/dt&gt;
  * &lt;dd&gt;byte[] (String.getBytes(&quot;UTF8&quot;))&lt;/dd&gt;
  * &lt;dt&gt;URL/URI&lt;/dt&gt;
@@ -98,90 +97,90 @@ public class BinaryProductHandler implements ProductHandler {
 	private OutputStream out;
 	private BinaryIO io;
 
-<span class="fc" id="L101">	public BinaryProductHandler(final OutputStream out) {</span>
-<span class="fc" id="L102">		this.out = out;</span>
-<span class="fc" id="L103">		this.io = new BinaryIO();</span>
-<span class="fc" id="L104">	}</span>
+<span class="fc" id="L100">	public BinaryProductHandler(final OutputStream out) {</span>
+<span class="fc" id="L101">		this.out = out;</span>
+<span class="fc" id="L102">		this.io = new BinaryIO();</span>
+<span class="fc" id="L103">	}</span>
 
 	@Override
 	public void onBeginProduct(ProductId id, String status, URL trackerURL)
 			throws Exception {
-<span class="fc" id="L109">		io.writeString(HEADER, out);</span>
-<span class="fc" id="L110">		io.writeString(id.toString(), out);</span>
-<span class="fc" id="L111">		io.writeString(status, out);</span>
+<span class="fc" id="L108">		io.writeString(HEADER, out);</span>
+<span class="fc" id="L109">		io.writeString(id.toString(), out);</span>
+<span class="fc" id="L110">		io.writeString(status, out);</span>
 		// allow trackerURL to be null
-<span class="fc bfc" id="L113" title="All 2 branches covered.">		if (trackerURL == null) {</span>
-<span class="fc" id="L114">			io.writeString(&quot;null&quot;, out);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">		if (trackerURL == null) {</span>
+<span class="fc" id="L113">			io.writeString(&quot;null&quot;, out);</span>
 		} else {
-<span class="fc" id="L116">			io.writeString(trackerURL.toString(), out);</span>
+<span class="fc" id="L115">			io.writeString(trackerURL.toString(), out);</span>
 		}
-<span class="fc" id="L118">	}</span>
+<span class="fc" id="L117">	}</span>
 
 	@Override
 	public void onProperty(ProductId id, String name, String value)
 			throws Exception {
-<span class="fc" id="L123">		io.writeString(PROPERTY, out);</span>
-<span class="fc" id="L124">		io.writeString(name, out);</span>
-<span class="fc" id="L125">		io.writeString(value, out);</span>
-<span class="fc" id="L126">	}</span>
+<span class="fc" id="L122">		io.writeString(PROPERTY, out);</span>
+<span class="fc" id="L123">		io.writeString(name, out);</span>
+<span class="fc" id="L124">		io.writeString(value, out);</span>
+<span class="fc" id="L125">	}</span>
 
 	@Override
 	public void onLink(ProductId id, String relation, URI href)
 			throws Exception {
-<span class="fc" id="L131">		io.writeString(LINK, out);</span>
-<span class="fc" id="L132">		io.writeString(relation, out);</span>
-<span class="fc" id="L133">		io.writeString(href.toString(), out);</span>
-<span class="fc" id="L134">	}</span>
+<span class="fc" id="L130">		io.writeString(LINK, out);</span>
+<span class="fc" id="L131">		io.writeString(relation, out);</span>
+<span class="fc" id="L132">		io.writeString(href.toString(), out);</span>
+<span class="fc" id="L133">	}</span>
 
 	@Override
 	public void onContent(ProductId id, String path, Content content)
 			throws Exception {
-<span class="pc bpc" id="L139" title="2 of 4 branches missed.">		if (content.getLength() == null || content.getLength() &lt; 0) {</span>
+<span class="pc bpc" id="L138" title="2 of 4 branches missed.">		if (content.getLength() == null || content.getLength() &lt; 0) {</span>
 			// binary io only handles streams with length, convert to content
 			// with length
-<span class="nc" id="L142">			content = new ByteContent(content);</span>
+<span class="nc" id="L141">			content = new ByteContent(content);</span>
 		}
 
-<span class="fc" id="L145">		io.writeString(CONTENT, out);</span>
-<span class="fc" id="L146">		io.writeString(path, out);</span>
+<span class="fc" id="L144">		io.writeString(CONTENT, out);</span>
+<span class="fc" id="L145">		io.writeString(path, out);</span>
 
-<span class="fc" id="L148">		io.writeString(content.getContentType(), out);</span>
-<span class="fc" id="L149">		io.writeDate(content.getLastModified(), out);</span>
-<span class="fc" id="L150">		InputStream contentInputStream = content.getInputStream();</span>
+<span class="fc" id="L147">		io.writeString(content.getContentType(), out);</span>
+<span class="fc" id="L148">		io.writeDate(content.getLastModified(), out);</span>
+<span class="fc" id="L149">		InputStream contentInputStream = content.getInputStream();</span>
 		try {
-<span class="fc" id="L152">			io.writeStream(content.getLength().longValue(), contentInputStream, out);</span>
+<span class="fc" id="L151">			io.writeStream(content.getLength().longValue(), contentInputStream, out);</span>
 		} finally {
-<span class="fc" id="L154">			StreamUtils.closeStream(contentInputStream);</span>
+<span class="fc" id="L153">			StreamUtils.closeStream(contentInputStream);</span>
 		}
-<span class="fc" id="L156">	}</span>
+<span class="fc" id="L155">	}</span>
 
 	@Override
 	public void onSignature(ProductId id, String signature) throws Exception {
 		// allow signature to be null
-<span class="fc bfc" id="L161" title="All 2 branches covered.">		if (signature == null) {</span>
-<span class="fc" id="L162">			return;</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">		if (signature == null) {</span>
+<span class="fc" id="L161">			return;</span>
 		}
 
-<span class="fc" id="L165">		io.writeString(SIGNATURE, out);</span>
-<span class="fc" id="L166">		io.writeString(signature, out);</span>
-<span class="fc" id="L167">	}</span>
+<span class="fc" id="L164">		io.writeString(SIGNATURE, out);</span>
+<span class="fc" id="L165">		io.writeString(signature, out);</span>
+<span class="fc" id="L166">	}</span>
 
 	@Override
 	public void onEndProduct(ProductId id) throws Exception {
-<span class="fc" id="L171">		io.writeString(FOOTER, out);</span>
+<span class="fc" id="L170">		io.writeString(FOOTER, out);</span>
 
-<span class="fc" id="L173">		out.flush();</span>
-<span class="fc" id="L174">		out.close();</span>
-<span class="fc" id="L175">	}</span>
+<span class="fc" id="L172">		out.flush();</span>
+<span class="fc" id="L173">		out.close();</span>
+<span class="fc" id="L174">	}</span>
 
 	/**
 	 * Free any resources associated with this source.
 	 */
 	@Override
 	public void close() {
-<span class="nc" id="L182">		StreamUtils.closeStream(out);</span>
-<span class="nc" id="L183">		out = null;</span>
-<span class="nc" id="L184">	}</span>
+<span class="nc" id="L181">		StreamUtils.closeStream(out);</span>
+<span class="nc" id="L182">		out = null;</span>
+<span class="nc" id="L183">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

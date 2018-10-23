@@ -3,7 +3,10 @@
 import gov.usgs.earthquake.distribution.NotificationEvent;
 import gov.usgs.earthquake.product.ProductId;
 
-<span class="nc" id="L6">public class NotificationEventBlockingQueue extends</span>
+/**
+ * Preliminary implementation for priority queuing products.
+ */
+<span class="nc" id="L9">public class NotificationEventBlockingQueue extends</span>
 		RoundRobinBlockingQueue&lt;NotificationEvent&gt; {
 
 	/**
@@ -11,9 +14,9 @@ import gov.usgs.earthquake.product.ProductId;
 	 */
 	@Override
 	protected String getQueueId(final NotificationEvent event) {
-<span class="nc" id="L14">		ProductId id = event.getNotification().getProductId();</span>
-<span class="nc" id="L15">		return (id.getSource() + &quot;_&quot; + id.getType()).toLowerCase();</span>
+<span class="nc" id="L17">		ProductId id = event.getNotification().getProductId();</span>
+<span class="nc" id="L18">		return (id.getSource() + &quot;_&quot; + id.getType()).toLowerCase();</span>
 	}
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
