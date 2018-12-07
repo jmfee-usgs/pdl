@@ -720,7 +720,7 @@ public class Event implements Comparable<Event> {
 		while (iter.hasNext()) {
 			time = iter.next().getId().getUpdateTime();
 			if (updateTime == null || time.after(updateTime)) {
-				time = updateTime;
+				updateTime = time;
 			}
 		}
 		return updateTime;

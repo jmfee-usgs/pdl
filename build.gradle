@@ -34,6 +34,8 @@ dependencies {
   compile "javax.activation:activation:1.1.1"
   compile "javax.xml.bind:jaxb-api:2.3+"
   compile "org.glassfish.jaxb:jaxb-runtime:2.3+"
+  // netty
+  compile "io.netty:netty-all:4.1.32.Final"
   // database drivers
   compile "mysql:mysql-connector-java:5.1.47"
   compile "org.xerial:sqlite-jdbc:3.23.1"
