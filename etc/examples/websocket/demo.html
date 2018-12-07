@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+    <head>
+        <title>WebSocket client example</title>
+    </head>
+    <body>
+        <h1>WebSocket client example</h1>
+
+        <div class="status">
+            <noscript>
+                Requires javascript.
+            </noscript>
+        </div>
+        <ul class="messages"></ul>
+
+        <script>
+            var status = document.querySelector('.status');
+            var messages = document.querySelector('.messages');
+            status.innerHTML = 'opening socket';
+
+            var exampleSocket = new WebSocket("ws://localhost:8080");
+            exampleSocket.onopen = (e) => {
+                status.innerHTML = 'socket opened ';
+            };
+            exampleSocket.onerror = (e) => {
+                status.innerHTML = 'socket error ';
+            };
+            exampleSocket.onmessage = (e) => {
+                var el = document.createElement('li');
+                el.innerHTML = '<code><pre>' +
+                        JSON.stringify(JSON.parse(e.data), null, 2) +
+                        '</pre></code>';
+                messages.insertBefore(el, messages.firstChild);
+            };
+        </script>
+    </body>
+</html>
