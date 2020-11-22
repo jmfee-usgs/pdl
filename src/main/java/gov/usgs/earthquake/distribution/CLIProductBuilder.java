@@ -3,6 +3,7 @@
  */
 package gov.usgs.earthquake.distribution;
 
+import gov.usgs.earthquake.aws.AwsProductSender;
 import gov.usgs.earthquake.product.ByteContent;
 import gov.usgs.earthquake.product.FileContent;
 import gov.usgs.earthquake.product.InputStreamContent;
@@ -18,9 +19,9 @@ import gov.usgs.util.StringUtils;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -427,18 +428,24 @@ public class CLIProductBuilder extends DefaultConfigurable {
 
 	public static List<ProductSender> parseServers(final String servers,
 			final Integer connectTimeout, final boolean binaryFormat,
-			final boolean enableDeflate) {
+			final boolean enableDeflate) throws MalformedURLException {
 		List<ProductSender> senders = new ArrayList<ProductSender>();
 
 		Iterator<String> iter = StringUtils.split(servers, ",").iterator();
 		while (iter.hasNext()) {
 			String server = iter.next();
-			String[] parts = server.split(":");
-			SocketProductSender sender = new SocketProductSender(parts[0],
-					Integer.parseInt(parts[1]), connectTimeout);
-			sender.setBinaryFormat(binaryFormat);
-			sender.setEnableDeflate(enableDeflate);
-			senders.add(sender);
+			if (server.startsWith("http")) {
+				AwsProductSender sender = new AwsProductSender();
+				sender.setHubUrl(new URL(server));
+				senders.add(sender);
+			} else {
+				String[] parts = server.split(":");
+				SocketProductSender sender = new SocketProductSender(parts[0],
+						Integer.parseInt(parts[1]), connectTimeout);
+				sender.setBinaryFormat(binaryFormat);
+				sender.setEnableDeflate(enableDeflate);
+				senders.add(sender);
+			}
 		}
 
 		return senders;

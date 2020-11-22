@@ -329,6 +329,14 @@ public class AwsProductSender extends DefaultConfigurable implements ProductSend
     return uploadResults;
   }
 
+  public URL getHubUrl() {
+    return hubUrl;
+  }
+
+  public void setHubUrl(final URL url) {
+    this.hubUrl = url;
+  }
+
   public boolean getSignProducts() {
     return signProducts;
   }

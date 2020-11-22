@@ -124,7 +124,16 @@ public class ProductBuilder extends DefaultConfigurable {
 		product.getProperties().put(ProductClient.PDL_CLIENT_VERSION_PROPERTY, ProductClient.RELEASE_VERSION);
 
 		// doesn't already have a signature.
-		if (privateKey != null && product.getSignature() == null) {
+		if (privateKey != null
+				&& (product.getSignature() == null
+						|| product.getSignatureVersion() != getSignatureVersion())) {
+			if (product.getSignature() != null) {
+				// upgrading signature, store original in properties
+				product.getProperties().put("original-signature", product.getSignature());
+				product.getProperties().put(
+						"original-signature-version",
+						product.getSignatureVersion().toString());
+			}
 			product.sign(privateKey, signatureVersion);
 		}
 
